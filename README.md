@@ -1,4 +1,4 @@
-# tugasakhir_app
+# tugasakhir_app (Flutter Version 2.10.5 Stable Channel)
 # NEW GIT!!
 # Kok link" e ilang kabehhhh, kudune dicopy sek mau
 
