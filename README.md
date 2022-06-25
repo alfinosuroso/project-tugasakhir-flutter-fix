@@ -10,8 +10,7 @@ A new Flutter project.
 ## Link Penting
 - Flask API_Authentication Flutter : https://www.section.io/engineering-education/flutter-authentication-using-flask-api/
 - Firestore Erico : https://www.youtube.com/watch?v=_mgDea2Ii7o&list=PLZQbl9Jhl-VBtLsFGDGXuhJSvAbwVuyPu&index=6
-- Django + Flutter : https://www.codersarts.com/post/how-to-create-register-and-login-api-using-django-rest-framework-and-token-authentication
-- Django new : https://www.jcchouinard.com/get-started-with-django/
+- Django + Flutter : https://dev.to/amartyadev/flutter-app-authentication-with-django-backend-1-21cp
 
 
 ## Database dan Perhitungan
