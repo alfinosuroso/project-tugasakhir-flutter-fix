@@ -7,7 +7,7 @@ class Beranda extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: 200.0, // Set this height
+          toolbarHeight: 160.0, // Set this height
           backgroundColor: Colors.transparent,
           elevation: 0,
 
@@ -84,7 +84,7 @@ class Beranda extends StatelessWidget {
             ),
           ),
         ),
-        extendBodyBehindAppBar: true,
+        // extendBodyBehindAppBar: true,
         body: Stack(
           children: [
             SingleChildScrollView(

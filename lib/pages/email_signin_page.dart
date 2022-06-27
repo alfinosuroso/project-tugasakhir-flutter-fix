@@ -118,7 +118,7 @@ class _EmailSignInPageState extends State<EmailSignInPage> {
 
   Future<void> login() async {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      var response = await http.post(Uri.parse("https://reqres.in/api/login"),
+      var response = await http.post(Uri.parse("http://127.0.0.1:8000/api/user/"),
           body: ({
             'email': emailController.text,
             'password': passwordController.text
