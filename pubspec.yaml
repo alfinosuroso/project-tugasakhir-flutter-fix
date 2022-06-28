@@ -53,6 +53,8 @@ flutter:
     - assets/images/
     - assets/images/maleButton.png
     - assets/images/femaleButton.png
+    - assets/images/bluetooth-icon.png
+    - assets/images/spoonycal-icon.png
 
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -93,6 +95,7 @@ flutter:
     - family: Share
       fonts:
         - asset: fonts/Share-Regular.ttf
+          weight: 400
         # - asset: fonts/Share-Medium.ttf
         - asset: fonts/Share-Bold.ttf
         - asset: fonts/Share-Italic.ttf

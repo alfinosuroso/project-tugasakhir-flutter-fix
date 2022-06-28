@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class Styles {
   static const Color primaryColor = Color(0xFF45625D);
   static const Color secondColor = Color(0xFF2D413D);
+  static const Color appBarPrimaryColor = Color(0xFF54A5CC);
 
   static const TextStyle headlineQuestion1 = TextStyle(
     fontFamily: 'Outfit',
@@ -54,5 +55,19 @@ class Styles {
     fontWeight: FontWeight.w700,
     fontSize: 35.0,
     color: Colors.white,
+  );
+
+  static const TextStyle welcomeUserAppBar1 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w400,
+    fontSize: 15.0,
+    color: Colors.white,
+  );
+
+  static const TextStyle welcomeUserAppBar2 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w400,
+    fontSize: 10.0,
+    color: Color(0xFFE0E0E0),
   );
 }

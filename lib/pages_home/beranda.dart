@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tugasakhir_app/styles.dart';
 
 class Beranda extends StatelessWidget {
   const Beranda({Key? key}) : super(key: key);
@@ -7,22 +8,70 @@ class Beranda extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: 160.0, // Set this height
+          toolbarHeight: 120.0, // Set this height
           backgroundColor: Colors.transparent,
           elevation: 0,
 
           flexibleSpace: Container(
-            height: 200.0,
+            height: 120.0,
             child: Stack(
               children: <Widget>[
                 Container(
-                  color: Colors.red,
                   width: MediaQuery.of(context).size.width,
                   height: 100.0,
-                  child: Center(
-                    child: Text(
-                      "Home",
-                      style: TextStyle(color: Colors.white, fontSize: 18.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                    color: Styles.appBarPrimaryColor,
+                  ),
+                  // 2 Row - Kumpulan User dan Logo
+                  child: Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // 1. Teks User - Welcome User dan Email User
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Selamat Pagi, User!",
+                                style: Styles.welcomeUserAppBar1,
+                              ),
+                              Text(
+                                "Username@gmail.com",
+                                style: Styles.welcomeUserAppBar2,
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        // 2. Logo - Logo Spoonycal dan Bluetooth
+                        Container(
+                          child: Row(
+                            children: [
+                              Image(
+                                image: AssetImage(
+                                    'assets/images/bluetooth-icon.png'),
+                                // width: 100,
+                                // height: 100,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Image(
+                                image: AssetImage(
+                                    'assets/images/spoonycal-icon.png'),
+                                // width: 100,
+                                // height: 100,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -124,7 +173,6 @@ class Beranda extends StatelessWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
-                
                 onPressed: () {},
                 child: Icon(Icons.plus_one),
               ),
