@@ -1,10 +1,48 @@
-# tugasakhir_app
+# tugasakhir_app (Flutter Version 2.10.5 Stable Channel)
+# NEW GIT!!
 
 A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+
+## Link Penting
+- Flask API_Authentication Flutter : https://www.section.io/engineering-education/flutter-authentication-using-flask-api/
+- Firestore Erico : https://www.youtube.com/watch?v=_mgDea2Ii7o&list=PLZQbl9Jhl-VBtLsFGDGXuhJSvAbwVuyPu&index=6
+- Django + Flutter : https://dev.to/amartyadev/flutter-app-authentication-with-django-backend-1-21cp
+
+
+## Database dan Perhitungan
+
+Database :
+‌User 
+- username
+- email
+- password
+- bb
+- tb
+- umur
+- kalori harian
+
+‌Laporan harian
+- user id
+- date
+- target kalori
+- sisa kalori
+- jadwal pagi, siang, malam (array)
+
+‌Makanan (python, iot)
+- nama makanan
+- berat 100gr
+
+PERHITUNGAN :
+‌Kalori harian
+‌gram ke kalori
+‌warning?
+
+# The Question is...
+How to do Relational Database on Firebase????
+
 
 A few resources to get you started if this is your first Flutter project:
 
