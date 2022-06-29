@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tugasakhir_app/pages_home/beranda.dart';
 import 'package:tugasakhir_app/question1.dart';
 import 'package:tugasakhir_app/question3.dart';
 import 'package:tugasakhir_app/styles.dart';
@@ -113,7 +114,7 @@ class _QuestionSixState extends State<QuestionSix> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const QuestionThree()));
+                            builder: (context) => const Beranda()));
                   },
                   child: const Text(
                     "Masuk",

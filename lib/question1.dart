@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tugasakhir_app/main.dart';
+import 'package:tugasakhir_app/pages_home/beranda.dart';
 import 'package:tugasakhir_app/question2.dart';
 import 'package:tugasakhir_app/question3.dart';
 import 'package:tugasakhir_app/styles.dart';
@@ -75,10 +77,7 @@ class QuestionOne extends StatelessWidget {
                       ))
                 ),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const QuestionTwo()));
+                  Get.toNamed('/question2');
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(43, 12, 43, 12),
@@ -106,10 +105,7 @@ class QuestionOne extends StatelessWidget {
                         MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const QuestionThree()));
+                   Get.to(Beranda(), transition: Transition.leftToRight);
                   },
                   child: const Text(
                     "Masuk",

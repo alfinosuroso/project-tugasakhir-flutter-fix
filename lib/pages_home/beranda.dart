@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:tugasakhir_app/styles.dart';
 
-class Beranda extends StatelessWidget {
+class Beranda extends StatefulWidget {
   const Beranda({Key? key}) : super(key: key);
 
+  @override
+  State<Beranda> createState() => _BerandaState();
+}
+
+class _BerandaState extends State<Beranda> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,9 +16,10 @@ class Beranda extends StatelessWidget {
           toolbarHeight: 120.0, // Set this height
           backgroundColor: Colors.transparent,
           elevation: 0,
+          automaticallyImplyLeading: false,
 
           flexibleSpace: Container(
-            height: 120.0,
+            height: 140.0,
             child: Stack(
               children: <Widget>[
                 Container(
@@ -28,101 +34,106 @@ class Beranda extends StatelessWidget {
                   ),
                   // 2 Row - Kumpulan User dan Logo
                   child: Padding(
-                    padding: const EdgeInsets.all(25.0),
+                    padding: const EdgeInsets.fromLTRB(30, 40, 30, 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // 1. Teks User - Welcome User dan Email User
-                        Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Selamat Pagi, User!",
-                                style: Styles.welcomeUserAppBar1,
-                              ),
-                              Text(
-                                "Username@gmail.com",
-                                style: Styles.welcomeUserAppBar2,
-                              ),
-                            ],
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Selamat Pagi, User!",
+                              style: Styles.welcomeUserAppBar1,
+                            ),
+                            Text(
+                              "Username@gmail.com",
+                              style: Styles.welcomeUserAppBar2,
+                            ),
+                          ],
                         ),
 
                         // 2. Logo - Logo Spoonycal dan Bluetooth
-                        Container(
-                          child: Row(
-                            children: [
-                              Image(
-                                image: AssetImage(
-                                    'assets/images/bluetooth-icon.png'),
-                                // width: 100,
-                                // height: 100,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Image(
-                                image: AssetImage(
-                                    'assets/images/spoonycal-icon.png'),
-                                // width: 100,
-                                // height: 100,
-                              ),
-                            ],
-                          ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image(
+                              image: AssetImage(
+                                  'assets/images/bluetooth-icon.png'),
+                              // width: 100,
+                              // height: 100,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Image(
+                              image: AssetImage(
+                                  'assets/images/spoonycal-icon.png'),
+                              // width: 100,
+                              // height: 100,
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
                 ),
+
+                // KONTAINER DATA BERAT DAN TINGGI BADAN
                 Positioned(
                   top: 80.0,
                   left: 0.0,
                   right: 0.0,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    height: 60,
+                    padding: EdgeInsets.symmetric(horizontal: 30.0),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(1.0),
-                          border: Border.all(
-                              color: Colors.grey.withOpacity(0.5), width: 1.0),
-                          color: Colors.white),
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            offset: const Offset(
+                              0.0,
+                              10.0,
+                            ),
+                            blurRadius: 10.0,
+                            spreadRadius: 2.0,
+                          ),
+                        ],
+                      ),
+
+                      // BERAT BADAN DAN TINGGI BADAN
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          IconButton(
-                            icon: Icon(
-                              Icons.menu,
-                              color: Colors.red,
-                            ),
-                            onPressed: () {
-                              print("your menu action here");
-                              // _scaffoldKey.currentState.openDrawer();
-                            },
-                          ),
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Search",
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "BERAT BADAN",
+                                style: Styles.headlineData1,
                               ),
-                            ),
+                              Text(
+                                "57 Kg",
+                                style: Styles.headlineData2,
+                              ),
+                            ],
                           ),
-                          IconButton(
-                            icon: Icon(
-                              Icons.search,
-                              color: Colors.red,
-                            ),
-                            onPressed: () {
-                              print("your menu action here");
-                            },
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              Icons.notifications,
-                              color: Colors.red,
-                            ),
-                            onPressed: () {
-                              print("your menu action here");
-                            },
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "KALORI HARIAN",
+                                style: Styles.headlineData1,
+                              ),
+                              Text(
+                                "2500 Kalori",
+                                style: Styles.headlineData2,
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -174,7 +185,7 @@ class Beranda extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
                 onPressed: () {},
-                child: Icon(Icons.plus_one),
+                child: Icon(Icons.add),
               ),
             ),
           ],

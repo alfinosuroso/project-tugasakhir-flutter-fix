@@ -70,4 +70,18 @@ class Styles {
     fontSize: 10.0,
     color: Color(0xFFE0E0E0),
   );
+
+  static const TextStyle headlineData1 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w400,
+    fontSize: 15.0,
+    color: Color(0xFF9B9B9B),
+  );
+
+  static const TextStyle headlineData2 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w400,
+    fontSize: 18.0,
+    color: Color(0xFF000000),
+  );
 }
