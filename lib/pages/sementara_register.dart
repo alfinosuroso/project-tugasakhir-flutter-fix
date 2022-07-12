@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:tugasakhir_app/pages/welcome_logout.dart';
 
-class EmailSignInPage extends StatefulWidget {
-  const EmailSignInPage({Key? key}) : super(key: key);
+class SementaraRegister extends StatefulWidget {
+  const SementaraRegister({Key? key}) : super(key: key);
 
   @override
-  State<EmailSignInPage> createState() => _EmailSignInPageState();
+  State<SementaraRegister> createState() => _EmailSignInPageState();
 }
 
-class _EmailSignInPageState extends State<EmailSignInPage> {
+class _EmailSignInPageState extends State<SementaraRegister> {
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -23,7 +24,7 @@ class _EmailSignInPageState extends State<EmailSignInPage> {
           children: [
             //* TITLE
             Text(
-              'SIGN IN WITH EMAIL/PASSWORD',
+              'REGISTER WITH EMAIL/PASSWORD',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
@@ -31,6 +32,20 @@ class _EmailSignInPageState extends State<EmailSignInPage> {
             //* SIGN IN STATUS
             // CODE HERE: Change status based on current user
             const Text("You haven't signed in yet"),
+
+            //* EMAIL TEXTFIELD
+            Container(
+              margin: const EdgeInsets.fromLTRB(30, 15, 30, 10),
+              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(15)),
+              child: TextField(
+                controller: nameController,
+                cursorColor: Colors.orange,
+                decoration: const InputDecoration(
+                    border: InputBorder.none, hintText: 'name'),
+              ),
+            ),
 
             //* EMAIL TEXTFIELD
             Container(

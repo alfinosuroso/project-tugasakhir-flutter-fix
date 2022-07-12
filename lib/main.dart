@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:tugasakhir_app/pages/anon_signin_test.dart';
 import 'package:tugasakhir_app/pages/email_signin_page.dart';
+import 'package:tugasakhir_app/pages/sementara_register.dart';
 import 'package:tugasakhir_app/pages_home/beranda.dart';
 import 'package:tugasakhir_app/question1.dart';
 import 'package:tugasakhir_app/question2.dart';
@@ -39,10 +40,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: EmailSignInPage(),
 
-      initialRoute: '/sign_in',
+      initialRoute: '/sign_up',
 
       getPages: [
         // Bagian Register, Login
+         GetPage(
+            name: '/sign_up',
+            page: () => SementaraRegister(),
+            transition: Transition.rightToLeftWithFade),
+
         GetPage(
             name: '/sign_in',
             page: () => EmailSignInPage(),
