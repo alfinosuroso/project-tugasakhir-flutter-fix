@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tugasakhir_app/pages/email_signin_page.dart';
+import 'package:tugasakhir_app/Register and Login Screens/email_signin_page.dart';
 
 class WelcomeLogout extends StatelessWidget {
   const WelcomeLogout({ Key? key }) : super(key: key);

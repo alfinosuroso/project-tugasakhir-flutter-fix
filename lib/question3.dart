@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tugasakhir_app/data_value.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tugasakhir_app/question2.dart';
 import 'package:tugasakhir_app/question4.dart';
+import 'package:tugasakhir_app/question_screens/class_method/data_profile.dart';
 import 'package:tugasakhir_app/styles.dart';
-
+import 'package:after_layout/after_layout.dart';
 
 class QuestionThree extends StatefulWidget {
-  const QuestionThree({Key? key}) : super(key: key);
+  const QuestionThree({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<QuestionThree> createState() => _QuestionThreeState();
@@ -15,7 +19,7 @@ class QuestionThree extends StatefulWidget {
 
 class _QuestionThreeState extends State<QuestionThree> {
   bool _notShowButtonRightArrow = true;
-  
+
   @override
   Widget build(BuildContext context) {
     ThemeData;
@@ -52,7 +56,6 @@ class _QuestionThreeState extends State<QuestionThree> {
                     "Anda dapat mengubahnya nanti",
                     textAlign: TextAlign.center,
                     style: Styles.headlineQuestion2,
-                    
                   ),
                 ],
               ),
@@ -83,14 +86,21 @@ class _QuestionThreeState extends State<QuestionThree> {
                     // ],
                     onChanged: (value) {
                       setState(() {
-                        if (DataValue.controllerBeratBadan.text != "") {
+                        if (DataProfile.controllerBeratBadan.text != "") {
                           _notShowButtonRightArrow = false;
                         } else {
                           _notShowButtonRightArrow = true;
                         }
                       });
                     },
-                    controller: DataValue.controllerBeratBadan,
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [
+                      // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}')),
+                    ],
+                    controller: DataProfile.controllerBeratBadan,
                     style: Styles.inputFieldText1,
                     textAlign: TextAlign.center,
                   ),
@@ -126,10 +136,8 @@ class _QuestionThreeState extends State<QuestionThree> {
                     icon: Image.asset('assets/images/rightArrowButton.png'),
                     iconSize: 42,
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const QuestionFour()));
+                      DataProfile().hitungBeratBadan();
+                      Navigator.pushNamed(context, '/question4');
                     },
                   ),
 
@@ -155,16 +163,13 @@ class _QuestionThreeState extends State<QuestionThree> {
                         MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const QuestionFour()));
+                    Navigator.pushNamed(context, '/question4');
                   },
                   child: const Text(
                     "Masuk",
                     style: Styles.bodyText7,
                   ),
-                )
+                ),
               ],
             )
           ],

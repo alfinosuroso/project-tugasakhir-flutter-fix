@@ -1,16 +1,22 @@
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:tugasakhir_app/pages/anon_signin_test.dart';
-import 'package:tugasakhir_app/pages/email_signin_page.dart';
-import 'package:tugasakhir_app/pages/sementara_register.dart';
-import 'package:tugasakhir_app/pages_home/beranda.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tugasakhir_app/Register%20and%20Login%20Screens/sign_in_page.dart';
+import 'package:tugasakhir_app/Register%20and%20Login%20Screens/sign_up_page.dart';
+import 'package:tugasakhir_app/loading_pages/landing.dart';
+import 'package:tugasakhir_app/loading_pages/entry_app.dart';
+// import 'package:tugasakhir_app/Register%20and%20Login%20Screens/sign_in_page.dart';
+import 'package:tugasakhir_app/main_screens/main_page.dart';
+import 'package:tugasakhir_app/Register and Login Screens/email_signin_page.dart';
+import 'package:tugasakhir_app/Register and Login Screens/sementara_register.dart';
+import 'package:tugasakhir_app/main_screens/profile/extend_profile/edit_profile.dart';
 import 'package:tugasakhir_app/question1.dart';
 import 'package:tugasakhir_app/question2.dart';
 import 'package:tugasakhir_app/question3.dart';
 import 'package:tugasakhir_app/question4.dart';
 import 'package:tugasakhir_app/question5.dart';
 import 'package:tugasakhir_app/question6.dart';
+import 'package:tugasakhir_app/splash_screen.dart';
 import 'package:tugasakhir_app/wrapper.dart';
 
 void main() async {
@@ -22,64 +28,47 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-  // static const primaryColor = Color(0xFF45625D);
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    WidgetsFlutterBinding.ensureInitialized();
+    return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Share',
-
-        // textTheme: const TextTheme(
-        //   headline1: TextStyle(fontSize: 96.0, fontFamily: 'Outfit', color: Colors.white),
-        //   headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-        //   bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-        // )
       ),
-
       debugShowCheckedModeBanner: false,
       // home: EmailSignInPage(),
 
-      initialRoute: '/sign_up',
+      initialRoute: '/sign_in_page',
 
-      getPages: [
-        // Bagian Register, Login
-         GetPage(
-            name: '/sign_up',
-            page: () => SementaraRegister(),
-            transition: Transition.rightToLeftWithFade),
+      routes: {
+        // Entry App
+        '/landing': (context) => const Landing(),
 
-        GetPage(
-            name: '/sign_in',
-            page: () => EmailSignInPage(),
-            transition: Transition.rightToLeftWithFade),
+        // Splash Screen
+        '/splash_screen': (context) => const SplashScreen(),
 
-        // Bagian Question
-        GetPage(name: '/question1', page: () => QuestionOne()),
-        GetPage(
-            name: '/question2',
-            page: () => QuestionTwo(),
-            transition: Transition.rightToLeftWithFade),
-        GetPage(
-            name: '/question3',
-            page: () => QuestionThree(),
-            transition: Transition.rightToLeftWithFade),
-        GetPage(
-            name: '/question4',
-            page: () => QuestionFour(),
-            transition: Transition.rightToLeftWithFade),
-        GetPage(
-            name: '/question5',
-            page: () => QuestionFive(),
-            transition: Transition.rightToLeftWithFade),
-        GetPage(
-            name: '/question6',
-            page: () => QuestionSix(),
-            transition: Transition.rightToLeftWithFade),
+        // Loading
+        // '/default_loading': (context) => const Defa(),
 
-        // Bagian Beranda
-        // GetPage(name: '/beranda', page: () => Beranda()),
-      ],
+        // Routes register and login
+        '/sign_in_page': (context) => const SignInPage(),
+        '/sign_up_page': (context) => const SignUpPage(),
+
+        // Routes Question
+        '/question1': (context) => const QuestionOne(),
+        '/question2': (context) => const QuestionTwo(),
+        '/question3': (context) => const QuestionThree(),
+        '/question4': (context) => const QuestionFour(),
+        '/question5': (context) => const QuestionFive(),
+        '/question6': (context) => const QuestionSix(),
+
+        // Routes Main Page
+        '/main_page': (context) => const MainPage(),
+
+        // Routes Extend Profile
+        '/edit_profile': (context) => const EditProfile(),
+      },
     );
   }
 }

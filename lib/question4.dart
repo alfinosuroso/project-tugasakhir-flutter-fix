@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tugasakhir_app/data_value.dart';
 import 'package:tugasakhir_app/question5.dart';
+import 'package:tugasakhir_app/question_screens/class_method/data_profile.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class QuestionFour extends StatefulWidget {
@@ -79,14 +79,21 @@ class _QuestionFourState extends State<QuestionFour> {
                     // ],
                     onChanged: (value) {
                       setState(() {
-                        if (DataValue.controllerTinggiBadan.text != "") {
+                        if (DataProfile.controllerTinggiBadan.text != "") {
                           _notShowButtonRightArrow = false;
                         } else {
                           _notShowButtonRightArrow = true;
                         }
                       });
                     },
-                    controller: DataValue.controllerTinggiBadan,
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [
+                      // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}')),
+                    ],
+                    controller: DataProfile.controllerTinggiBadan,
                     style: Styles.inputFieldText1,
                     textAlign: TextAlign.center,
                   ),
@@ -122,10 +129,8 @@ class _QuestionFourState extends State<QuestionFour> {
                     icon: Image.asset('assets/images/rightArrowButton.png'),
                     iconSize: 42,
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const QuestionFive()));
+                      DataProfile().hitungTinggiBadan();
+                      Navigator.pushNamed(context, '/question5');
                     },
                   ),
 
@@ -151,10 +156,7 @@ class _QuestionFourState extends State<QuestionFour> {
                         MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const QuestionFive()));
+                    Navigator.pushNamed(context, '/sign_in_page');
                   },
                   child: const Text(
                     "Masuk",
@@ -163,7 +165,6 @@ class _QuestionFourState extends State<QuestionFour> {
                 )
               ],
             ),
-            Text(DataValue.controllerBeratBadan.text),
           ],
         ),
       ),

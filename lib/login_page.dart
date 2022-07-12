@@ -6,13 +6,13 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login Page"),),
+      appBar: AppBar(title: const Text("Login Page"),),
       body: Center(
         child: ElevatedButton(
           onPressed: () {},
 
           //* PENTING
-          child: Text("Login!"),
+          child: const Text("Login!"),
         ),
         
       ),

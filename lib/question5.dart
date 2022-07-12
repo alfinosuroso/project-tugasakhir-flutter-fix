@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tugasakhir_app/data_value.dart';
 import 'package:tugasakhir_app/question1.dart';
 import 'package:tugasakhir_app/question6.dart';
+import 'package:tugasakhir_app/question_screens/class_method/data_profile.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class QuestionFive extends StatefulWidget {
@@ -80,14 +80,19 @@ class _QuestionFiveState extends State<QuestionFive> {
                     // ],
                     onChanged: (value) {
                       setState(() {
-                        if (DataValue.controllerUmur.text != "") {
+                        if (DataProfile.controllerUmur.text != "") {
                           _notShowButtonRightArrow = false;
                         } else {
                           _notShowButtonRightArrow = true;
                         }
                       });
                     },
-                    controller: DataValue.controllerUmur,
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]+')),
+                    ],
+                    controller: DataProfile.controllerUmur,
                     style: Styles.inputFieldText1,
                     textAlign: TextAlign.center,
                   ),
@@ -123,10 +128,8 @@ class _QuestionFiveState extends State<QuestionFive> {
                     icon: Image.asset('assets/images/rightArrowButton.png'),
                     iconSize: 42,
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const QuestionSix()));
+                      DataProfile().hitungUmur();
+                      Navigator.pushNamed(context, '/question6');
                     },
                   ),
 
@@ -152,10 +155,7 @@ class _QuestionFiveState extends State<QuestionFive> {
                         MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const QuestionSix()));
+                    Navigator.pushNamed(context, '/sign_in_page');
                   },
                   child: const Text(
                     "Masuk",

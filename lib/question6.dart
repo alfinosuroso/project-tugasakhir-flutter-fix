@@ -1,18 +1,30 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:tugasakhir_app/pages_home/beranda.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tugasakhir_app/main_screens/main_page.dart';
 import 'package:tugasakhir_app/question1.dart';
 import 'package:tugasakhir_app/question3.dart';
 import 'package:tugasakhir_app/styles.dart';
+import 'package:after_layout/after_layout.dart';
+import 'package:http/http.dart' as http;
+
+String? finalGender;
+double? finalBeratBadan;
+double? finalTinggiBadan;
+double? finalUmur;
+double? finalKaloriHarian;
+String? finalToken;
 
 class QuestionSix extends StatefulWidget {
-  const QuestionSix({ Key? key }) : super(key: key);
+  const QuestionSix({Key? key}) : super(key: key);
 
   @override
   State<QuestionSix> createState() => _QuestionSixState();
 }
 
-class _QuestionSixState extends State<QuestionSix> {
+class _QuestionSixState extends State<QuestionSix>
+    with AfterLayoutMixin<QuestionSix> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +34,6 @@ class _QuestionSixState extends State<QuestionSix> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Styles.primaryColor,
-        
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
@@ -35,67 +46,65 @@ class _QuestionSixState extends State<QuestionSix> {
             const EdgeInsets.only(top: 30, left: 60, right: 60, bottom: 40),
         child: Column(
           children: [
-            
             // Teks 1 - Selamat Datang
             const Spacer(
               flex: 1,
             ),
             const Text(
-              "Kalori harian yang anda butuhkan adalah sebagai berikut",
-              textAlign: TextAlign.center,
-              style: Styles.headlineQuestion1
-            ),
+                "Kalori harian yang anda butuhkan adalah sebagai berikut",
+                textAlign: TextAlign.center,
+                style: Styles.headlineQuestion1),
 
             // Teks 2 - Pernyataan awal
             const Spacer(
               flex: 1,
             ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 140),
-              child: Text(
-                "Kami akan mengajukan beberapa pertanyaan untuk memberikan rekomendasi kalori harian Anda untuk mencapai target yang lebih fit",
-                textAlign: TextAlign.center,
-                style: Styles.bodyQuestion1,
-                
-                // TextStyle(
-                //     fontSize: 16,
-                //     fontFamily: "Poppins",
-                //     color: Colors.white),
+            Container(
+              alignment: Alignment.center,
+              // width: 120,
+              // height: 65,
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                border: Border.all(width: 1, color: Colors.white),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  "$finalKaloriHarian kalori/hari",
+                  style: Styles.inputFieldText1,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
 
             // Teks 3 - Button Mengerti
             const Spacer(
-              flex: 3,
+              flex: 1,
             ),
             ElevatedButton(
                 style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(const Color(0xff45625d)),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  shape: 
-                      MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ))
-                ),
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                        const Color(0xff45625d)),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ))),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const QuestionThree()));
+                  Navigator.pushNamed(context, '/main_page');
                 },
                 child: const Padding(
-                  padding: EdgeInsets.fromLTRB(43, 12, 43, 12),
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
-                    "Mengerti",
+                    "Mengerti dan Lanjutkan!",
                     style: Styles.buttonMengertiText,
+                    textAlign: TextAlign.center,
                   ),
                 )),
 
             // Teks 4 - Sudah memiliki akun?
             const Spacer(
-              flex: 1,
+              flex: 2,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -111,21 +120,86 @@ class _QuestionSixState extends State<QuestionSix> {
                         MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Beranda()));
+                    Navigator.pushNamed(context, '/sign_in_page');
                   },
                   child: const Text(
                     "Masuk",
                     style: Styles.bodyText7,
                   ),
-                )
+                ),
               ],
-            ) 
+            )
           ],
         ),
       ),
     );
+  }
+
+  //** FUNGSI UNTUK MENGHITUNG KALORI HARIAN */
+  @override
+  void afterFirstLayout(BuildContext context) {
+    postKaloriHarian();
+  }
+
+  Future<void> postKaloriHarian() async {
+    final SharedPreferences localStorage =
+        await SharedPreferences.getInstance();
+    final String? getGender = localStorage.getString("gender_user");
+    final double? getBeratBadan = localStorage.getDouble("berat_badan");
+    final double? getTinggiBadan = localStorage.getDouble("tinggi_badan");
+    final double? getUmur = localStorage.getDouble("umur");
+    final String? getToken = localStorage.getString('token');
+
+    if (getGender == 'Laki-Laki') {
+      finalKaloriHarian = 66.5 +
+          (13.8 * getBeratBadan!) +
+          (5.0 * getTinggiBadan!) -
+          (6.8 * getUmur!);
+    } else if (getGender == 'Perempuan') {
+      finalKaloriHarian = 655.1 +
+          (9.6 * getBeratBadan!) +
+          (1.9 * getTinggiBadan!) -
+          (4.7 * getUmur!);
+    }
+
+    setState(() {
+      finalKaloriHarian?.toStringAsFixed(2);
+    });
+
+    final responseProfil = await http.post(
+        Uri.parse("https://spoonycal-ta.herokuapp.com/api/profil"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $getToken',
+        },
+        body: jsonEncode({
+          'gender': getGender,
+          'berat': getBeratBadan,
+          'tinggi': getTinggiBadan,
+          'umur': getUmur,
+          'kalori_harian': finalKaloriHarian,
+        }));
+    if (responseProfil.statusCode == 201) {
+      final dataProfile = jsonDecode(responseProfil.body);
+      final SharedPreferences localStorage =
+          await SharedPreferences.getInstance();
+      setState(() {
+        finalGender = getGender;
+        finalBeratBadan = getBeratBadan;
+        finalTinggiBadan = getTinggiBadan;
+        finalUmur = getUmur;        
+        finalToken = getToken;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Styles.buttonAuthBg,
+          content: Text("Berhasil menginputkan data!")));
+
+      Navigator.popAndPushNamed(context, '/main_page');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Styles.buttonAuthBg,
+          content: Text("Data ada yang belum terisi!")));
+    }
   }
 }

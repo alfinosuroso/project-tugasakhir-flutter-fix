@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tugasakhir_app/pages/welcome_logout.dart';
+import 'package:tugasakhir_app/Register and Login Screens/welcome_logout.dart';
 
 class EmailSignInPage extends StatefulWidget {
   const EmailSignInPage({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:tugasakhir_app/pages/welcome_logout.dart';
+import 'package:tugasakhir_app/Register and Login Screens/welcome_logout.dart';
 
 class SementaraRegister extends StatefulWidget {
   const SementaraRegister({Key? key}) : super(key: key);
@@ -153,10 +153,11 @@ class _EmailSignInPageState extends State<SementaraRegister> {
   }
 
   Future<void> register() async {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+    if (nameController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       var response = await http.post(
           Uri.parse("https://spoonycal-ta.herokuapp.com/api/register"),
           body: ({
+            'name': nameController.text,
             'email': emailController.text,
             'password': passwordController.text
           }));
@@ -165,11 +166,11 @@ class _EmailSignInPageState extends State<SementaraRegister> {
             MaterialPageRoute(builder: (context) => const WelcomeLogout()));
       } else {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Email belum terdaftar!")));
+            .showSnackBar(SnackBar(content: Text("Email sudah terdaftar!")));
       }
     } else {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Email/Password Wajib diisi!")));
+          .showSnackBar(SnackBar(content: Text("User/Email/Password Wajib diisi!")));
     }
   }
 }

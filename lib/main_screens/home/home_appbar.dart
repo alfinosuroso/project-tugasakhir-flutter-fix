@@ -1,0 +1,141 @@
+import 'package:flutter/material.dart';
+import 'package:tugasakhir_app/main_screens/main_page.dart';
+import 'package:tugasakhir_app/styles.dart';
+
+class HomeAppBar extends StatelessWidget {
+  const HomeAppBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      toolbarHeight: 120.0, // Set this height
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+
+      flexibleSpace: Container(
+        height: 140.0,
+        child: Stack(
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 100.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+                color: Styles.appBarPrimaryColor,
+              ),
+              // 2 Row - Kumpulan User dan Logo
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(30, 38, 30, 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // 1. Teks User - Welcome User dan Email User
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Halo, $finalName",
+                          style: Styles.welcomeUserAppBar1,
+                        ),
+                        Text(
+                          "$finalEmail",
+                          style: Styles.welcomeUserAppBar2,
+                        ),
+                      ],
+                    ),
+
+                    // 2. Logo - Logo Spoonycal dan Bluetooth
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image(
+                          image: AssetImage('assets/images/bluetooth-icon.png'),
+                          // width: 100,
+                          // height: 100,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Image(
+                          image: AssetImage('assets/images/spoonycal-icon.png'),
+                          // width: 100,
+                          // height: 100,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // KONTAINER DATA BERAT DAN TINGGI BADAN
+            Positioned(
+              top: 80.0,
+              left: 0.0,
+              right: 0.0,
+              child: Container(
+                height: 60,
+                padding: EdgeInsets.symmetric(horizontal: 30.0),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: const Offset(
+                          0.0,
+                          3.0,
+                        ),
+                        blurRadius: 6.0,
+                        spreadRadius: 3.0,
+                      ),
+                    ],
+                  ),
+
+                  // BERAT BADAN DAN TINGGI BADAN
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "BERAT BADAN",
+                            style: Styles.shareFont1,
+                          ),
+                          Text(
+                            "$finalBeratBadan".toString() + ' Kg',
+                            style: Styles.shareFont2,
+                          ),
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "KALORI HARIAN",
+                            style: Styles.shareFont1,
+                          ),
+                          Text(
+                            "$finalKaloriHarian".toString() + ' Kalori',
+                            style: Styles.shareFont2,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:tugasakhir_app/main_screens/profile/profile_appbar.dart';
 import 'package:tugasakhir_app/question3.dart';
+import 'package:tugasakhir_app/question_screens/class_method/data_profile.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 import 'main.dart';
@@ -58,8 +61,7 @@ class _QuestionTwoState extends State<QuestionTwo> {
                       _femaleGender = false;
                       if (_maleGender || _femaleGender) {
                         _notShowButtonRightArrow = false;
-                      }
-                      else {
+                      } else {
                         _notShowButtonRightArrow = true;
                       }
                     });
@@ -90,8 +92,7 @@ class _QuestionTwoState extends State<QuestionTwo> {
                       _maleGender = false;
                       if (_maleGender || _femaleGender) {
                         _notShowButtonRightArrow = false;
-                      }
-                      else {
+                      } else {
                         _notShowButtonRightArrow = true;
                       }
                     });
@@ -113,7 +114,7 @@ class _QuestionTwoState extends State<QuestionTwo> {
             const Spacer(
               flex: 3,
             ),
-            
+
             SizedBox(
               height: 20,
             ),
@@ -123,10 +124,12 @@ class _QuestionTwoState extends State<QuestionTwo> {
                     icon: Image.asset('assets/images/rightArrowButton.png'),
                     iconSize: 42,
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const QuestionThree()));
+                      if (_maleGender == true) {
+                        DataProfile().genderLakiLaki();
+                      } else if (_femaleGender == true) {
+                        DataProfile().genderPerempuan();
+                      }
+                      Navigator.pushNamed(context, '/question3');
                     },
                   ),
 
@@ -148,10 +151,7 @@ class _QuestionTwoState extends State<QuestionTwo> {
                         MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const QuestionThree()));
+                    Navigator.pushNamed(context, '/sign_in_page');
                   },
                   child: const Text(
                     "Masuk",

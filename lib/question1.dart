@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:tugasakhir_app/main.dart';
-import 'package:tugasakhir_app/pages_home/beranda.dart';
+import 'package:tugasakhir_app/main_screens/main_page.dart';
 import 'package:tugasakhir_app/question2.dart';
 import 'package:tugasakhir_app/question3.dart';
 import 'package:tugasakhir_app/styles.dart';
 
-class QuestionOne extends StatelessWidget {
+class QuestionOne extends StatefulWidget {
   const QuestionOne({Key? key}) : super(key: key);
 
   @override
+  State<QuestionOne> createState() => _QuestionOneState();
+}
+
+class _QuestionOneState extends State<QuestionOne> {
+  @override
   Widget build(BuildContext context) {
-    ThemeData;  
+    ThemeData;
     return Scaffold(
       backgroundColor: Styles.primaryColor,
 
@@ -19,7 +23,6 @@ class QuestionOne extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Styles.primaryColor,
-        
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
@@ -32,15 +35,11 @@ class QuestionOne extends StatelessWidget {
             const EdgeInsets.only(top: 30, left: 60, right: 60, bottom: 40),
         child: Column(
           children: [
-            
             // Teks 1 - Selamat Datang
             const Padding(
               padding: EdgeInsets.only(bottom: 80),
-              child: Text(
-                "Selamat Datang",
-                textAlign: TextAlign.center,
-                style: Styles.headlineQuestion1
-              ),
+              child: Text("Selamat Datang",
+                  textAlign: TextAlign.center, style: Styles.headlineQuestion1),
             ),
 
             // Teks 2 - Pernyataan awal
@@ -53,7 +52,7 @@ class QuestionOne extends StatelessWidget {
                 "Kami akan mengajukan beberapa pertanyaan untuk memberikan rekomendasi kalori harian Anda untuk mencapai target yang lebih fit",
                 textAlign: TextAlign.center,
                 style: Styles.bodyQuestion1,
-                
+
                 // TextStyle(
                 //     fontSize: 16,
                 //     fontFamily: "Poppins",
@@ -67,17 +66,15 @@ class QuestionOne extends StatelessWidget {
             ),
             ElevatedButton(
                 style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(const Color(0xff45625d)),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  shape: 
-                      MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ))
-                ),
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                        const Color(0xff45625d)),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ))),
                 onPressed: () {
-                  Get.toNamed('/question2');
+                  Navigator.pushNamed(context, '/question2');
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(43, 12, 43, 12),
@@ -105,7 +102,7 @@ class QuestionOne extends StatelessWidget {
                         MaterialStateProperty.all<Color>(Colors.white),
                   ),
                   onPressed: () {
-                   Get.to(Beranda(), transition: Transition.leftToRight);
+                    Navigator.pushNamed(context, '/sign_in_page');
                   },
                   child: const Text(
                     "Masuk",
@@ -113,7 +110,7 @@ class QuestionOne extends StatelessWidget {
                   ),
                 )
               ],
-            ) 
+            )
           ],
         ),
       ),
