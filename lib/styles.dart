@@ -17,6 +17,7 @@ class Styles {
   static const Color offGreyBorder = Color(0xFFDEDEDE);
   static const Color datePageViewColor = Color(0xFF33647C);
   static const Color logOutColor = Color(0xFFb23b3b);
+  static const Color blueBackButton = Color(0xFF4DBDE0);
 
   static const double defaultPadding = 16.0;
 
@@ -65,6 +66,13 @@ class Styles {
     color: primaryColor,
   );
 
+  static const TextStyle buttonMengertiText2 = TextStyle(
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w500,
+    fontSize: 15.0,
+    color: Colors.white,
+  );
+
   static const TextStyle buttonAuthText = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w800,
@@ -89,8 +97,29 @@ class Styles {
   static const TextStyle outfitText2 = TextStyle(
     fontFamily: 'Outfit',
     fontWeight: FontWeight.w700,
-    fontSize: 18.0,
+    fontSize: 15.0,
     color: offGreyLaporan,
+  );
+
+  static const TextStyle outfitTextPairing3 = TextStyle(
+    fontFamily: 'Outfit',
+    fontWeight: FontWeight.w700,
+    fontSize: 28.0,
+    color: Color(0xFF111111),
+  );
+
+  static const TextStyle latoPairing1 = TextStyle(
+    fontFamily: 'Lato', 
+    fontWeight: FontWeight.w600,
+    fontSize: 15.0,
+    color: Colors.black,
+  );
+
+  static const TextStyle latoPairing2 = TextStyle(
+    fontFamily: 'Lato', 
+    fontWeight: FontWeight.w800,
+    fontSize: 20.0,
+    color: Colors.white,
   );
 
   static const TextStyle inputFieldText2 = TextStyle(
@@ -205,6 +234,27 @@ class Styles {
     color: logOutColor
   );
 
+  static const TextStyle shareFontProfile11 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w400,
+    fontSize: 12.0,
+    color: appBarPrimaryColor
+  );
+
+  static const TextStyle shareFontProfileText12 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w400,
+    fontSize: 16.0,
+    color: Colors.black87
+  );
+
+  static const TextStyle shareTitleAppbarText13 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w700,
+    fontSize: 20.0,
+    color: Colors.white
+  );
+
   static const TextStyle selectedBottomNavBarText = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
@@ -219,5 +269,18 @@ class Styles {
     color: offGreyColor,
   );
 
+  static const TextStyle soraMakananText1 = TextStyle(
+    fontFamily: 'Sora',
+    fontWeight: FontWeight.w400,
+    fontSize: 17.0,
+    color: Color(0xFF4A4A4A),
+  );
+
+  static const TextStyle soraMakananText2 = TextStyle(
+    fontFamily: 'Sora',
+    fontWeight: FontWeight.w400,
+    fontSize: 15.0,
+    color: Color(0xFF178BCC),
+  );
 
 }

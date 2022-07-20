@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tugasakhir_app/Register%20and%20Login%20Screens/sign_in_page.dart';
-import 'package:tugasakhir_app/Register%20and%20Login%20Screens/sign_up_page.dart';
-import 'package:tugasakhir_app/main_screens/main_page.dart';
+import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_up_page.dart';
+import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 
 //Entry point of the app
 class EntryApp extends StatefulWidget {

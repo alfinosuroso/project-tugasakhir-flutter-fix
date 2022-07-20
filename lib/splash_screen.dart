@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return AnimatedSplashScreen(
       splash: "assets/images/splash-image.png",
       duration: 3000,
-      nextScreen: Landing(),
+      nextScreen: const Landing(),
       splashTransition: SplashTransition.scaleTransition,
       backgroundColor: Styles.primaryColor,
     );

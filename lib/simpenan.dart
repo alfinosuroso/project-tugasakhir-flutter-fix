@@ -237,3 +237,130 @@
                             //     ],
                             //   ),
                             // ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// SIMPENAN LISTTILE BUILDER
+
+// import 'package:flutter/material.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:tugasakhir_app/model/makanan_model.dart';
+// import 'package:tugasakhir_app/screens/spoonycal_screens/search.dart';
+// import 'package:tugasakhir_app/services/api_makanan_service.dart';
+// import 'package:tugasakhir_app/styles.dart';
+
+
+// class SearchScreen extends StatefulWidget {
+//   const SearchScreen({Key? key}) : super(key: key);
+
+//   @override
+//   State<SearchScreen> createState() => _SearchScreenState();
+// }
+
+// class _SearchScreenState extends State<SearchScreen> {
+
+//   final FetchDatumMakananList _makananList = FetchDatumMakananList();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         toolbarHeight: 70.0,
+//         backgroundColor: Styles.appBarPrimaryColor,
+//         leading: IconButton(
+//           icon: const Icon(FontAwesomeIcons.xmark, color: Colors.white),
+//           onPressed: () => Navigator.of(context).pop(),
+//         ),
+//         centerTitle: false,
+//         title: const Text(
+//           'Pilih makanan anda',
+//           style: Styles.shareTitleAppbarText13,
+//         ),
+//         actions: [
+//           IconButton(
+//             onPressed: () {
+//               showSearch(context: context, delegate: SearchMakanan());
+//             },
+//             icon: Icon(Icons.search_sharp),
+//           )
+//         ],
+//       ),
+//       body: Container(
+//         padding: EdgeInsets.all(20),
+//         child: FutureBuilder<List<DatumMakananList>>(
+//             future: _makananList.getDatumMakananList(),
+//             builder: (context, snapshot) {
+//               var data = snapshot.data;
+//               return ListView.builder(
+//                   itemCount: data?.length,
+//                   itemBuilder: (context, index) {
+//                     if (!snapshot.hasData) {
+//                       return Center(child: CircularProgressIndicator());
+//                     }
+//                     return Card(
+//                       child: Padding(
+//                         padding: const EdgeInsets.all(8.0),
+//                         child: ListTile(
+//                           title: Row(
+//                             children: [
+//                               Container(
+//                                 width: 60,
+//                                 height: 60,
+//                                 decoration: BoxDecoration(
+//                                   color: Colors.deepPurpleAccent,
+//                                   borderRadius: BorderRadius.circular(10),
+//                                 ),
+//                                 child: Center(
+//                                   child: Text(
+//                                     '${data?[index].id}',
+//                                     style: TextStyle(
+//                                         fontSize: 20,
+//                                         fontWeight: FontWeight.bold,
+//                                         color: Colors.white),
+//                                   ),
+//                                 ),
+//                               ),
+//                               SizedBox(width: 20),
+//                               Column(
+//                                   crossAxisAlignment: CrossAxisAlignment.start,
+//                                   children: [
+//                                     Text(
+//                                       '${data?[index].makanan}',
+//                                       style: TextStyle(
+//                                           fontSize: 18,
+//                                           fontWeight: FontWeight.w600),
+//                                     ),
+//                                     SizedBox(height: 10),
+//                                     Text(
+//                                       '${data?[index].kaloriPerGram}',
+//                                       style: TextStyle(
+//                                         color: Colors.black,
+//                                         fontSize: 14,
+//                                         fontWeight: FontWeight.w400,
+//                                       ),
+//                                     ),
+//                                   ])
+//                             ],
+//                           ),
+//                           // trailing: Text('More Info'),
+//                         ),
+//                       ),
+//                     );
+//                   });
+//             }),
+//       ),
+//     );
+//   }
+// }
