@@ -142,6 +142,13 @@ flutter:
           weight: 600
         - asset: fonts/Sora-Bold.ttf
           weight: 700
+
+    - family: Amaranth
+      fonts:
+        - asset: fonts/Amaranth-Regular.ttf
+          weight: 400
+        - asset: fonts/Amaranth-Bold.ttf
+          weight: 700
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

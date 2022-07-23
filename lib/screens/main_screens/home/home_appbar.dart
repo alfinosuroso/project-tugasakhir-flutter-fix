@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tugasakhir_app/main_screens/main_page.dart';
+import 'package:provider/provider.dart';
+import 'package:tugasakhir_app/model/user_model.dart';
+import 'package:tugasakhir_app/providers/auth_provider.dart';
+import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -7,6 +10,8 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel? user = authProvider.user;
     return AppBar(
       toolbarHeight: 120.0, // Set this height
       backgroundColor: Colors.transparent,
@@ -39,7 +44,7 @@ class HomeAppBar extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Halo, $finalName",
+                          "Halo, ${user?.name} woah",
                           style: Styles.welcomeUserAppBar1,
                         ),
                         Text(

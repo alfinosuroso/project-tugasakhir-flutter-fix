@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/dont_have_an_account.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/forget_password.dart';
 import 'package:tugasakhir_app/styles.dart';
@@ -38,12 +40,12 @@ class _SignUpPageState extends State<SignUpPage> {
           }));
       if (responseRegister.statusCode == 200) {
         final dataRegister = jsonDecode(responseRegister.body);
-        final SharedPreferences localStorage = await SharedPreferences.getInstance();
+        final SharedPreferences localStorage =
+            await SharedPreferences.getInstance();
         localStorage.setInt('id', dataRegister['data']['id']);
         localStorage.setString('name', dataRegister['data']['name']);
         localStorage.setString('email', dataRegister['data']['email']);
         localStorage.setString('token', dataRegister['access_token']);
-
 
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.green[400],
@@ -64,6 +66,36 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    bool isLoading = false;
+
+    handleSignUp() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await authProvider.register(
+          name: nameController.text,
+          email: emailController.text,
+          password: passwordController.text)) {
+        Navigator.pushNamed(context, '/question1');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.yellow,
+            content: Text(
+              'Gagal Register!',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
+
     return Scaffold(
       backgroundColor: Styles.primaryColor,
       body: Column(
@@ -206,8 +238,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   borderRadius: new BorderRadius.circular(5.0),
                 ),
               ),
-              onPressed: () async {
-                register();
+              onPressed: () {
+                handleSignUp();
               },
               child: Text(
                 "Daftar".toUpperCase(),

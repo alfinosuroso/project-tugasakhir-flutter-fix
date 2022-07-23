@@ -1,7 +1,10 @@
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/loading_pages/landing.dart';
+import 'package:tugasakhir_app/model/user_model.dart';
+import 'package:tugasakhir_app/providers/auth_provider.dart';
 // import 'package:tugasakhir_app/Register%20and%20Login%20Screens/sign_in_page.dart';
 import 'package:tugasakhir_app/providers/favorite_food.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_in_page.dart';
@@ -19,6 +22,7 @@ import 'package:tugasakhir_app/screens/spoonycal_screens/pairing_device_screen.d
 import 'package:tugasakhir_app/screens/spoonycal_screens/search_screen.dart';
 import 'package:tugasakhir_app/screens/spoonycal_screens/tampildatamakanan.dart';
 import 'package:tugasakhir_app/splash_screen.dart';
+import 'package:tugasakhir_app/util/shared_preference.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -29,14 +33,22 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+  // Future<UserModel> getUserData() => UserPreferences().getUser();
 
   @override
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
+    var token = UserPreferences().getToken;
+    UserModel? user;
+    user = UserPreferences().getUser as UserModel?;
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (context) => ProviderFavoriteFood(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
         ),
       ],
       child: MaterialApp(
@@ -44,24 +56,27 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Share',
         ),
         debugShowCheckedModeBanner: false,
-        // home: EmailSignInPage(),
-    
-        initialRoute: '/splash_screen',
-    
+        // ignore: unnecessary_null_comparison
+        home: token == null
+              ? const SignInPage()
+              : MainPage(user: user),
+
+        // initialRoute: '/splash_screen',
+
         routes: {
           // Entry App
           '/landing': (context) => const Landing(),
-    
+
           // Splash Screen
           '/splash_screen': (context) => const SplashScreen(),
-    
+
           // Loading
           // '/default_loading': (context) => const Defa(),
-    
+
           // Routes register and login
           '/sign_in_page': (context) => const SignInPage(),
           '/sign_up_page': (context) => const SignUpPage(),
-    
+
           // Routes Question
           '/prequestion': (context) => const PreQuestion(),
           '/question1': (context) => const QuestionOne(),
@@ -70,19 +85,18 @@ class MyApp extends StatelessWidget {
           '/question4': (context) => const QuestionFour(),
           '/question5': (context) => const QuestionFive(),
           '/question6': (context) => const QuestionSix(),
-    
+
           // Routes Main Page
-          '/main_page': (context) => const MainPage(),
-    
+          // '/main_page': (context) => MainPage(),
+
           // Routes Extend Profile
           '/edit_profile': (context) => const EditProfile(),
-    
+
           // Spoonycal
           '/pairing_device_screen': (context) => const PairingDeviceScreen(),
           '/search_screen': (context) => const SearchScreen(),
           '/tampil_data': (context) => const TampilDataMakanan(),
           // '/search_makanan': (context) => const SearchMakanan(),
-    
         },
       ),
     );

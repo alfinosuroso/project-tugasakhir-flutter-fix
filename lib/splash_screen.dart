@@ -15,9 +15,9 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: "assets/images/splash-image.png",
-      duration: 3000,
+      duration: 1500,
       nextScreen: const Landing(),
-      splashTransition: SplashTransition.scaleTransition,
+      splashTransition: SplashTransition.fadeTransition,
       backgroundColor: Styles.primaryColor,
     );
   }

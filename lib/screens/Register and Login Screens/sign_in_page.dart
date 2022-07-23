@@ -1,10 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tugasakhir_app/model/user_model.dart';
+import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/dont_have_an_account.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/forget_password.dart';
+import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_up_page.dart';
+import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class SignInPage extends StatefulWidget {
@@ -15,8 +21,8 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  TextEditingController emailController2 = TextEditingController();
-  TextEditingController passwordController2 = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   bool focusIcon = false;
 
@@ -27,37 +33,37 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   Future<void> login() async {
-    if (emailController2.text.isNotEmpty && passwordController2.text.isNotEmpty) {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       var responseLogin = await http.post(
-        // Response /api/login 
+          // Response /api/login
           Uri.parse("https://spoonycal-ta.herokuapp.com/api/login"),
           body: ({
-            'email': emailController2.text,
-            'password': passwordController2.text
+            'email': emailController.text,
+            'password': passwordController.text
           }));
-      if (responseLogin.statusCode == 200) {         
+      if (responseLogin.statusCode == 200) {
         final dataLogin = jsonDecode(responseLogin.body);
-        final SharedPreferences localStorage = await SharedPreferences.getInstance();
+        final SharedPreferences localStorage =
+            await SharedPreferences.getInstance();
         localStorage.setString('name', dataLogin['data']['name']);
         localStorage.setString('email', dataLogin['data']['email']);
         localStorage.setString('token', dataLogin['access_token']);
 
         // Response /api/register
-    //     String token = await Candidate().getToken();
-    // final response = await http.get(url, headers: {
-    //   'Content-Type': 'application/json',
-    //   'Accept': 'application/json',
-    //   'Authorization': 'Bearer $token',
-    // });
-    // print('Token : ${token}');
-    // print(response);
-
+        //     String token = await Candidate().getToken();
+        // final response = await http.get(url, headers: {
+        //   'Content-Type': 'application/json',
+        //   'Accept': 'application/json',
+        //   'Authorization': 'Bearer $token',
+        // });
+        // print('Token : ${token}');
+        // print(response);
 
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.green[400],
             content: Text("Login Berhasil!")));
 
-        Navigator.popAndPushNamed(context, '/main_page');
+        // Navigator.popAndPushNamed(context, '/main_page');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Styles.buttonAuthBg,
@@ -72,6 +78,41 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel? user;
+    bool isLoading = false;
+
+    handleSignIn() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await authProvider.login(
+          email: emailController.text, password: passwordController.text)) {
+        Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+                builder: (BuildContext context) => MainPage(
+                      user: user!,
+                    )));
+        // Navigator.pushNamed(context, '/main_page');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.yellow,
+            content: Text(
+              'Gagal Login!',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
+
     return Scaffold(
       backgroundColor: Styles.primaryColor,
       body: Column(
@@ -88,7 +129,6 @@ class _SignInPageState extends State<SignInPage> {
             // height:
           ),
           SizedBox(height: Styles.defaultPadding * 2),
-          
 
           // Email
           SizedBox(
@@ -96,7 +136,7 @@ class _SignInPageState extends State<SignInPage> {
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextField(
-                controller: emailController2,
+                controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
                 cursorColor: Styles.cursorColorGreen,
@@ -133,7 +173,7 @@ class _SignInPageState extends State<SignInPage> {
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextField(
-                controller: passwordController2,
+                controller: passwordController,
                 textInputAction: TextInputAction.next,
                 obscureText: true,
                 cursorColor: Styles.cursorColorGreen,
@@ -177,8 +217,8 @@ class _SignInPageState extends State<SignInPage> {
                   borderRadius: new BorderRadius.circular(5.0),
                 ),
               ),
-              onPressed: () async {
-                login();
+              onPressed: () {
+                handleSignIn();
               },
               child: Text(
                 "Login".toUpperCase(),

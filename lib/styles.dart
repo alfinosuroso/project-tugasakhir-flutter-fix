@@ -17,6 +17,7 @@ class Styles {
   static const Color offGreyBorder = Color(0xFFDEDEDE);
   static const Color datePageViewColor = Color(0xFF33647C);
   static const Color logOutColor = Color(0xFFb23b3b);
+  static const Color redMainColor = Color.fromARGB(255, 219, 97, 97);
   static const Color blueBackButton = Color(0xFF4DBDE0);
 
   static const double defaultPadding = 16.0;
@@ -255,6 +256,20 @@ class Styles {
     color: Colors.white
   );
 
+  static const TextStyle shareBeratSendokFont14 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w700,
+    fontSize: 15.0,
+    color: offGreySisaKaloriColor,
+  );
+
+  static const TextStyle shareBeratSendokFont15 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w700,
+    fontSize: 20.0,
+    color: Color(0xFFF36767),
+  );
+
   static const TextStyle selectedBottomNavBarText = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
@@ -281,6 +296,83 @@ class Styles {
     fontWeight: FontWeight.w400,
     fontSize: 15.0,
     color: Color(0xFF178BCC),
+  );
+
+  static const TextStyle soraMakananText3 = TextStyle(
+    fontFamily: 'Sora',
+    fontWeight: FontWeight.w400,
+    fontSize: 13.0,
+    color: Color(0xFF178BCC),
+  );
+
+  static const TextStyle soraMakananText4 = TextStyle(
+    fontFamily: 'Sora',
+    fontWeight: FontWeight.w700,
+    fontSize: 17.0,
+    color: Color(0xFF4A4A4A),
+  );
+
+  static const TextStyle soraMakananText5 = TextStyle(
+    fontFamily: 'Sora',
+    fontWeight: FontWeight.w700,
+    fontSize: 15.0,
+    color: Color(0xFF178BCC),
+  );
+
+  static const TextStyle amaranthCalorieText1 = TextStyle(
+    fontFamily: 'Amaranth',
+    fontWeight: FontWeight.w400,
+    fontSize: 20.0,
+    color: Color(0xFF02617E),
+  );
+
+  static const TextStyle amaranthCalorieText2 = TextStyle(
+    fontFamily: 'Amaranth',
+    fontWeight: FontWeight.w400,
+    fontSize: 13.0,
+    color: Color(0xFF818E93),
+  );
+
+  static const TextStyle outfitCalorieText1 = TextStyle(
+    fontFamily: 'Outfit',
+    fontWeight: FontWeight.w700,
+    fontSize: 20.0,
+    color: Color(0xFF359CD6),
+  );
+
+  static const TextStyle outfitCalorieText2 = TextStyle(
+    fontFamily: 'Outfit',
+    fontWeight: FontWeight.w700,
+    fontSize: 20.0,
+    color: Color(0xFF979797),
+  );
+
+  static const TextStyle outfitDialogText3 = TextStyle(
+    fontFamily: 'Outfit',
+    fontWeight: FontWeight.w700,
+    fontSize: 20.0,
+    color: Color(0xFF1E1F1F),
+  );
+
+  static const TextStyle outfitDialogText4 = TextStyle(
+    fontFamily: 'Outfit',
+    fontWeight: FontWeight.w400,
+    fontSize: 15.0,
+    color: Color(0xFF0A0A0A),
+  );
+
+  static const TextStyle outfitDialogTidakText5 = TextStyle(
+    fontFamily: 'Outfit',
+    fontWeight: FontWeight.w400,
+    fontSize: 14.0,
+    color: Color(0xFFF36767),
+  );
+
+  static const TextStyle outfitDialogYaText6 = TextStyle(
+    fontFamily: 'Outfit',
+    fontWeight: FontWeight.w400,
+    fontSize: 14.0,
+    color: appBarPrimaryColor,
   );
 
 }

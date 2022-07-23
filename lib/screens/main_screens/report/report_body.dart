@@ -143,7 +143,7 @@ class _ReportBodyState extends State<ReportBody> {
                                           title: AxisTitle(text: 'Hari')
                                         ),
                                         primaryYAxis: NumericAxis(
-                                          title: AxisTitle(text: 'kkal')
+                                          title: AxisTitle(text: 'kal')
                                         ),
                                         series: <ChartSeries>[
                                           ColumnSeries<ChartData, String>(

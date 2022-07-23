@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/styles.dart';
+import 'package:tugasakhir_app/util/shared_preference.dart';
 
 class ProfileBody extends StatefulWidget {
   const ProfileBody({Key? key}) : super(key: key);
@@ -214,7 +215,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                           style: Styles.shareFontLogOut10,
                         ),
                         onTap: () {
-                          logout();
+                          UserPreferences().removeUser();
                         },
                       ),
                     ),

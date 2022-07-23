@@ -1,12 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tugasakhir_app/model/user_model.dart';
+import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/screens/main_screens/components_main/fab.dart';
 import 'package:tugasakhir_app/screens/main_screens/home/home_appbar.dart';
 import 'package:tugasakhir_app/screens/main_screens/home/home_body.dart';
 import 'package:tugasakhir_app/screens/main_screens/profile/profile_appbar.dart';
+import 'package:tugasakhir_app/screens/main_screens/profile/profile_body.dart';
 import 'package:tugasakhir_app/screens/main_screens/report/report_appbar.dart';
+import 'package:tugasakhir_app/screens/main_screens/report/report_body.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,7 +27,10 @@ double? finalKaloriHarian;
 String? finalToken;
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  final UserModel? user;
+  const MainPage({
+    Key? key,
+    required this.user}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -38,8 +47,8 @@ class _MainPageState extends State<MainPage> {
   ];
   final screensBody = [
     const HomeBody(),
-    const ReportAppBar(),
-    const ProfileAppBar(),
+    const ReportBody(),
+    const ProfileBody(),
   ];
 
   List appBarHeight = [
@@ -63,16 +72,16 @@ class _MainPageState extends State<MainPage> {
   void getValidationData() async {
     localStorage = await SharedPreferences.getInstance();
 
-    setState(() {
-      finalName = localStorage?.getString("name")!;
-      finalEmail = localStorage?.getString("email")!;
-      finalGender = localStorage?.getString("gender_user");
-      finalBeratBadan = localStorage?.getDouble("berat_badan");
-      finalTinggiBadan = localStorage?.getDouble("tinggi_badan");
-      finalUmur = localStorage?.getDouble("umur");
-      finalKaloriHarian = localStorage?.getDouble("kalori_harian");
-      finalToken = localStorage?.getString('token');
-    });
+    // setState(() {
+    //   finalName = localStorage?.getString("name")!;
+    //   finalEmail = localStorage?.getString("email")!;
+    //   finalGender = localStorage?.getString("gender_user");
+    //   finalBeratBadan = localStorage?.getDouble("berat_badan");
+    //   finalTinggiBadan = localStorage?.getDouble("tinggi_badan");
+    //   finalUmur = localStorage?.getDouble("umur");
+    //   finalKaloriHarian = localStorage?.getDouble("kalori_harian");
+    //   finalToken = localStorage?.getString('token');
+    // });
   }
 
   @override

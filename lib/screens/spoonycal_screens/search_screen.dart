@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,14 +31,15 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
-  Future<void> sendCalorieValue() async {
-    final SharedPreferences localStorage =
-        await SharedPreferences.getInstance();
-    // localStorage.setString('makanan', ['data']['name']);
-  }
+  // Future<void> sendCalorieValue() async {
+  //   final SharedPreferences localStorage =
+  //       await SharedPreferences.getInstance();
+  //   // localStorage.setString('makanan', ['data']['name']);
+  // }
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70.0,
@@ -85,7 +85,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           subtitle: Text(
                             "100 gram (g) - " +
                                 "${data?[index].kaloriPerGram}" +
-                                " kkal",
+                                " kal",
                             style: Styles.soraMakananText2,
                           ),
                           // When a user taps the ListTile, navigate to the DetailScreen.
@@ -95,16 +95,26 @@ class _SearchScreenState extends State<SearchScreen> {
                             showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                      title: Text('Hitung Kalori ${data?[index].makanan}'),
+                                      title: Text(
+                                        'Hitung Kalori ${data?[index].makanan}',
+                                        style: Styles.outfitDialogText3,
+                                      ),
                                       content: Text(
-                                          'Ingin menghitung kalori ${data?[index].makanan} sekarang?'),
+                                        'Ingin menghitung kalori ${data?[index].makanan} sekarang?',
+                                        style: Styles.outfitDialogText4,
+                                      ),
                                       actions: [
                                         TextButton(
                                             onPressed: () =>
                                                 Navigator.pop(context),
-                                            child: const Text('TIDAK')),
+                                            child: const Text(
+                                              'TIDAK',
+                                              style:
+                                                  Styles.outfitDialogTidakText5,
+                                            )),
                                         TextButton(
-                                            onPressed: () => Navigator.pushReplacement(
+                                            onPressed: () =>
+                                                Navigator.pushReplacement(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
@@ -117,33 +127,13 @@ class _SearchScreenState extends State<SearchScreen> {
                                                     ),
                                                   ),
                                                 ),
-                                            child: const Text('YA')),
+                                            child: const Text('YA',
+                                                style: Styles
+                                                    .outfitDialogYaText6)),
                                       ],
                                     ));
                           },
-                        )
-                            // RadioListTile<int?>(
-                            //   controlAffinity: ListTileControlAffinity.trailing,
-                            //   value: data?[index].kaloriPerGram,
-                            //   groupValue: selectedRadioTile,
-                            // title: Text(
-                            //   "${data?[index].makanan}",
-                            //   style: Styles.soraMakananText1,
-                            // ),
-                            // subtitle: Text(
-                            //   "100 gram (g) - " +
-                            //       "${data?[index].kaloriPerGram}" +
-                            //       " kkal",
-                            //   style: Styles.soraMakananText2,
-                            // ),
-                            //   onChanged: (val) {
-                            //     print("Radio Tile pressed $val");
-                            //     setSelectedRadioTile(val);
-                            //   },
-                            //   activeColor: Styles.mainBlueColor,
-                            //   selected: false,
-                            // ),
-                            );
+                        ));
                       });
                 }),
             selectedRadioTile == 0

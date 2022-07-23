@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tugasakhir_app/question_screens/class_method/data_profile.dart';
+import 'package:tugasakhir_app/model/data_profile.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class QuestionFour extends StatefulWidget {

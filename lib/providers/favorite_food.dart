@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 import 'package:tugasakhir_app/model/favorite_food.dart';
 
 class ProviderFavoriteFood extends ChangeNotifier {

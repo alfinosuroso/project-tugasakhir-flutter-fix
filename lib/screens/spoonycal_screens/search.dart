@@ -60,7 +60,7 @@ class SearchMakanan extends SearchDelegate {
                           subtitle: Text(
                             "100 gram (g) - " +
                                 "${data?[index].kaloriPerGram}" +
-                                " kkal",
+                                " kal",
                             style: Styles.soraMakananText2,
                           ),
                           onChanged: (val) {
