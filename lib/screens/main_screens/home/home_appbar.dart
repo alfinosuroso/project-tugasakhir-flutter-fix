@@ -44,11 +44,11 @@ class HomeAppBar extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Halo, ${user?.name} woah",
+                          "Halo, ${user?.name}",
                           style: Styles.welcomeUserAppBar1,
                         ),
                         Text(
-                          "$finalEmail",
+                          "${user?.email}",
                           style: Styles.welcomeUserAppBar2,
                         ),
                       ],

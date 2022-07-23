@@ -19,7 +19,7 @@ class DontHaveAnAccount extends StatelessWidget {
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/sign_up_page');
+            Navigator.pushNamed(context, '/question1');
           },
           child: const Text(
             "Daftar disini",

@@ -27,10 +27,7 @@ double? finalKaloriHarian;
 String? finalToken;
 
 class MainPage extends StatefulWidget {
-  final UserModel? user;
-  const MainPage({
-    Key? key,
-    required this.user}) : super(key: key);
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();

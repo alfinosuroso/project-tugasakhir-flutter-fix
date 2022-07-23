@@ -39,7 +39,7 @@ class PreQuestion extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.0),
                   ))),
               onPressed: () {
-                Navigator.pushNamed(context, '/sign_up_page');
+                Navigator.pushNamed(context, '/question1');
               },
               child: const Padding(
                 padding: EdgeInsets.all(16.0),

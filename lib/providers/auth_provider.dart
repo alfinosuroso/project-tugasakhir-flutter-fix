@@ -15,10 +15,18 @@ class AuthProvider extends ChangeNotifier {
   Future<bool> register(
       {required String name,
       required String email,
-      required String password}) async {
+      required String password,
+      required String gender,
+      required double berat,
+      required double tinggi,
+      required double umur,
+      required double kaloriHarian,
+      }) async {
     try {
       UserModel user = await AuthService().register(
-          name: name, email: email, password: password);
+          name: name, email: email, password: password,
+          gender: gender, berat: berat, tinggi: tinggi,
+          umur: umur, kaloriHarian: kaloriHarian);
 
       _user = user;
       return true;
@@ -32,6 +40,19 @@ class AuthProvider extends ChangeNotifier {
     try {
       UserModel user =
           await AuthService().login(email: email, password: password);
+
+      _user = user;
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool> myuser({required int id, String? token}) async {
+    try {
+      UserModel user =
+          await AuthService().myuser(id: id, token: token);
 
       _user = user;
       return true;

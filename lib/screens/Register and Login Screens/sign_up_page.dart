@@ -7,10 +7,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/dont_have_an_account.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/forget_password.dart';
+import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+  final String? gender;
+  final double? berat;
+  final double? tinggi;
+  final double? umur;
+  final double? kaloriHarian;
+  
+  const SignUpPage({
+    Key? key,
+    @required this.gender,
+    @required this.berat,
+    @required this.tinggi,
+    @required this.umur,
+    @required this.kaloriHarian,
+  }) : super(key: key);
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -77,7 +91,13 @@ class _SignUpPageState extends State<SignUpPage> {
       if (await authProvider.register(
           name: nameController.text,
           email: emailController.text,
-          password: passwordController.text)) {
+          password: passwordController.text,
+          gender: widget.gender!,
+          berat: widget.berat!, 
+          tinggi: widget.tinggi!, 
+          umur: widget.umur!, 
+          kaloriHarian: widget.kaloriHarian!, 
+          )) {
         Navigator.pushNamed(context, '/question1');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

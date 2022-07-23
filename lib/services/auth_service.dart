@@ -9,13 +9,23 @@ class AuthService {
   Future<UserModel> register(
       {required String name,
       required String email,
-      required String password}) async {
+      required String password,
+      required String gender,
+      required double berat,
+      required double tinggi,
+      required double umur,
+      required double kaloriHarian}) async {
     var url = '$baseUrl/register';
     var headers = {'Content-Type': 'application/json'};
     var body = jsonEncode({
       'name': name,
       'email': email,
       'password': password,
+      'gender': gender,
+      'berat': berat,
+      'tinggi': tinggi,
+      'umur': umur,
+      'kaloriHarian': kaloriHarian,
     });
 
     print(jsonDecode(body));
@@ -65,6 +75,34 @@ class AuthService {
       UserModel user = UserModel.fromJson(data['data']);
       user.token = 'Bearer ' + data['access_token'];
       UserPreferences().saveUser(user);
+
+      return user;
+    } else {
+      print("Gagal Login");
+      throw Exception("Gagal Login");
+    }
+  }
+
+  Future<UserModel> myuser({required int id, String? token}) async {
+    var url = '$baseUrl/myuser/$id';
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+      };
+
+    var response = await http.get(
+      Uri.parse(url),
+      headers: headers,
+    );
+
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      UserModel user = UserModel.fromJson(data['data']);
+      user.token = 'Bearer ' + data['access_token'];
+      UserPreferences().saveUser(user);
+
       return user;
     } else {
       print("Gagal Login");

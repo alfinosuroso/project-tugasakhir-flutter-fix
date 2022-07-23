@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tugasakhir_app/providers/auth_provider.dart';
+import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_in_page.dart';
+import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 
 class Landing extends StatefulWidget {
   const Landing({Key? key}) : super(key: key);
@@ -9,23 +13,39 @@ class Landing extends StatefulWidget {
 }
 
 class _LandingState extends State<Landing> {
+  int _id = 0;
   String _token = "";
+  AuthProvider? authProvider;
 
   @override
   void initState() {
     super.initState();
-    _loadUserInfo();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      _handleSignIn();
+    });
+    // Future.delayed(Duration.zero, () {
+    //   _handleSignIn();
+
+    // });
   }
 
-  _loadUserInfo() async {
+  _handleSignIn() async {
+    authProvider = Provider.of<AuthProvider>(context, listen: false);
     SharedPreferences localStorage = await SharedPreferences.getInstance();
+    _id = (localStorage.getInt('id') ?? 0);
     _token = (localStorage.getString('token') ?? "");
-    if (_token == "") {
-      Navigator.pushNamedAndRemoveUntil(
-          context, '/sign_in_page', ModalRoute.withName('/sign_in_page'));
+    print(_token + 'EMAILLLLL' + _id.toString());
+    if (_id != 0 || _token != "") {
+      await authProvider?.myuser(id: _id, token: _token);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainPage()),
+      );
+      // Navigator.pushNamed(context, '/main_page');
     } else {
       Navigator.pushNamedAndRemoveUntil(
-          context, '/main_page', ModalRoute.withName('/main_page'));
+          context, '/pre_question', ModalRoute.withName('/pre_question'));
     }
   }
 

@@ -79,7 +79,6 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel? user;
     bool isLoading = false;
 
     handleSignIn() async {
@@ -93,7 +92,6 @@ class _SignInPageState extends State<SignInPage> {
             context,
             MaterialPageRoute<void>(
                 builder: (BuildContext context) => MainPage(
-                      user: user!,
                     )));
         // Navigator.pushNamed(context, '/main_page');
       } else {

@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final UserToken = UserTokenFromJson(jsonString);
+//     final userList = userListFromJson(jsonString);
 
 import 'dart:convert';
 
-UserToken UserTokenFromJson(String str) => UserToken.fromJson(json.decode(str));
+UserList userListFromJson(String str) => UserList.fromJson(json.decode(str));
 
-String UserTokenToJson(UserToken data) => json.encode(data.toJson());
+String userListToJson(UserList data) => json.encode(data.toJson());
 
-class UserToken {
-  UserToken({
+class UserList {
+  UserList({
     this.data,
     this.accessToken,
     this.tokenType,
@@ -19,14 +19,14 @@ class UserToken {
   String? accessToken;
   String? tokenType;
 
-  factory UserToken.fromJson(Map<String, dynamic> json) => UserToken(
+  factory UserList.fromJson(Map<String, dynamic> json) => UserList(
         data: UserModel.fromJson(json["data"]),
         accessToken: json["access_token"],
         tokenType: json["token_type"],
       );
 
   Map<String, dynamic> toJson() => {
-        "data": data?.toJson(),
+        "data": data!.toJson(),
         "access_token": accessToken,
         "token_type": tokenType,
       };
@@ -36,6 +36,11 @@ class UserModel {
   UserModel({
     this.name,
     this.email,
+    this.umur,
+    this.gender,
+    this.tinggi,
+    this.berat,
+    this.kaloriHarian,
     this.updatedAt,
     this.createdAt,
     this.id,
@@ -44,6 +49,11 @@ class UserModel {
 
   String? name;
   String? email;
+  double? umur;
+  String? gender;
+  double? tinggi;
+  double? berat;
+  double? kaloriHarian;
   DateTime? updatedAt;
   DateTime? createdAt;
   int? id;
@@ -52,6 +62,11 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         name: json["name"],
         email: json["email"],
+        umur: json["umur"],
+        gender: json["gender"],
+        tinggi: json["tinggi"],
+        berat: json["berat"],
+        kaloriHarian: json["kalori_harian"],
         updatedAt: DateTime.parse(json["updated_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         id: json["id"],
@@ -61,8 +76,13 @@ class UserModel {
   Map<String, dynamic> toJson() => {
         "name": name,
         "email": email,
-        "updated_at": updatedAt?.toIso8601String(),
-        "created_at": createdAt?.toIso8601String(),
+        "umur": umur,
+        "gender": gender,
+        "tinggi": tinggi,
+        "berat": berat,
+        "kalori_harian": kaloriHarian,
+        "updated_at": updatedAt!.toIso8601String(),
+        "created_at": createdAt!.toIso8601String(),
         "id": id,
         "token": token,
       };

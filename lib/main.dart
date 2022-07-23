@@ -38,10 +38,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
-    var token = UserPreferences().getToken;
-    UserModel? user;
-    user = UserPreferences().getUser as UserModel?;
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -56,12 +52,8 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Share',
         ),
         debugShowCheckedModeBanner: false,
-        // ignore: unnecessary_null_comparison
-        home: token == null
-              ? const SignInPage()
-              : MainPage(user: user),
 
-        // initialRoute: '/splash_screen',
+        initialRoute: '/splash_screen',
 
         routes: {
           // Entry App
