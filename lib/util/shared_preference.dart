@@ -10,11 +10,11 @@ class UserPreferences {
     prefs.setInt("id", user.id!);
     prefs.setString("name", user.name!);
     prefs.setString("email", user.email!);
-    prefs.setDouble("email", user.umur!);
-    prefs.setString("email", user.gender!);
-    prefs.setDouble("email", user.tinggi!);
-    prefs.setDouble("email", user.berat!);
-    prefs.setDouble("email", user.kaloriHarian!);
+    prefs.setDouble("umur", user.umur!);
+    prefs.setString("gender", user.gender!);
+    prefs.setDouble("tinggi", user.tinggi!);
+    prefs.setDouble("berat", user.berat!);
+    prefs.setDouble("kaloriHarian", user.kaloriHarian!);
     prefs.setString("token", user.token!);
 
     print("object prefere");
@@ -45,6 +45,11 @@ class UserPreferences {
     prefs.remove("id");
     prefs.remove("name");
     prefs.remove("email");
+    prefs.remove("umur");
+    prefs.remove("gender");
+    prefs.remove("tinggi");
+    prefs.remove("berat");
+    prefs.remove("kaloriHarian");
     prefs.remove("token");
   }
 

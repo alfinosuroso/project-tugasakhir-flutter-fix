@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class Styles {
   static const Color primaryColor = Color(0xFF45625D);
   static const Color secondColor = Color(0xFF2D413D);
+  static const Color iconCircleGrey = Color(0xFF404040);
   static const Color appBarPrimaryColor = Color(0xFF54A5CC);
   static const Color cursorColorGreen = Color(0xFF28FDBD);
   static const Color textFormBg = Color(0xFF748B87);
@@ -121,6 +122,20 @@ class Styles {
     fontWeight: FontWeight.w800,
     fontSize: 20.0,
     color: Colors.white,
+  );
+
+  static const TextStyle latoPairing3 = TextStyle(
+    fontFamily: 'Lato', 
+    fontWeight: FontWeight.w800,
+    fontSize: 18.0,
+    color: Colors.white,
+  );
+
+  static const TextStyle latoPairing4 = TextStyle(
+    fontFamily: 'Lato', 
+    fontWeight: FontWeight.w800,
+    fontSize: 18.0,
+    color: Color(0xFFA9A9A9),
   );
 
   static const TextStyle inputFieldText2 = TextStyle(

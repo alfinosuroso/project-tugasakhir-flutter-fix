@@ -4,7 +4,7 @@ import 'package:tugasakhir_app/model/data_profile.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class QuestionFive extends StatefulWidget {
-  const QuestionFive({ Key? key }) : super(key: key);
+  const QuestionFive({Key? key}) : super(key: key);
 
   @override
   State<QuestionFive> createState() => _QuestionFiveState();
@@ -27,6 +27,9 @@ class _QuestionFiveState extends State<QuestionFive> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: true,
+        title: const Image(
+          image: AssetImage('assets/images/icon-question5.png'),
+        ),
       ),
       // Badan Utama
       body: Padding(
@@ -87,8 +90,13 @@ class _QuestionFiveState extends State<QuestionFive> {
                     },
                     keyboardType:
                         TextInputType.numberWithOptions(decimal: true),
+                    // inputFormatters: [
+                    //   FilteringTextInputFormatter.allow(RegExp('[0-9]+')),
+                    // ],
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp('[0-9]+')),
+                      // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}')),
                     ],
                     controller: DataProfile.controllerUmur,
                     style: Styles.inputFieldText1,

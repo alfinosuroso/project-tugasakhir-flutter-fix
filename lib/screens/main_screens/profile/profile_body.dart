@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
+import 'package:tugasakhir_app/model/user_model.dart';
+import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:tugasakhir_app/util/shared_preference.dart';
@@ -12,16 +14,10 @@ class ProfileBody extends StatefulWidget {
 }
 
 class _ProfileBodyState extends State<ProfileBody> {
-  logout() async {
-    final localStorage = await SharedPreferences.getInstance();
-    localStorage.remove('token'); // <- remove sharedpreferences
-
-    Navigator.pushReplacementNamed(
-        context, "/sign_in_page"); // <- navigasi ke halaman awal
-  }
-
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel? user = authProvider.user;
     return Stack(
       children: [
         // Kontainer atas - biru
@@ -37,10 +33,11 @@ class _ProfileBodyState extends State<ProfileBody> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Spacer(
-                    flex: 1,
-                  ),
+                  flex: 1,
+                ),
                 // 1. Teks User - Welcome User dan Email User
                 Expanded(
+                  flex: 2,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,11 +50,11 @@ class _ProfileBodyState extends State<ProfileBody> {
                         flex: 1,
                       ),
                       Text(
-                        "$finalName",
+                        "${user?.name}",
                         style: Styles.shareFont8,
                       ),
                       Text(
-                        "$finalEmail",
+                        "${user?.email}",
                         style: Styles.welcomeUserAppBar1,
                       ),
                     ],
@@ -66,6 +63,7 @@ class _ProfileBodyState extends State<ProfileBody> {
 
                 // 2. Logo - Logo Spoonycal dan Bluetooth
                 Expanded(
+                  flex: 1,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -91,7 +89,7 @@ class _ProfileBodyState extends State<ProfileBody> {
           ),
         ),
 
-        // Container utama - Putih 
+        // Container utama - Putih
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -172,25 +170,23 @@ class _ProfileBodyState extends State<ProfileBody> {
                   //** BANTUAN */
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         border: Border(
                             bottom: BorderSide(
                                 color: Styles.offGreyBorder, width: 2))),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
                       child: ListTile(
-                        leading: Icon(
+                        leading: const Icon(
                           Icons.help,
                           color: Styles.appBarPrimaryColor,
                           size: 30,
                         ),
-                        title: Text(
+                        title: const Text(
                           'Bantuan',
                           style: Styles.shareFont9,
                         ),
-                        onTap: () {
-                          logout();
-                        },
+                        onTap: () {},
                       ),
                     ),
                   ),
@@ -198,24 +194,25 @@ class _ProfileBodyState extends State<ProfileBody> {
                   //** LOGOUT */
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         border: Border(
                             bottom: BorderSide(
                                 color: Styles.offGreyBorder, width: 2))),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
                       child: ListTile(
-                        leading: Icon(
+                        leading: const Icon(
                           Icons.logout,
                           color: Styles.logOutColor,
                           size: 30,
                         ),
-                        title: Text(
+                        title: const Text(
                           'Keluar',
                           style: Styles.shareFontLogOut10,
                         ),
                         onTap: () {
                           UserPreferences().removeUser();
+                          Navigator.popAndPushNamed(context, '/sign_in_page');
                         },
                       ),
                     ),
@@ -225,7 +222,6 @@ class _ProfileBodyState extends State<ProfileBody> {
             ),
           ),
         ),
-        
       ],
     );
   }

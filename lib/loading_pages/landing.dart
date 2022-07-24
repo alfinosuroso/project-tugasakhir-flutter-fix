@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
-import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_in_page.dart';
 import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 
 class Landing extends StatefulWidget {
@@ -45,7 +44,7 @@ class _LandingState extends State<Landing> {
       // Navigator.pushNamed(context, '/main_page');
     } else {
       Navigator.pushNamedAndRemoveUntil(
-          context, '/pre_question', ModalRoute.withName('/pre_question'));
+          context, '/prequestion', ModalRoute.withName('/prequestion'));
     }
   }
 

@@ -138,28 +138,16 @@ class PairingDeviceScreen extends StatelessWidget {
                   padding: EdgeInsets.all(16.0),
                   child: Text(
                     "Temukan perangkat anda",
-                    style: Styles.bodyQuestion1,
+                    style: Styles.latoPairing3,
                     textAlign: TextAlign.center,
                   ),
                 )),
 
-                const SizedBox(
-                  height: 20.0,
-                ),
-
-                ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white)),
-                onPressed: () {},
-                child: const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
+                TextButton(onPressed: () => Navigator.pop(context), child: Text(
                     "Tidak Sekarang",
-                    style: Styles.outfitText2,
+                    style: Styles.latoPairing4,
                     textAlign: TextAlign.center,
-                  ),
-                )),
+                  ),)
               ]),
         ),
       ),

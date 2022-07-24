@@ -98,7 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
           umur: widget.umur!, 
           kaloriHarian: widget.kaloriHarian!, 
           )) {
-        Navigator.pushNamed(context, '/question1');
+        Navigator.pushNamed(context, '/main_page');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

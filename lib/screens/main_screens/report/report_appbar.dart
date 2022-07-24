@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tugasakhir_app/model/user_model.dart';
+import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 
@@ -7,6 +10,8 @@ class ReportAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel? user = authProvider.user;
     return AppBar(
       toolbarHeight: 100.0, // Set this height
       backgroundColor: Colors.transparent,
@@ -39,11 +44,11 @@ class ReportAppBar extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Halo, $finalName",
+                          "Halo, ${user?.name}",
                           style: Styles.welcomeUserAppBar1,
                         ),
                         Text(
-                          "$finalEmail",
+                          "${user?.email}",
                           style: Styles.welcomeUserAppBar2,
                         ),
                       ],

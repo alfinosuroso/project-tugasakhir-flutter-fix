@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tugasakhir_app/model/user_model.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
-import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -115,7 +114,7 @@ class HomeAppBar extends StatelessWidget {
                             style: Styles.shareFont1,
                           ),
                           Text(
-                            "$finalBeratBadan".toString() + ' Kg',
+                            "${user?.berat}".toString() + ' Kg',
                             style: Styles.shareFont2,
                           ),
                         ],
@@ -128,7 +127,7 @@ class HomeAppBar extends StatelessWidget {
                             style: Styles.shareFont1,
                           ),
                           Text(
-                            "$finalKaloriHarian".toString() + ' Kalori',
+                            "${user?.kaloriHarian}".toString() + ' Kalori',
                             style: Styles.shareFont2,
                           ),
                         ],

@@ -32,6 +32,9 @@ class _QuestionSixState extends State<QuestionSix>
           onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: true,
+        title: const Image(
+          image: AssetImage('assets/images/icon-question6.png'),
+        ),
       ),
       // Badan Utama
       body: Padding(
@@ -122,7 +125,6 @@ class _QuestionSixState extends State<QuestionSix>
                 ),
               ],
             ),
-            Text("$tesStatus".toString())
           ],
         ),
       ),
@@ -180,16 +182,20 @@ class _QuestionSixState extends State<QuestionSix>
           (1.9 * getTinggiBadan!) -
           (4.7 * getUmur!);
     }
+    print(getGender);
+    print(getBeratBadan);
+    print(getTinggiBadan);
+    print(getUmur);
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => SignUpPage(
-              gender: getGender,
-              berat: getBeratBadan,
-              tinggi: getTinggiBadan,
-              umur: getUmur,
-              kaloriHarian: finalKaloriHarian,
-            )),
-      );
+      context,
+      MaterialPageRoute(
+          builder: (context) => SignUpPage(
+                gender: getGender,
+                berat: getBeratBadan,
+                tinggi: getTinggiBadan,
+                umur: getUmur,
+                kaloriHarian: finalKaloriHarian,
+              )),
+    );
   }
 }

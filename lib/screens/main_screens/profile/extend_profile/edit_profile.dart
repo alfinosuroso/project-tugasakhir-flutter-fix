@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tugasakhir_app/screens/main_screens/components_main/fab.dart';
-import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
+import 'package:provider/provider.dart';
+import 'package:tugasakhir_app/model/user_model.dart';
+import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class EditProfile extends StatefulWidget {
@@ -14,10 +16,22 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel? user = authProvider.user;
+    TextEditingController controllerUsername =
+        TextEditingController(text: user?.name);
+    TextEditingController controllerEmail =
+        TextEditingController(text: user?.email);
+    TextEditingController controllerTinggi =
+        TextEditingController(text: user?.tinggi.toString());
+    TextEditingController controllerBerat =
+        TextEditingController(text: user?.berat.toString());
+    TextEditingController controllerUmur =
+        TextEditingController(text: user?.umur.toString());
     return Scaffold(
       backgroundColor: Styles.bgMainColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(0.0),
+        preferredSize: const Size.fromHeight(0.0),
         child: AppBar(
           backgroundColor: Styles.appBarPrimaryColor,
           automaticallyImplyLeading: true,
@@ -37,11 +51,12 @@ class _EditProfileState extends State<EditProfile> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Spacer(
+                  const Spacer(
                     flex: 1,
                   ),
                   // 1. Teks User - Welcome User dan Email User
                   Expanded(
+                    flex: 2,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,15 +65,15 @@ class _EditProfileState extends State<EditProfile> {
                           "Edit Profil",
                           style: Styles.welcomeUserAppBar1,
                         ),
-                        Spacer(
+                        const Spacer(
                           flex: 1,
                         ),
                         Text(
-                          "$finalName",
+                          "${user?.name}",
                           style: Styles.shareFont8,
                         ),
                         Text(
-                          "$finalEmail",
+                          "${user?.email}",
                           style: Styles.welcomeUserAppBar1,
                         ),
                       ],
@@ -67,10 +82,11 @@ class _EditProfileState extends State<EditProfile> {
 
                   // 2. Logo - Logo Spoonycal dan Bluetooth
                   Expanded(
+                    flex: 1,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
+                      children: const [
                         Image(
                           image: AssetImage('assets/images/bluetooth-icon.png'),
                           // width: 100,
@@ -93,7 +109,7 @@ class _EditProfileState extends State<EditProfile> {
           ),
 
           Align(
-            alignment: Alignment(-0.9, -0.95),
+            alignment: const Alignment(-0.9, -0.95),
             child: IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () => Navigator.of(context).pop(),
@@ -107,7 +123,7 @@ class _EditProfileState extends State<EditProfile> {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.69,
               width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30)),
@@ -115,7 +131,7 @@ class _EditProfileState extends State<EditProfile> {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
-                    offset: const Offset(
+                    offset: Offset(
                       0.0,
                       -3.0,
                     ),
@@ -132,26 +148,26 @@ class _EditProfileState extends State<EditProfile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // USERNAME
-                        Text(
+                        const Text(
                           "Username",
                           style: Styles.shareFontProfile11,
                         ),
                         TextField(
-                          controller: ControlEditProfile.controllerUsername,
-                          decoration: InputDecoration(),
+                          controller: controllerUsername,
+                          decoration: const InputDecoration(),
                           maxLines: 1,
                           style: Styles.shareFontProfileText12,
                         ),
 
                         // EMAIL
                         const SizedBox(height: 12),
-                        Text(
+                        const Text(
                           "Email Address",
                           style: Styles.shareFontProfile11,
                         ),
                         TextField(
-                          controller: ControlEditProfile.controllerEmail,
-                          decoration: InputDecoration(),
+                          controller: controllerEmail,
+                          decoration: const InputDecoration(),
                           maxLines: 1,
                           style: Styles.shareFontProfileText12,
                         ),
@@ -168,7 +184,7 @@ class _EditProfileState extends State<EditProfile> {
                             SizedBox(
                               width: 70,
                               child: TextField(
-                                controller: ControlEditProfile.controllerTinggi,
+                                controller: controllerTinggi,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
@@ -204,7 +220,7 @@ class _EditProfileState extends State<EditProfile> {
                             SizedBox(
                               width: 70,
                               child: TextField(
-                                controller: ControlEditProfile.controllerBerat,
+                                controller: controllerBerat,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
@@ -240,7 +256,7 @@ class _EditProfileState extends State<EditProfile> {
                             SizedBox(
                               width: 70,
                               child: TextField(
-                                controller: ControlEditProfile.controllerUmur,
+                                controller: controllerUmur,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
@@ -275,22 +291,21 @@ class _EditProfileState extends State<EditProfile> {
       ),
 
       // ** FLOATING BUTTON ** //
-        floatingActionButton: const FabProfile(),
+      floatingActionButton: const FabProfile(),
     );
   }
 }
-
-class ControlEditProfile {
-  static final TextEditingController controllerUsername =
-      TextEditingController(text: finalName);
-  static final TextEditingController controllerEmail =
-      TextEditingController(text: finalEmail);
-  static final TextEditingController controllerTinggi =
-      TextEditingController(text: finalTinggiBadan.toString());
-  static final TextEditingController controllerBerat =
-      TextEditingController(text: finalBeratBadan.toString());
-  static final TextEditingController controllerGender =
-      TextEditingController(text: finalGender);
-  static final TextEditingController controllerUmur =
-      TextEditingController(text: finalUmur.toString());
-}
+// class ControlEditProfile {
+//   static final TextEditingController controllerUsername =
+//       TextEditingController(text: finalName);
+//   static final TextEditingController controllerEmail =
+//       TextEditingController(text: finalEmail);
+//   static final TextEditingController controllerTinggi =
+//       TextEditingController(text: finalTinggiBadan.toString());
+//   static final TextEditingController controllerBerat =
+//       TextEditingController(text: finalBeratBadan.toString());
+//   static final TextEditingController controllerGender =
+//       TextEditingController(text: finalGender);
+//   static final TextEditingController controllerUmur =
+//       TextEditingController(text: finalUmur.toString());
+// }

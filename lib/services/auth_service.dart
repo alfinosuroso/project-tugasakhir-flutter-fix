@@ -25,7 +25,7 @@ class AuthService {
       'berat': berat,
       'tinggi': tinggi,
       'umur': umur,
-      'kaloriHarian': kaloriHarian,
+      'kalori_harian': kaloriHarian,
     });
 
     print(jsonDecode(body));
@@ -39,7 +39,9 @@ class AuthService {
     print(response.body);
 
     if (response.statusCode == 200) {
+      print(response.statusCode);
       var data = jsonDecode(response.body);
+      print(data);
       UserModel user = UserModel.fromJson(data['data']);
       user.token = 'Bearer ' + data['access_token'];
       UserPreferences().saveUser(user);
@@ -69,9 +71,14 @@ class AuthService {
     );
 
     print(response.body);
+    print(response.statusCode);
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
+      // UserModel? user;
+      print("Tes1");
+      print(data['data']['token']);
+      // print("Tes" + user!.umur.toString());
       UserModel user = UserModel.fromJson(data['data']);
       user.token = 'Bearer ' + data['access_token'];
       UserPreferences().saveUser(user);
@@ -87,8 +94,8 @@ class AuthService {
     var url = '$baseUrl/myuser/$id';
     var headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-      };
+      'Authorization': '$token',
+    };
 
     var response = await http.get(
       Uri.parse(url),

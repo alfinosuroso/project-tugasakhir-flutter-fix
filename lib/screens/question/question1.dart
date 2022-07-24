@@ -24,6 +24,9 @@ class _QuestionOneState extends State<QuestionOne> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: true,
+        title: const Image(
+                        image: AssetImage('assets/images/icon-question1.png'),
+                      ),
       ),
       // Badan Utama
       body: Padding(

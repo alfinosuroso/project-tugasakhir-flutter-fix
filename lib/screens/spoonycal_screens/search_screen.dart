@@ -20,26 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final FetchDatumMakananList _makananList = FetchDatumMakananList();
 
   @override
-  void initState() {
-    super.initState();
-    selectedRadioTile = 0;
-  }
-
-  setSelectedRadioTile(int? val) {
-    setState(() {
-      selectedRadioTile = val;
-    });
-  }
-
-  // Future<void> sendCalorieValue() async {
-  //   final SharedPreferences localStorage =
-  //       await SharedPreferences.getInstance();
-  //   // localStorage.setString('makanan', ['data']['name']);
-  // }
-
-  @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70.0,
@@ -69,17 +50,17 @@ class _SearchScreenState extends State<SearchScreen> {
             FutureBuilder<List<DatumMakananList>>(
                 future: _makananList.getDatumMakananList(),
                 builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(child: CircularProgressIndicator());
+                  }
                   var data = snapshot.data;
                   return ListView.builder(
                       itemCount: data?.length,
                       itemBuilder: (context, index) {
-                        if (!snapshot.hasData) {
-                          return Center(child: CircularProgressIndicator());
-                        }
                         return Card(
                             child: ListTile(
                           title: Text(
-                            "${data?[index].makanan}",
+                            " ${data?[index].makanan}",
                             style: Styles.soraMakananText1,
                           ),
                           subtitle: Text(
@@ -95,6 +76,9 @@ class _SearchScreenState extends State<SearchScreen> {
                             showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0))),
                                       title: Text(
                                         'Hitung Kalori ${data?[index].makanan}',
                                         style: Styles.outfitDialogText3,
@@ -136,31 +120,6 @@ class _SearchScreenState extends State<SearchScreen> {
                         ));
                       });
                 }),
-            selectedRadioTile == 0
-                ? const SizedBox.shrink()
-                : Align(
-                    alignment: Alignment(0.0, 0.9),
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            foregroundColor: MaterialStateProperty.all<Color>(
-                                const Color(0xff45625d)),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xFF498FB1)),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ))),
-                        onPressed: () =>
-                            Navigator.pushNamed(context, '/search_screen'),
-                        child: const Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Text(
-                            "Hitung kalori sekarang",
-                            style: Styles.bodyQuestion1,
-                            textAlign: TextAlign.center,
-                          ),
-                        )),
-                  ),
           ],
         ),
       ),

@@ -16,16 +16,6 @@ import 'package:tugasakhir_app/screens/main_screens/report/report_body.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:http/http.dart' as http;
 
-String? finalEmail;
-String? finalName;
-SharedPreferences? localStorage;
-String? finalGender;
-double? finalBeratBadan;
-double? finalTinggiBadan;
-double? finalUmur;
-double? finalKaloriHarian;
-String? finalToken;
-
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 
@@ -53,33 +43,6 @@ class _MainPageState extends State<MainPage> {
     80.0,
     0.0,
   ];
-
-  @override
-  // void afterFirstLayout(BuildContext context) {
-  //   getValidationData();
-  // }
-
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(milliseconds: 300), () {
-      getValidationData();
-    });
-  }
-
-  void getValidationData() async {
-    localStorage = await SharedPreferences.getInstance();
-
-    // setState(() {
-    //   finalName = localStorage?.getString("name")!;
-    //   finalEmail = localStorage?.getString("email")!;
-    //   finalGender = localStorage?.getString("gender_user");
-    //   finalBeratBadan = localStorage?.getDouble("berat_badan");
-    //   finalTinggiBadan = localStorage?.getDouble("tinggi_badan");
-    //   finalUmur = localStorage?.getDouble("umur");
-    //   finalKaloriHarian = localStorage?.getDouble("kalori_harian");
-    //   finalToken = localStorage?.getString('token');
-    // });
-  }
 
   @override
   Widget build(BuildContext context) {

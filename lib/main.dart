@@ -1,14 +1,11 @@
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/loading_pages/landing.dart';
-import 'package:tugasakhir_app/model/user_model.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
 // import 'package:tugasakhir_app/Register%20and%20Login%20Screens/sign_in_page.dart';
 import 'package:tugasakhir_app/providers/favorite_food.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_in_page.dart';
-import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_up_page.dart';
 import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/screens/main_screens/profile/extend_profile/edit_profile.dart';
 import 'package:tugasakhir_app/screens/question/pre_question.dart';
@@ -22,7 +19,6 @@ import 'package:tugasakhir_app/screens/spoonycal_screens/pairing_device_screen.d
 import 'package:tugasakhir_app/screens/spoonycal_screens/search_screen.dart';
 import 'package:tugasakhir_app/screens/spoonycal_screens/tampildatamakanan.dart';
 import 'package:tugasakhir_app/splash_screen.dart';
-import 'package:tugasakhir_app/util/shared_preference.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -67,7 +63,7 @@ class MyApp extends StatelessWidget {
 
           // Routes register and login
           '/sign_in_page': (context) => const SignInPage(),
-          '/sign_up_page': (context) => const SignUpPage(),
+          // '/sign_up_page': (context) => const SignUpPage(),
 
           // Routes Question
           '/prequestion': (context) => const PreQuestion(),
@@ -79,7 +75,7 @@ class MyApp extends StatelessWidget {
           '/question6': (context) => const QuestionSix(),
 
           // Routes Main Page
-          // '/main_page': (context) => MainPage(),
+          '/main_page': (context) => const MainPage(),
 
           // Routes Extend Profile
           '/edit_profile': (context) => const EditProfile(),

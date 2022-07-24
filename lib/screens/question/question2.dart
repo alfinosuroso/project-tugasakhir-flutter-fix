@@ -28,6 +28,9 @@ class _QuestionTwoState extends State<QuestionTwo> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: true,
+        title: const Image(
+                        image: AssetImage('assets/images/icon-question2.png'),
+                      ),
       ),
 
       // Badan Utama

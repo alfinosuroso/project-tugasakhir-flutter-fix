@@ -33,6 +33,9 @@ class _QuestionThreeState extends State<QuestionThree> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: true,
+        title: const Image(
+                        image: AssetImage('assets/images/icon-question3.png'),
+                      ),
       ),
       // Badan Utama
       body: Padding(

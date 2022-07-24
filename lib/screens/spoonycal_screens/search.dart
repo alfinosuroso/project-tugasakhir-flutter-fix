@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tugasakhir_app/screens/spoonycal_screens/count_calorie.dart';
 import 'package:tugasakhir_app/services/api_makanan_service.dart';
 import 'package:tugasakhir_app/styles.dart';
 
@@ -7,7 +8,6 @@ import '../../services/api_makanan_service.dart';
 
 class SearchMakanan extends SearchDelegate {
   final FetchDatumMakananList _makananList = FetchDatumMakananList();
-  int? selectedRadioTile = 0;
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -49,57 +49,68 @@ class SearchMakanan extends SearchDelegate {
                     itemCount: data?.length,
                     itemBuilder: (context, index) {
                       return Card(
-                        child: RadioListTile<int?>(
-                          controlAffinity: ListTileControlAffinity.trailing,
-                          value: data?[index].kaloriPerGram,
-                          groupValue: selectedRadioTile,
-                          title: Text(
-                            "${data?[index].makanan}",
-                            style: Styles.soraMakananText1,
-                          ),
-                          subtitle: Text(
-                            "100 gram (g) - " +
-                                "${data?[index].kaloriPerGram}" +
-                                " kal",
-                            style: Styles.soraMakananText2,
-                          ),
-                          onChanged: (val) {
-                            print("Radio Tile pressed $val");
-                            setState(() {
-                              selectedRadioTile = val;
-                            });
-                          },
-                          activeColor: Styles.mainBlueColor,
-                          selected: false,
+                          child: ListTile(
+                        title: Text(
+                          " ${data?[index].makanan}",
+                          style: Styles.soraMakananText1,
                         ),
-                      );
+                        subtitle: Text(
+                          "100 gram (g) - " +
+                              "${data?[index].kaloriPerGram}" +
+                              " kal",
+                          style: Styles.soraMakananText2,
+                        ),
+                        // When a user taps the ListTile, navigate to the DetailScreen.
+                        // Notice that you're not only creating a DetailScreen, you're
+                        // also passing the current todo through to it.
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20.0))),
+                                    title: Text(
+                                      'Hitung Kalori ${data?[index].makanan}',
+                                      style: Styles.outfitDialogText3,
+                                    ),
+                                    content: Text(
+                                      'Ingin menghitung kalori ${data?[index].makanan} sekarang?',
+                                      style: Styles.outfitDialogText4,
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: const Text(
+                                            'TIDAK',
+                                            style:
+                                                Styles.outfitDialogTidakText5,
+                                          )),
+                                      TextButton(
+                                          onPressed: () =>
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CountCalorie(
+                                                    finalMakanan:
+                                                        "${data?[index].makanan}",
+                                                    finalKaloriPerGram:
+                                                        data?[index]
+                                                            .kaloriPerGram,
+                                                  ),
+                                                ),
+                                              ),
+                                          child: const Text('YA',
+                                              style:
+                                                  Styles.outfitDialogYaText6)),
+                                    ],
+                                  ));
+                        },
+                      ));
                     });
               }),
-          selectedRadioTile == 0
-              ? const SizedBox.shrink()
-              : Align(
-                  alignment: Alignment(0.0, 0.9),
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                              const Color(0xff45625d)),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xFF498FB1)),
-                          shape:
-                              MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ))),
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/search_screen'),
-                      child: const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Text(
-                          "Hitung kalori sekarang",
-                          style: Styles.bodyQuestion1,
-                          textAlign: TextAlign.center,
-                        ),
-                      )),
-                ),
         ],
       );
     });
