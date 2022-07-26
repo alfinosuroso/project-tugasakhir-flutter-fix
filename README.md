@@ -12,6 +12,15 @@ A new Flutter project.
 - Django + Flutter : https://dev.to/amartyadev/flutter-app-authentication-with-django-backend-1-21cp
 
 
+## API Link
+Login : https://spoonycal-ta.herokuapp.com/api/login
+
+-- NEED AUTH TOKEN --
+MyUser : https://spoonycal-ta.herokuapp.com/api/myuser
+Register : https://spoonycal-ta.herokuapp.com/api/register
+Makanan : https://spoonycal-ta.herokuapp.com/api/makanan
+Catatan : ..
+
 ## Database dan Perhitungan
 
 Database :
