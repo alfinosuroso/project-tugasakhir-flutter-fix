@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/model/makanan_model.dart';
 import 'package:tugasakhir_app/screens/spoonycal_screens/count_calorie.dart';
+import 'package:tugasakhir_app/screens/spoonycal_screens/count_caloriesementara.dart';
 import 'package:tugasakhir_app/screens/spoonycal_screens/search.dart';
 import 'package:tugasakhir_app/services/api_makanan_service.dart';
 import 'package:tugasakhir_app/styles.dart';

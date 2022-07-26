@@ -46,7 +46,7 @@ class TampilDataMakanan extends StatelessWidget {
                           trailing:
                               Row(mainAxisSize: MainAxisSize.min, children: [
                             Text(
-                              "100 gram (g) - " +
+                              "${favoriteList[index].tempBerat} gram (g) - " +
                                   "${favoriteList[index].tempKaloriPerGram}" +
                                   " kal",
                               style: Styles.soraMakananText3,

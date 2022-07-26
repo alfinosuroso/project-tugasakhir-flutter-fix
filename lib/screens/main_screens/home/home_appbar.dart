@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tugasakhir_app/model/user_model.dart';
@@ -53,15 +54,19 @@ class HomeAppBar extends StatelessWidget {
                       ],
                     ),
 
-                    // 2. Logo - Logo Spoonycal dan Bluetooth
+                    // 2. Logo - Logo Spoonycal dan Wifi Hotspot
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image(
-                          image: AssetImage('assets/images/bluetooth-icon.png'),
+                        GestureDetector(
+                        onTap: () => AppSettings.openDeviceSettings(asAnotherTask: true,),
+                        child: Image(
+                          image: AssetImage('assets/images/wifi-hotspot.png'),
+                          
                           // width: 100,
                           // height: 100,
                         ),
+                      ),
                         SizedBox(
                           width: 10,
                         ),

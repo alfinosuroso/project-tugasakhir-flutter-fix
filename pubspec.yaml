@@ -29,6 +29,7 @@ environment:
 dependencies:
   after_layout: ^1.1.0
   animated_splash_screen: ^1.2.0
+  app_settings: ^4.1.4
   camera: ^0.10.0
   cupertino_icons: ^1.0.5
   firebase_auth: ^3.3.17
@@ -41,11 +42,13 @@ dependencies:
   get: ^4.4.0
   http: ^0.13.4
   intl: ^0.17.0
+  json_annotation: ^4.3.0
   path: ^1.8.0
   path_provider: ^2.0.11
   provider: ^6.0.3
   shared_preferences: ^2.0.6
   syncfusion_flutter_charts: ^19.1.63
+  web_socket_channel: ^2.1.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0

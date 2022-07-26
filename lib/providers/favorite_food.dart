@@ -15,10 +15,11 @@ class ProviderFavoriteFood extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addCart({String? makan, int? kalori}) {
+  void addCart({String? makan, int? kalori, int? berat}) {
     favoriteFood.add(FavoriteFoodCalorie(
       tempMakanan: makan,
       tempKaloriPerGram: kalori,
+      tempBerat: berat
     ));
 
     notifyListeners();

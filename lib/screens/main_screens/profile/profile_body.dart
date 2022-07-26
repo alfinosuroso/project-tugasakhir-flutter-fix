@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tugasakhir_app/model/user_model.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
-import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:tugasakhir_app/util/shared_preference.dart';
+import 'package:app_settings/app_settings.dart';
 
 class ProfileBody extends StatefulWidget {
   const ProfileBody({Key? key}) : super(key: key);
@@ -61,17 +61,21 @@ class _ProfileBodyState extends State<ProfileBody> {
                   ),
                 ),
 
-                // 2. Logo - Logo Spoonycal dan Bluetooth
+                // 2. Logo - Logo Spoonycal dan Settings
                 Expanded(
                   flex: 1,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Image(
-                        image: AssetImage('assets/images/bluetooth-icon.png'),
-                        // width: 100,
-                        // height: 100,
+                      GestureDetector(
+                        onTap: () => AppSettings.openDeviceSettings(asAnotherTask: true,),
+                        child: Image(
+                          image: AssetImage('assets/images/wifi-hotspot.png'),
+                          
+                          // width: 100,
+                          // height: 100,
+                        ),
                       ),
                       SizedBox(
                         width: 10,

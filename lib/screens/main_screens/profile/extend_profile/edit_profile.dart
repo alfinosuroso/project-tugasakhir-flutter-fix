@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tugasakhir_app/screens/main_screens/components_main/fab.dart';
@@ -80,18 +81,22 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
 
-                  // 2. Logo - Logo Spoonycal dan Bluetooth
+                  // 2. Logo - Logo Spoonycal dan Wifi Hotspot
                   Expanded(
                     flex: 1,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Image(
-                          image: AssetImage('assets/images/bluetooth-icon.png'),
+                      children: [
+                        GestureDetector(
+                        onTap: () => AppSettings.openDeviceSettings(asAnotherTask: true,),
+                        child: Image(
+                          image: AssetImage('assets/images/wifi-hotspot.png'),
+                          
                           // width: 100,
                           // height: 100,
                         ),
+                      ),
                         SizedBox(
                           width: 10,
                         ),
