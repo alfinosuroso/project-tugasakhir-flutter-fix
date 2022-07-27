@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/model/makanan_model.dart';
 import 'package:tugasakhir_app/screens/spoonycal_screens/count_calorie.dart';
@@ -22,6 +23,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime tempToday = DateTime.now();
+    String finalToday = DateFormat('yyyy-MM-dd' ).format(tempToday);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70.0,
@@ -31,9 +34,16 @@ class _SearchScreenState extends State<SearchScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: false,
-        title: const Text(
-          'Pilih makanan anda',
+        title: RichText(
+          text: TextSpan(
+            text : 'Pilih makanan anda',
           style: Styles.shareTitleAppbarText13,
+            children: [
+              TextSpan(
+                text : '\n' + '$finalToday',
+          style: Styles.shareDateFont16,
+              )
+          ]),
         ),
         actions: [
           IconButton(

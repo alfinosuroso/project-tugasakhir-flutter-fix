@@ -364,3 +364,38 @@
 //     );
 //   }
 // }
+
+
+
+
+
+
+
+
+// ListView.builder(
+//                                           scrollDirection: Axis.vertical,
+//                                           shrinkWrap: true,
+//                                           itemCount:
+//                                               data?[index].catatan?.length,
+//                                           itemBuilder: (context, ratio) {
+//                                             var dataCatatan =
+//                                                 data?[index].catatan?[ratio];
+//                                             totalKaloriMasuk =
+//                                                 totalKaloriMasuk +
+//                                                     dataCatatan!.kaloriMasuk!;
+
+//                                             if (data?[index].catatan?.length ==
+//                                                     ratio + 1) {
+//                                               chartData.add(ChartData(
+//                                                   "${data?[index].date.toString()}",
+//                                                   totalKaloriMasuk));
+                                          //     totalKaloriMasuk = 0
+                                          //     return const SizedBox.shrink();
+//                                                
+//                                             } else if ((indexPlusSatu / 7) ==
+//                                                 1) {
+//                                               print(totalKaloriMasuk);
+//                                               print(
+//                                                   "${data?[index].date.toString()}");
+//                                               print(chartData);
+//                                               week += 1;

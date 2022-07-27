@@ -90,14 +90,14 @@ class _QuestionFiveState extends State<QuestionFive> {
                     },
                     keyboardType:
                         TextInputType.numberWithOptions(decimal: true),
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp('[0-9]+')),
-                    // ],
                     inputFormatters: [
-                      // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
-                      FilteringTextInputFormatter.allow(
-                          RegExp(r'^\d+\.?\d{0,2}')),
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]+')),
                     ],
+                    // inputFormatters: [
+                    //   // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
+                    //   FilteringTextInputFormatter.allow(
+                    //       RegExp(r'^\d+\.?\d{0,2}')),
+                    // ],
                     controller: DataProfile.controllerUmur,
                     style: Styles.inputFieldText1,
                     textAlign: TextAlign.center,

@@ -77,12 +77,14 @@ class _HomeBodyState extends State<HomeBody> {
                 child: Text(
                     "Hitung kalori sekarang dengan cara menekan tombol plus dibawah!"),
               );
-            } else if (data?.length != 0) {
+            } else if (data!.isNotEmpty) {
               return PageView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   controller: controllerPage,
-                  itemCount: data?.length,
+                  itemCount: data.length,
                   itemBuilder: (context, index) {
+                    String finalTanggal =
+                        DateFormat('yyyy-MM-dd').format(data[index].date!);
                     return SingleChildScrollView(
                       //** LEBAR KESELURUHAN KONTAINER BODY */
                       child: Container(
@@ -110,7 +112,7 @@ class _HomeBodyState extends State<HomeBody> {
                                       color: Styles.mainBlueColor),
                                 ),
                                 Text(
-                                  "${data?[index].date.toString()}",
+                                  "$finalTanggal",
                                   style: Styles.shareFont3,
                                 ),
                                 IconButton(
@@ -128,11 +130,11 @@ class _HomeBodyState extends State<HomeBody> {
                             ListView.builder(
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
-                                itemCount: data?[index].catatan?.length,
+                                itemCount: data[index].catatan?.length,
                                 itemBuilder: (context, firstratio) {
                                   var dataCatatan =
-                                      data?[index].catatan?[firstratio];
-                                  double? totalTargetKalori =
+                                      data[index].catatan?[firstratio];
+                                  num? totalTargetKalori =
                                       dataCatatan?.targetKalori;
                                   totalKaloriMasuk = totalKaloriMasuk +
                                       dataCatatan!.kaloriMasuk!;
@@ -141,9 +143,9 @@ class _HomeBodyState extends State<HomeBody> {
                                   double percentageCircular =
                                       totalSisaKalori / totalTargetKalori;
 
-                                  if (data?[index].catatan?.length ==
+                                  if (data[index].catatan?.length ==
                                           firstratio + 1 ||
-                                      data?[index].catatan?.length == 1) {
+                                      data[index].catatan?.length == 1) {
                                     return Container(
                                       width: MediaQuery.of(context).size.width,
                                       height: 220,
@@ -331,16 +333,19 @@ class _HomeBodyState extends State<HomeBody> {
                                     ListView.builder(
                                         scrollDirection: Axis.vertical,
                                         shrinkWrap: true,
-                                        itemCount: data?[index].catatan?.length,
+                                        itemCount: data[index].catatan?.length,
                                         itemBuilder: (context, secondratio) {
+                                          String? finalWaktu = data[index]
+                                              .catatan?[secondratio]
+                                              .waktu?.substring(0,5);
                                           totalKaloriMasuk = 0;
                                           return ListTile(
                                             title: Text(
-                                              "${data?[index].catatan?[secondratio].sisaKalori} Kalori",
+                                              "${data[index].catatan?[secondratio].kaloriMasuk} Kalori",
                                               style: Styles.shareFont6,
                                             ),
                                             trailing: Text(
-                                                "${data?[index].catatan?[secondratio].waktu} WIB",
+                                                "$finalWaktu WIB",
                                                 style: Styles.shareFont7),
                                           );
                                         })
@@ -367,9 +372,9 @@ class _HomeBodyState extends State<HomeBody> {
             }
 
             return const Center(
-                child: Text(
-                    "Hitung kalori sekarang dengan cara menekan tombol plus dibawah!"),
-              );
+              child: Text(
+                  "Hitung kalori sekarang dengan cara menekan tombol plus dibawah!"),
+            );
           }),
     );
   }

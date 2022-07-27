@@ -14,7 +14,7 @@ class AuthService {
       required double berat,
       required double tinggi,
       required double umur,
-      required double kaloriHarian}) async {
+      required num kaloriHarian}) async {
     var url = '$baseUrl/register';
     var headers = {'Content-Type': 'application/json'};
     var body = jsonEncode({

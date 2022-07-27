@@ -15,7 +15,7 @@ class SignUpPage extends StatefulWidget {
   final double? berat;
   final double? tinggi;
   final double? umur;
-  final double? kaloriHarian;
+  final num? kaloriHarian;
   
   const SignUpPage({
     Key? key,

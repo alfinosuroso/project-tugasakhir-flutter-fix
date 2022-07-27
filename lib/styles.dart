@@ -285,6 +285,13 @@ class Styles {
     color: Color(0xFFF36767),
   );
 
+  static const TextStyle shareDateFont16 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w400,
+    fontSize: 12.0,
+    color: Color(0xFFE0E0E0), 
+  );
+
   static const TextStyle selectedBottomNavBarText = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,

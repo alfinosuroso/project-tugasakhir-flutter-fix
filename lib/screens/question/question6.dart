@@ -6,8 +6,9 @@ import 'package:tugasakhir_app/styles.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:http/http.dart' as http;
 
-double? finalKaloriHarian;
+num? finalKaloriHarian;
 int? tesStatus;
+double? finalFixKaloriHarian;
 
 class QuestionSix extends StatefulWidget {
   const QuestionSix({Key? key}) : super(key: key);
@@ -66,7 +67,7 @@ class _QuestionSixState extends State<QuestionSix>
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "$finalKaloriHarian".toString() + " kalori/hari",
+                  "${finalKaloriHarian?.toStringAsPrecision(2)}" + " kalori/hari",
                   style: Styles.inputFieldText1,
                   textAlign: TextAlign.center,
                 ),
@@ -159,7 +160,7 @@ class _QuestionSixState extends State<QuestionSix>
     }
 
     setState(() {
-      finalKaloriHarian?.toStringAsFixed(2);
+      finalKaloriHarian?.toStringAsExponential(2);
     });
   }
 
@@ -182,6 +183,7 @@ class _QuestionSixState extends State<QuestionSix>
           (1.9 * getTinggiBadan!) -
           (4.7 * getUmur!);
     }
+
     print(getGender);
     print(getBeratBadan);
     print(getTinggiBadan);
@@ -194,7 +196,7 @@ class _QuestionSixState extends State<QuestionSix>
                 berat: getBeratBadan,
                 tinggi: getTinggiBadan,
                 umur: getUmur,
-                kaloriHarian: finalKaloriHarian,
+                kaloriHarian: finalKaloriHarian?.ceilToDouble(),
               )),
     );
   }

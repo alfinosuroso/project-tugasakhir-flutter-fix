@@ -72,9 +72,9 @@ class DatumCatatanModel {
   int? id;
   DateTime? tanggal;
   String? waktu;
-  double? kaloriMasuk;
-  double? sisaKalori;
-  double? targetKalori;
+  num? kaloriMasuk;
+  num? sisaKalori;
+  num? targetKalori;
   int? userId;
   DateTime? createdAt;
   DateTime? updatedAt;

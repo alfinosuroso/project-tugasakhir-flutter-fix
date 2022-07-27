@@ -49,11 +49,11 @@ class UserModel {
 
   String? name;
   String? email;
-  double? umur;
+  num? umur;
   String? gender;
-  double? tinggi;
-  double? berat;
-  double? kaloriHarian;
+  num? tinggi;
+  num? berat;
+  num? kaloriHarian;
   DateTime? updatedAt;
   DateTime? createdAt;
   int? id;

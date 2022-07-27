@@ -20,7 +20,7 @@ class AuthProvider extends ChangeNotifier {
       required double berat,
       required double tinggi,
       required double umur,
-      required double kaloriHarian,
+      required num kaloriHarian,
       }) async {
     try {
       UserModel user = await AuthService().register(
