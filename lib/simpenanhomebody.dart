@@ -86,7 +86,7 @@
 //                         stringDateTime[position],
 //                         style: Styles.shareFont3,
 //                       ),
-//                       IconButton(
+//                       Button(
 //                           onPressed: () => controllerPage.nextPage(
 //                               duration: const Duration(milliseconds: 700),
 //                               curve: Curves.easeInOut),

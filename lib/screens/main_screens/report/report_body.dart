@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tugasakhir_app/model/catatan_model.dart';
+import 'package:tugasakhir_app/model/user_model.dart';
+import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/services/api_catatan_service.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:intl/intl.dart';
@@ -12,9 +15,9 @@ const makanKalori = 1500;
 int sum = 0;
 late List<String>? cumulativeDataLabel;
 List<ChartData>? chartData;
-List<ChartData>? dataku;
+List<ChartData>? barChartData;
 double totalKaloriMasuk = 0;
-int week = 1;
+double tambahanWidth = 0;
 
 class ReportBody extends StatefulWidget {
   const ReportBody({Key? key}) : super(key: key);
@@ -29,8 +32,10 @@ class _ReportBodyState extends State<ReportBody> {
   @override
   Widget build(BuildContext context) {
     // Mendefinisikan Controller, Size, dan Listlist
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel? user = authProvider.user;
     final controllerPage = PageController(initialPage: 0);
-    dataku = [];
+    barChartData = [];
     // dataku?.add(ChartData("Tanggal sekarang", 2));
 
     @override
@@ -54,143 +59,149 @@ class _ReportBodyState extends State<ReportBody> {
                 child: Text(
                     "Hitung kalori sekarang dengan cara menekan tombol plus dibawah!"),
               );
-            }
-            return PageView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                controller: controllerPage,
-                itemCount: data?.length,
-                itemBuilder: (context, index) {
-                  int indexPlusSatu = index + 1;
-                  // print(dataku?[0].y1);
-                  print(dataku?.length);
-                  print(indexPlusSatu);
+            } else if (data!.isNotEmpty) {
+              print("halo 1");
+              print(barChartData?.length);
 
-                  return SingleChildScrollView(
-                    //** LEBAR KESELURUHAN KONTAINER BODY */
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              //** PREVIOUS BUTTON, TEXT, NEXT BUTTON */
-                              Visibility(
-                                visible: true,
-                                maintainSize: true,
-                                maintainAnimation: true,
-                                maintainState: true,
-                                maintainInteractivity: true,
-                                child: IconButton(
-                                    onPressed: () =>
-                                        controllerPage.animateToPage(index - 7,
-                                            duration: const Duration(
-                                                milliseconds: 700),
-                                            curve: Curves.easeInOut),
-                                    icon: Icon(Icons.keyboard_arrow_left),
-                                    iconSize: 50,
-                                    color: Styles.mainBlueColor),
-                              ),
-                              Text(
-                                "Minggu ke-$week",
-                                style: Styles.shareFont3,
-                              ),
-                              IconButton(
-                                  onPressed: () => controllerPage.animateToPage(
-                                      index + 7,
-                                      duration:
-                                          const Duration(milliseconds: 700),
-                                      curve: Curves.easeInOut),
-                                  icon: Icon(Icons.keyboard_arrow_right),
-                                  iconSize: 50,
-                                  color: Styles.mainBlueColor),
-                            ],
-                          ),
+              return PageView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  controller: controllerPage,
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    print("halo 2");
+                    print(barChartData?.length);
 
-                          //** CONTAINER KALORI MINGGUAN DAN CHART */
-                          Container(
-                            height: 550,
-                            padding: EdgeInsets.symmetric(horizontal: 30.0),
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15.0),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    offset: const Offset(
-                                      0.0,
-                                      3.0,
-                                    ),
-                                    blurRadius: 6.0,
-                                    spreadRadius: 3.0,
-                                  ),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Kalori hari ini",
-                                        style: Styles.outfitText1,
+                    for (int i = 0; i < data.length; i++) {
+                      print("i = " + i.toString());
+                      for (int j = 0; j < data[i].catatan!.length; j++) {
+                        print("j = " + j.toString());
+                        var dataCatatan = data[i].catatan?[j];
+                        totalKaloriMasuk =
+                            totalKaloriMasuk + dataCatatan!.kaloriMasuk!;
+                        if (data[i].catatan?.length == j + 1) {
+                          String finalTanggal =
+                              DateFormat('EEEE, d MMMM').format(data[i].date!);
+                          barChartData!
+                              .add(ChartData(finalTanggal, totalKaloriMasuk));
+                          print(totalKaloriMasuk);
+                          totalKaloriMasuk = 0;
+                          tambahanWidth += (70);
+                        }
+                      }
+                    }
+
+                    return SingleChildScrollView(
+                      //** LEBAR KESELURUHAN KONTAINER BODY */
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.8,                        
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            //** LAPORAN KALORI HARIAN KESELURUHAN */
+                            Text(
+                                  "LAPORAN KALORI MASUK KESELURUHAN",
+                                  style: Styles.shareFont3,
+                                ),
+
+                            SizedBox(
+                              height: 20,
+                            ),
+                            //** CONTAINER KALORI MINGGUAN DAN CHART */
+                            Container(
+                              height: 550,
+                              padding: EdgeInsets.symmetric(horizontal: 30.0),
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      offset: const Offset(
+                                        0.0,
+                                        3.0,
                                       ),
-                                      Text("$makanKalori",
-                                          style: Styles.outfitText2),
-                                      // 7 Barchart
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 20),
-                                          child: Container(
-                                            width: 1200,
-                                            height: 400,
-                                            child: SfCartesianChart(
-                                                // annotations: getAnnotation(),
-                                                primaryXAxis: CategoryAxis(
-                                                    title: AxisTitle(
-                                                        text: 'Hari')),
-                                                primaryYAxis: NumericAxis(
-                                                    title:
-                                                        AxisTitle(text: 'kal')),
-                                                series: <ChartSeries>[
-                                                  ColumnSeries<ChartData,
-                                                          String>(
-                                                      dataLabelSettings:
-                                                          DataLabelSettings(
-                                                              isVisible: true,
-                                                              labelAlignment:
-                                                                  ChartDataLabelAlignment
-                                                                      .middle),
-                                                      dataSource: dataku!,
-                                                      xValueMapper:
-                                                          (ChartData data, _) =>
-                                                              data.x,
-                                                      yValueMapper:
-                                                          (ChartData data, _) =>
-                                                              data.y1),
-                                                ]),
+                                      blurRadius: 6.0,
+                                      spreadRadius: 3.0,
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Target kalori hari ini",
+                                          style: Styles.outfitText1,
+                                        ),
+                                        Text('${user?.kaloriHarian}',
+                                            style: Styles.outfitText2),
+                                        // 7 Barchart
+                                        SingleChildScrollView(
+                                          // scrollDirection: Axis.horizontal,
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 20),
+                                            child: Container(
+                                              width: 100 + tambahanWidth,
+                                              height: 400,
+                                              child: SfCartesianChart(
+                                                  enableAxisAnimation: true,
+                                                  primaryXAxis: 
+                                                  CategoryAxis(                                                    
+                                                      title: AxisTitle(
+                                                          text: 'Hari')),
+                                                  primaryYAxis: NumericAxis(
+                                                    anchorRangeToVisiblePoints: false,
+                                                      title: 
+                                                      AxisTitle(
+                                                          text: 'kal',
+                                                          alignment: ChartAlignment.far)),
+                                                  series: <ChartSeries>[
+                                                    ColumnSeries<ChartData,
+                                                            String>(
+                                                        dataLabelSettings:
+                                                            DataLabelSettings(
+                                                                isVisible: true,
+                                                                labelAlignment:
+                                                                    ChartDataLabelAlignment
+                                                                        .middle),
+                                                        dataSource:
+                                                            barChartData!,
+                                                        xValueMapper:
+                                                            (ChartData data,
+                                                                    _) =>
+                                                                data.x,
+                                                        yValueMapper:
+                                                            (ChartData data,
+                                                                    _) =>
+                                                                data.y1),
+                                                  ]),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Text(
-                                        "Rata-rata kalori minggu ini",
-                                        style: Styles.outfitText1,
-                                      ),
-                                      Text("$makanKalori",
-                                          style: Styles.outfitText2),
-                                    ]),
+                                        Text(
+                                          "Rata-rata kalori minggu ini",
+                                          style: Styles.outfitText1,
+                                        ),
+                                        Text("$makanKalori",
+                                            style: Styles.outfitText2),
+                                      ]),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                });
+                    );
+                  });
+            }
+            return const Center(
+              child: Text(
+                  "Hitung kalori sekarang dengan cara menekan tombol plus dibawah!"),
+            );
           }),
     );
   }

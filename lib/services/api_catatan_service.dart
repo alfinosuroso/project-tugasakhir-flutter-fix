@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/model/catatan_model.dart';
 import 'package:tugasakhir_app/model/makanan_model.dart';
 
 class CatatanApiService {
+  String finalToday = DateFormat('yyyy-MM-dd').format(DateTime.now());
   String urlList = "https://spoonycal-ta.herokuapp.com/api/catatan";
   var data = [];
   List<Datum> results = [];

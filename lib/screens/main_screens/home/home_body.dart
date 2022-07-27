@@ -349,17 +349,6 @@ class _HomeBodyState extends State<HomeBody> {
                                                 style: Styles.shareFont7),
                                           );
                                         })
-
-                                    //** KOLOM 2 - KONTAINER LISTVIEW */
-                                    // for (int i = 0; i < 2; i++)
-                                    //   ListTile(
-                                    //     title: Text(
-                                    //       "${eatenCalorie[i]} Kalori",
-                                    //       style: Styles.shareFont6,
-                                    //     ),
-                                    //     trailing: Text("${time[i]} WIB",
-                                    //         style: Styles.shareFont7),
-                                    //   ),
                                   ],
                                 ),
                               ),
