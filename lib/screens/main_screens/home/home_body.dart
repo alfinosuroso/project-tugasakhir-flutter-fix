@@ -77,7 +77,8 @@ class _HomeBodyState extends State<HomeBody> {
                 child: Text(
                     "Hitung kalori sekarang dengan cara menekan tombol plus dibawah!"),
               );
-            } else if (data!.isNotEmpty) {
+            } else if (data!.isNotEmpty &&
+                snapshot.connectionState == ConnectionState.done) {
               return PageView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   controller: controllerPage,

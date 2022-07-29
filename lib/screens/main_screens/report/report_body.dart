@@ -59,7 +59,8 @@ class _ReportBodyState extends State<ReportBody> {
                 child: Text(
                     "Hitung kalori sekarang dengan cara menekan tombol plus dibawah!"),
               );
-            } else if (data!.isNotEmpty) {
+            } else if (data!.isNotEmpty &&
+                snapshot.connectionState == ConnectionState.done) {
               print("halo 1");
               print(barChartData?.length);
 

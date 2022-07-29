@@ -30,7 +30,7 @@ class TampilDataMakanan extends StatelessWidget {
     String finalTime = DateFormat('HH:mm').format(tempToday);
 
     // MENGIRIM DATA KE CATATAN
-    sendData() {
+    void sendData() {
       CatatanApiService().postCatatanModel(
           tanggal: finalToday,
           waktu: finalTime,
@@ -167,6 +167,9 @@ class TampilDataMakanan extends StatelessWidget {
             }
           } else {
             print('Data masih kosong');
+            return showDialog(
+                            context: context,
+                            builder: (BuildContext context) => showKirimData());
           }
         } else {
           print(token);
