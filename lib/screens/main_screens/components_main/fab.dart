@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tugasakhir_app/screens/camera/webview.dart';
 import 'package:tugasakhir_app/screens/camera_screens/takepicture.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+
+// don't forget this line
+import 'package:flutter_webview_pro/webview_flutter.dart';
+import 'package:webview_pro_android/webview_android.dart';
+import 'dart:io' show Platform;
 
 class Fab extends StatefulWidget {
   const Fab({Key? key}) : super(key: key);
@@ -102,7 +109,12 @@ class _FabState extends State<Fab> {
                               )),
                           TextButton(
                               onPressed: () {
-                                useCamera();
+                                // useCamera();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ObjectDetectionWebview()));
                               },
                               child: const Text('DIMENGERTI',
                                   style: Styles.outfitDialogYaText6)),
@@ -149,6 +161,36 @@ class _FabProfileState extends State<FabProfile> {
       onPress: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Styles.buttonAuthBg,
           content: Text("Data berhasil disimpan (belum post patch)"))),
+    );
+  }
+}
+
+
+
+class ObjectDetectionWebview extends StatefulWidget {
+  const ObjectDetectionWebview({Key? key}) : super(key: key);
+
+  @override
+  State<ObjectDetectionWebview> createState() => _ObjectDetectionWebviewState();
+}
+
+class _ObjectDetectionWebviewState extends State<ObjectDetectionWebview> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Deteksi Makanan'),
+      ),
+      body: const SizedBox(
+          width: double.infinity,
+          // the most important part of this example
+          child: WebView(
+            initialUrl: 'https://hf.space/embed/dblitzz21/food-spoonycal/+',
+
+            // Enable Javascript on WebView
+            javascriptMode: JavascriptMode.unrestricted,
+            gestureNavigationEnabled: true,
+          )),
     );
   }
 }

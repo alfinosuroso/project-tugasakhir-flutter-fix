@@ -9,8 +9,8 @@ import 'package:tugasakhir_app/styles.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:intl/intl.dart';
 
-// const String espUrl = 'ws://192.168.1.184:81';
-const String espUrl = 'ws://192.168.222.73:81';
+const String espUrl = 'ws://192.168.43.56:81';
+// const String espUrl = 'ws://192.168.245.73:81';
 
 class CountCalorie extends StatefulWidget {
   final String? finalMakanan;
