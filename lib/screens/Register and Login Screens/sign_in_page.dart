@@ -24,70 +24,36 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  bool focusIcon = false;
-
-  void showNotification(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Styles.secondColor,
-        content: Text(message.toString())));
-  }
-
-  Future<void> login() async {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      var responseLogin = await http.post(
-          // Response /api/login
-          Uri.parse("https://spoonycal-ta.herokuapp.com/api/login"),
-          body: ({
-            'email': emailController.text,
-            'password': passwordController.text
-          }));
-      if (responseLogin.statusCode == 200) {
-        final dataLogin = jsonDecode(responseLogin.body);
-        final SharedPreferences localStorage =
-            await SharedPreferences.getInstance();
-        localStorage.setString('name', dataLogin['data']['name']);
-        localStorage.setString('email', dataLogin['data']['email']);
-        localStorage.setString('token', dataLogin['access_token']);
-
-        // Response /api/register
-        //     String token = await Candidate().getToken();
-        // final response = await http.get(url, headers: {
-        //   'Content-Type': 'application/json',
-        //   'Accept': 'application/json',
-        //   'Authorization': 'Bearer $token',
-        // });
-        // print('Token : ${token}');
-        // print(response);
-
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.green[400],
-            content: Text("Login Berhasil!")));
-
-        // Navigator.popAndPushNamed(context, '/main_page');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Styles.buttonAuthBg,
-            content: Text("Email atau Password Salah!")));
-      }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Styles.buttonAuthBg,
-          content: Text("Email/Password Wajib diisi!")));
-    }
-  }
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    bool isLoading = false;
-
+    
     handleSignIn() async {
       setState(() {
         isLoading = true;
       });
 
-      if (await authProvider.login(
+      FocusScope.of(context).requestFocus(FocusNode());
+
+      if (emailController.text == '' || passwordController.text == '' )
+      {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Styles.buttonAuthBg,
+            content: Text(
+              'Email dan Password wajib diisi!',
+            ),
+          ),
+        );
+      }
+      else if (await authProvider.login(
           email: emailController.text, password: passwordController.text)) {
+        
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.green[400],
+            content: Text("Login Berhasil")));
         Navigator.push(
             context,
             MaterialPageRoute<void>(
@@ -97,10 +63,9 @@ class _SignInPageState extends State<SignInPage> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Colors.yellow,
+            backgroundColor: Styles.buttonAuthBg,
             content: Text(
-              'Gagal Login!',
-              textAlign: TextAlign.center,
+              'Email/Password anda salah!',
             ),
           ),
         );
@@ -207,7 +172,11 @@ class _SignInPageState extends State<SignInPage> {
           SizedBox(
             // tag: "login_btn",
             width: MediaQuery.of(context).size.width * 0.78,
-            child: ElevatedButton(
+            child: 
+            ElevatedButton.icon(
+              icon: isLoading ? const CircularProgressIndicator(
+                color: Colors.white,
+              ) : const SizedBox.shrink(),
               style: ElevatedButton.styleFrom(
                 primary: Styles.buttonAuthBg,
                 minimumSize: const Size.fromHeight(50),
@@ -216,10 +185,10 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
               onPressed: () {
-                handleSignIn();
+                isLoading ? null : handleSignIn();
               },
-              child: Text(
-                "Login".toUpperCase(),
+              label: Text(
+                isLoading ? '' : "Login".toUpperCase(),
                 style: Styles.buttonAuthText,
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tugasakhir_app/model/data_profile.dart';
+import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/already_have_an_account.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class QuestionTwo extends StatefulWidget {
@@ -36,8 +37,9 @@ class _QuestionTwoState extends State<QuestionTwo> {
       // Badan Utama
       body: Padding(
         padding:
-            const EdgeInsets.only(top: 30, left: 60, right: 60, bottom: 40),
+            const EdgeInsets.only(top: 30, bottom: 40),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Teks 1 - Jenis Kelamin
             const Text(
@@ -135,29 +137,7 @@ class _QuestionTwoState extends State<QuestionTwo> {
             const Spacer(
               flex: 1,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Sudah memiliki akun?",
-                  textAlign: TextAlign.center,
-                  style: Styles.bodyText6,
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/sign_in_page');
-                  },
-                  child: const Text(
-                    "Masuk",
-                    style: Styles.bodyText7,
-                  ),
-                )
-              ],
-            )
+            AlreadyHaveAnAccount(),
           ],
         ),
       ),

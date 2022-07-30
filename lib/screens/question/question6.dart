@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/already_have_an_account.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_up_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:after_layout/after_layout.dart';
@@ -67,7 +68,7 @@ class _QuestionSixState extends State<QuestionSix>
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "${finalKaloriHarian?.toStringAsPrecision(2)}" + " kalori/hari",
+                  "${finalKaloriHarian?.toStringAsFixed(2)}" + " kalori/hari",
                   style: Styles.inputFieldText1,
                   textAlign: TextAlign.center,
                 ),
@@ -103,29 +104,7 @@ class _QuestionSixState extends State<QuestionSix>
             const Spacer(
               flex: 2,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Sudah memiliki akun?",
-                  textAlign: TextAlign.center,
-                  style: Styles.bodyText6,
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/sign_in_page');
-                  },
-                  child: const Text(
-                    "Masuk",
-                    style: Styles.bodyText7,
-                  ),
-                ),
-              ],
-            ),
+            AlreadyHaveAnAccount(),
           ],
         ),
       ),
@@ -188,16 +167,19 @@ class _QuestionSixState extends State<QuestionSix>
     print(getBeratBadan);
     print(getTinggiBadan);
     print(getUmur);
-    Navigator.push(
+
+    Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
-          builder: (context) => SignUpPage(
+          builder: (BuildContext context) => SignUpPage(
                 gender: getGender,
                 berat: getBeratBadan,
                 tinggi: getTinggiBadan,
                 umur: getUmur,
-                kaloriHarian: finalKaloriHarian?.ceilToDouble(),
+                kaloriHarian: finalKaloriHarian,
               )),
+      ModalRoute.withName('/'),
     );
+
   }
 }

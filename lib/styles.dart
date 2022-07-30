@@ -264,6 +264,13 @@ class Styles {
     color: Colors.black87
   );
 
+  static const TextStyle shareFontProfileText12_2 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w400,
+    fontSize: 16.0,
+    color: offGreyBorderColor,
+  );
+
   static const TextStyle shareTitleAppbarText13 = TextStyle(
     fontFamily: 'Share',
     fontWeight: FontWeight.w700,

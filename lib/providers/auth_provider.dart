@@ -61,4 +61,26 @@ class AuthProvider extends ChangeNotifier {
       return false;
     }
   }
+
+  Future<bool> editData(
+      {required String token,
+      required String name,
+      required num berat,
+      required num tinggi,
+      required num umur,
+      required num? kalori_harian,
+      }) async {
+    try {
+      UserModel user = await AuthService().editData(
+          token: token, name: name, berat: berat, tinggi: tinggi,
+          umur: umur, kalori_harian: kalori_harian);
+
+      _user = user;
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+  
 }

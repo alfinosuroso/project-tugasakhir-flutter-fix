@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tugasakhir_app/model/catatan_model.dart';
+import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/services/api_catatan_service.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:intl/intl.dart';
@@ -55,7 +56,6 @@ class _HomeBodyState extends State<HomeBody> {
       DateFormat('yyyy-MM-dd').format(dateTime[1]),
       DateFormat('yyyy-MM-dd').format(dateTime[2])
     ];
-    // List<bool> checkRemove = [true, false, true];
 
     DateTime tempToday = DateTime.now();
     String finalToday = DateFormat('yyyy-MM-dd').format(tempToday);
@@ -93,7 +93,8 @@ class _HomeBodyState extends State<HomeBody> {
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                               children: [
                                 //** PREVIOUS BUTTON, TEXT, NEXT BUTTON */
                                 Visibility(
@@ -148,7 +149,8 @@ class _HomeBodyState extends State<HomeBody> {
                                           firstratio + 1 ||
                                       data[index].catatan?.length == 1) {
                                     return Container(
-                                      width: MediaQuery.of(context).size.width,
+                                      width:
+                                          MediaQuery.of(context).size.width,
                                       height: 220,
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 30.0),
@@ -176,14 +178,15 @@ class _HomeBodyState extends State<HomeBody> {
                                               tween: Tween(
                                                   begin: 0.0,
                                                   end: percentageCircular),
-                                              duration:
-                                                  Duration(milliseconds: 1500),
+                                              duration: Duration(
+                                                  milliseconds: 1500),
                                               curve: Curves.easeInOut,
                                               builder: (BuildContext context,
-                                                  double value, Widget? child) {
-                                                double persen =
-                                                    (value * totalTargetKalori)
-                                                        .toPrecision(2);
+                                                  double value,
+                                                  Widget? child) {
+                                                double persen = (value *
+                                                        totalTargetKalori)
+                                                    .toPrecision(2);
                                                 return Container(
                                                   width: sizeContainer,
                                                   height: sizeContainer,
@@ -192,17 +195,20 @@ class _HomeBodyState extends State<HomeBody> {
                                                     children: [
                                                       //** SHADER MASK */
                                                       ShaderMask(
-                                                        shaderCallback: (rect) {
+                                                        shaderCallback:
+                                                            (rect) {
                                                           return SweepGradient(
                                                               startAngle: 0.0,
-                                                              endAngle: TWO_PI,
+                                                              endAngle:
+                                                                  TWO_PI,
                                                               stops: [
                                                                 value,
                                                                 value
                                                               ],
                                                               // 0.0 , 0.5 , 0.5 , 1.0
-                                                              center: Alignment
-                                                                  .center,
+                                                              center:
+                                                                  Alignment
+                                                                      .center,
                                                               colors: [
                                                                 Colors.blue,
                                                                 Colors.grey
@@ -211,13 +217,16 @@ class _HomeBodyState extends State<HomeBody> {
                                                               ]).createShader(rect);
                                                         },
                                                         child: Container(
-                                                          width: sizeContainer,
-                                                          height: sizeContainer,
+                                                          width:
+                                                              sizeContainer,
+                                                          height:
+                                                              sizeContainer,
                                                           decoration:
                                                               BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            color: Colors.white,
+                                                            shape: BoxShape
+                                                                .circle,
+                                                            color:
+                                                                Colors.white,
                                                           ),
                                                         ),
                                                       ),
@@ -225,8 +234,9 @@ class _HomeBodyState extends State<HomeBody> {
                                                       // //** CIRCULAR PUTIH */
                                                       Center(
                                                         child: Container(
-                                                          width: sizeContainer -
-                                                              40,
+                                                          width:
+                                                              sizeContainer -
+                                                                  40,
                                                           height:
                                                               sizeContainer -
                                                                   40,
@@ -299,8 +309,9 @@ class _HomeBodyState extends State<HomeBody> {
                                   children: [
                                     //** KOLOM 1 - KONTAINER ATAS */
                                     Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.8,
+                                      width:
+                                          MediaQuery.of(context).size.width *
+                                              0.8,
                                       height: 50,
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 30.0),
@@ -334,26 +345,31 @@ class _HomeBodyState extends State<HomeBody> {
                                     ListView.builder(
                                         scrollDirection: Axis.vertical,
                                         shrinkWrap: true,
-                                        itemCount: data[index].catatan?.length,
+                                        itemCount:
+                                            data[index].catatan?.length,
                                         itemBuilder: (context, secondratio) {
                                           String? finalWaktu = data[index]
                                               .catatan?[secondratio]
-                                              .waktu?.substring(0,5);
+                                              .waktu
+                                              ?.substring(0, 5);
                                           totalKaloriMasuk = 0;
                                           return ListTile(
                                             title: Text(
                                               "${data[index].catatan?[secondratio].kaloriMasuk} Kalori",
                                               style: Styles.shareFont6,
                                             ),
-                                            trailing: Text(
-                                                "$finalWaktu WIB",
+                                            trailing: Text("$finalWaktu WIB",
                                                 style: Styles.shareFont7),
                                           );
-                                        })
+                                        }),
                                   ],
                                 ),
                               ),
                             ),
+
+                            SizedBox(
+                              height: 30,
+                            )
                           ],
                         ),
                       ),

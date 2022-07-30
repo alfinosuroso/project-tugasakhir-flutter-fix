@@ -20,7 +20,7 @@ class _LandingState extends State<Landing> {
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      _handleSignIn();
+      _handleMyUser();
     });
     // Future.delayed(Duration.zero, () {
     //   _handleSignIn();
@@ -28,7 +28,7 @@ class _LandingState extends State<Landing> {
     // });
   }
 
-  _handleSignIn() async {
+  _handleMyUser() async {
     authProvider = Provider.of<AuthProvider>(context, listen: false);
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     _id = (localStorage.getInt('id') ?? 0);

@@ -69,6 +69,18 @@ class PairingDeviceScreen extends StatelessWidget {
                             textAlign: TextAlign.center,
                             maxLines: 2,
                           ),
+                          const Text(
+                            "SSID : SPOONYCAL",
+                            style: Styles.latoPairing1,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                          ),
+                          const Text(
+                            "PASSWORD : SPOONYCAL",
+                            style: Styles.latoPairing1,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                          ),
                         ]),
                         
                   ),
@@ -137,7 +149,7 @@ class PairingDeviceScreen extends StatelessWidget {
                 child: const Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Text(
-                    "Temukan perangkat anda",
+                    "Perangkat sudah tersambung",
                     style: Styles.latoPairing3,
                     textAlign: TextAlign.center,
                   ),

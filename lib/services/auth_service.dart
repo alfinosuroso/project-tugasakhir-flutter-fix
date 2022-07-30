@@ -116,4 +116,49 @@ class AuthService {
       throw Exception("Gagal Login");
     }
   }
+
+  Future<UserModel> editData(
+      {required String token,
+      required String name,
+      required num berat,
+      required num tinggi,
+      required num umur,
+      required num? kalori_harian}) async {
+    var url = '$baseUrl/editdata';
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token
+      };
+    var body = jsonEncode({
+      'name': name,
+      'berat': berat,
+      'tinggi': tinggi,
+      'umur': umur,
+      'kalori_harian': kalori_harian,
+    });
+
+    print(jsonDecode(body));
+
+    var response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: body,
+    );
+
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      var data = jsonDecode(response.body);
+      print(data);
+      UserModel user = UserModel.fromJson(data['data']);
+      user.token = 'Bearer ' + data['access_token'];
+      UserPreferences().saveUser(user);
+
+      return user;
+    } else {
+      print("Gagal Update");
+      throw Exception("Gagal Update");
+    }
+  }
 }

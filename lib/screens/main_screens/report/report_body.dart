@@ -81,7 +81,7 @@ class _ReportBodyState extends State<ReportBody> {
                             totalKaloriMasuk + dataCatatan!.kaloriMasuk!;
                         if (data[i].catatan?.length == j + 1) {
                           String finalTanggal =
-                              DateFormat('EEEE, d MMMM').format(data[i].date!);
+                              DateFormat('d MMMM yyyy').format(data[i].date!);
                           barChartData!
                               .add(ChartData(finalTanggal, totalKaloriMasuk));
                           print(totalKaloriMasuk);
@@ -109,7 +109,7 @@ class _ReportBodyState extends State<ReportBody> {
                             ),
                             //** CONTAINER KALORI MINGGUAN DAN CHART */
                             Container(
-                              height: 550,
+                              height: 500,
                               padding: EdgeInsets.symmetric(horizontal: 30.0),
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
@@ -132,6 +132,7 @@ class _ReportBodyState extends State<ReportBody> {
                                   child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           "Target kalori hari ini",
@@ -183,12 +184,6 @@ class _ReportBodyState extends State<ReportBody> {
                                             ),
                                           ),
                                         ),
-                                        Text(
-                                          "Rata-rata kalori minggu ini",
-                                          style: Styles.outfitText1,
-                                        ),
-                                        Text("$makanKalori",
-                                            style: Styles.outfitText2),
                                       ]),
                                 ),
                               ),

@@ -70,10 +70,13 @@ class HomeAppBar extends StatelessWidget {
                         SizedBox(
                           width: 10,
                         ),
-                        Image(
-                          image: AssetImage('assets/images/spoonycal-icon.png'),
-                          // width: 100,
-                          // height: 100,
+                        GestureDetector(
+                          onTap: () => Navigator.pushNamed(context, '/pairing_device_screen'),
+                          child: Image(
+                            image: AssetImage('assets/images/spoonycal-icon.png'),
+                            // width: 100,
+                            // height: 100,
+                          ),
                         ),
                       ],
                     ),

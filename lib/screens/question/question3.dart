@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tugasakhir_app/model/data_profile.dart';
+import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/already_have_an_account.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:after_layout/after_layout.dart';
 
@@ -40,8 +41,9 @@ class _QuestionThreeState extends State<QuestionThree> {
       // Badan Utama
       body: Padding(
         padding:
-            const EdgeInsets.only(top: 30, left: 60, right: 60, bottom: 40),
+            const EdgeInsets.only(top: 30, bottom: 40),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Teks 1 - Selamat Datang
             Padding(
@@ -150,29 +152,7 @@ class _QuestionThreeState extends State<QuestionThree> {
             const Spacer(
               flex: 1,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Sudah memiliki akun?",
-                  textAlign: TextAlign.center,
-                  style: Styles.bodyText6,
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/question4');
-                  },
-                  child: const Text(
-                    "Masuk",
-                    style: Styles.bodyText7,
-                  ),
-                ),
-              ],
-            )
+            AlreadyHaveAnAccount(),
           ],
         ),
       ),

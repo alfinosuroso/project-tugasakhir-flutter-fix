@@ -110,7 +110,7 @@ class _FabState extends State<Fab> {
                           TextButton(
                               onPressed: () {
                                 // useCamera();
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
@@ -134,39 +134,6 @@ class _FabState extends State<Fab> {
   }
 }
 
-class FabProfile extends StatefulWidget {
-  const FabProfile({Key? key}) : super(key: key);
-
-  @override
-  State<FabProfile> createState() => _FabProfileState();
-}
-
-class _FabProfileState extends State<FabProfile> {
-  final isDialOpen = ValueNotifier(false);
-  Future ShowToast(String message) async {
-    await Fluttertoast.cancel();
-
-    Fluttertoast.showToast(
-        msg: message, fontSize: 15, backgroundColor: Colors.blueGrey[800]);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SpeedDial(
-      icon: FontAwesomeIcons.save,
-      animatedIconTheme: IconThemeData(size: 25.0),
-      backgroundColor: Styles.mainBlueColor,
-      overlayOpacity: 0.8,
-      openCloseDial: isDialOpen,
-      onPress: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Styles.buttonAuthBg,
-          content: Text("Data berhasil disimpan (belum post patch)"))),
-    );
-  }
-}
-
-
-
 class ObjectDetectionWebview extends StatefulWidget {
   const ObjectDetectionWebview({Key? key}) : super(key: key);
 
@@ -179,7 +146,11 @@ class _ObjectDetectionWebviewState extends State<ObjectDetectionWebview> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Deteksi Makanan'),
+        title: const Text(
+          'Preview Deteksi Makanan',
+          style: Styles.shareTitleAppbarText13,
+        ),
+        backgroundColor: Styles.appBarPrimaryColor,
       ),
       body: const SizedBox(
           width: double.infinity,

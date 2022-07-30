@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tugasakhir_app/model/catatan_model.dart';
 import 'package:tugasakhir_app/model/user_model.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
@@ -14,8 +15,16 @@ import 'package:tugasakhir_app/services/api_catatan_service.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:http/http.dart' as http;
 
-class TampilDataMakanan extends StatelessWidget {
+class TampilDataMakanan extends StatefulWidget {
   const TampilDataMakanan({Key? key}) : super(key: key);
+
+  @override
+  State<TampilDataMakanan> createState() => _TampilDataMakananState();
+}
+
+class _TampilDataMakananState extends State<TampilDataMakanan> {
+  bool isLoading = false;
+  bool isLoadingSecond = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +39,13 @@ class TampilDataMakanan extends StatelessWidget {
     String finalTime = DateFormat('HH:mm').format(tempToday);
 
     // MENGIRIM DATA KE CATATAN
-    void sendData() {
+    sendData() {
+      setState(() {
+        isLoadingSecond = true;
+      });
+
+      Future.delayed(const Duration(milliseconds: 1500));
+
       CatatanApiService().postCatatanModel(
           tanggal: finalToday,
           waktu: finalTime,
@@ -50,22 +65,53 @@ class TampilDataMakanan extends StatelessWidget {
 
     // WARNING POP UP
     Widget warning() => AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
           title: const Icon(
             Icons.warning,
             size: 70,
             color: Colors.red,
           ),
           content: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 'WARNING!',
                 style: Styles.outfitDialogText3,
               ),
+              SizedBox(
+                height: 20,
+              ),
               Text(
                 'Isi piring anda melebihi sisa kalori harian anda saat ini!',
                 style: Styles.outfitDialogText4,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        'KEMBALI',
+                        style: Styles.outfitDialogTidakText5,
+                        textAlign: TextAlign.center,
+                      )),
+                ],
+              )
             ],
+          ),
+        );
+
+    Widget showKirimData() => AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          title: Text(
+            'Perhatian!',
+            style: Styles.outfitDialogText3,
+          ),
+          content: Text(
+            'Total Kalori yang Anda makan adalah : ${providerFavoriteFood.totalKalori()} kalori',
+            style: Styles.outfitDialogText4,
           ),
           actions: [
             TextButton(
@@ -74,37 +120,25 @@ class TampilDataMakanan extends StatelessWidget {
                   'KEMBALI',
                   style: Styles.outfitDialogTidakText5,
                 )),
+            TextButton(
+                onPressed: () {
+                  sendData();
+                },
+                child: isLoadingSecond
+                    ? const CircularProgressIndicator(
+                        color: Styles.appBarPrimaryColor,
+                      )
+                    : Text('KIRIM SEKARANG!',
+                        style: Styles.outfitDialogYaText6)),
           ],
         );
 
-    Widget showKirimData() =>
-      AlertDialog(
-        title: Text(
-          'Perhatian!',
-          style: Styles.outfitDialogText3,
-        ),
-        content: Text(
-          'Total Kalori yang Anda makan adalah : ${providerFavoriteFood.totalKalori()} kalori',
-          style: Styles.outfitDialogText4,
-        ),
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text(
-                'KEMBALI',
-                style: Styles.outfitDialogTidakText5,
-              )),
-          TextButton(
-              onPressed: () {
-                sendData();
-              },
-              child: const Text('KIRIM SEKARANG!',
-                  style: Styles.outfitDialogYaText6)),
-        ],
-      );
-
     // CEK WARNING JIKA SISA KALORI HARI INI MELEBIHI BATAS
     cekSisaKaloriAkhir({required num totalKalori}) async {
+      setState(() {
+        isLoading = true;
+      });
+
       var data = [];
       List<Datum> results = [];
       String urlList = "https://spoonycal-ta.herokuapp.com/api/catatan";
@@ -140,17 +174,22 @@ class TampilDataMakanan extends StatelessWidget {
                     targetKalori = results[i].catatan?[j].targetKalori;
                     kaloriMasuk =
                         kaloriMasuk + results[i].catatan![j].kaloriMasuk!;
-                    print(kaloriMasuk);
                     print('HARI INI TGL 27');
                     if (j == results[i].catatan!.length - 1) {
                       if (targetKalori! - (kaloriMasuk + totalKalori) < 0) {
                         print(kaloriMasuk + totalKalori);
                         print("Kalori yang masuk melebihi kalori harian anda");
+                        setState(() {
+                          isLoading = false;
+                        });
                         return showDialog(
                             context: context,
                             builder: (BuildContext context) => warning());
                       } else {
                         print('Kalori tidak melebihi kalori harian!');
+                        setState(() {
+                          isLoading = false;
+                        });
                         return showDialog(
                             context: context,
                             builder: (BuildContext context) => showKirimData());
@@ -158,18 +197,24 @@ class TampilDataMakanan extends StatelessWidget {
                     }
                   } else {
                     print('HARI INI BEDA DENGAN HARI AKHIR DI API');
+                    setState(() {
+                      isLoading = false;
+                    });
                     return showDialog(
-                            context: context,
-                            builder: (BuildContext context) => showKirimData());
+                        context: context,
+                        builder: (BuildContext context) => showKirimData());
                   }
                 }
               }
             }
           } else {
             print('Data masih kosong');
+            setState(() {
+              isLoading = false;
+            });
             return showDialog(
-                            context: context,
-                            builder: (BuildContext context) => showKirimData());
+                context: context,
+                builder: (BuildContext context) => showKirimData());
           }
         } else {
           print(token);
@@ -196,91 +241,110 @@ class TampilDataMakanan extends StatelessWidget {
           style: Styles.shareTitleAppbarText13,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              child: Consumer<ProviderFavoriteFood>(
-                builder: (context, providerlistState, _) => ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: providerlistState.favoriteFood.length,
-                    itemBuilder: (context, index) {
-                      var favoriteList = providerlistState.favoriteFood;
+      body: Stack(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.67,
+            child: Consumer<ProviderFavoriteFood>(
+              builder: (context, providerlistState, _) => ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: providerlistState.favoriteFood.length,
+                  itemBuilder: (context, index) {
+                    var favoriteList = providerlistState.favoriteFood;
 
-                      return Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            title: Text(
-                              favoriteList[index].tempMakanan!,
-                              style: Styles.soraMakananText1,
-                            ),
-                            trailing:
-                                Row(mainAxisSize: MainAxisSize.min, children: [
-                              Text(
-                                "${favoriteList[index].tempBerat} gram (g) - " +
-                                    "${favoriteList[index].tempKaloriPerGram}" +
-                                    " kal",
-                                style: Styles.soraMakananText3,
-                              ),
-                              IconButton(
-                                  onPressed: () {
-                                    providerFavoriteFood.removeFromList(index);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                            backgroundColor: Color.fromARGB(
-                                                255, 206, 83, 81),
-                                            content: Text(
-                                                "Berhasil menghapus data!")));
-                                  },
-                                  icon: const Icon(FontAwesomeIcons.circleXmark,
-                                      color: Styles.redMainColor)),
-                            ]),
+                    return Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          title: Text(
+                            favoriteList[index].tempMakanan!,
+                            style: Styles.soraMakananText1,
                           ),
+                          trailing:
+                              Row(mainAxisSize: MainAxisSize.min, children: [
+                            Text(
+                              "${favoriteList[index].tempBerat} gram (g) - " +
+                                  "${favoriteList[index].tempKaloriPerGram}" +
+                                  " kal",
+                              style: Styles.soraMakananText3,
+                            ),
+                            IconButton(
+                                onPressed: () {
+                                  providerFavoriteFood.removeFromList(index);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          backgroundColor:
+                                              Color.fromARGB(255, 206, 83, 81),
+                                          duration:
+                                              Duration(milliseconds: 1000),
+                                          content: Text(
+                                              "Berhasil menghapus data!")));
+                                },
+                                icon: const Icon(FontAwesomeIcons.circleXmark,
+                                    color: Styles.redMainColor)),
+                          ]),
                         ),
-                      );
-                    }),
-              ),
+                      ),
+                    );
+                  }),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ListTile(
-                title: Text(
-                  'Total Kalori',
-                  style: Styles.soraMakananText4,
-                ),
-                trailing: Text(
-                  '${providerFavoriteFood.totalKalori()} kal',
-                  style: Styles.soraMakananText5,
-                ),
-              ),
-            ),
-            Align(
-              alignment: const Alignment(0.0, 0.9),
-              child: ElevatedButton(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(
-                          const Color(0xff45625d)),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Color(0xFF54A5CC)),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ))),
-                  onPressed: () => {
-                        cekSisaKaloriAkhir(
-                            totalKalori: providerFavoriteFood.totalKalori()),
-                      },
-                  child: const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text(
-                      "Isi piring saya sudah lengkap!",
-                      style: Styles.bodyQuestion1,
-                      textAlign: TextAlign.center,
+          ),
+          Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ListTile(
+                    title: Text(
+                      'Total Kalori',
+                      style: Styles.soraMakananText4,
                     ),
-                  )),
-            ),
-          ],
-        ),
+                    trailing: Text(
+                      '${providerFavoriteFood.totalKalori()} kal',
+                      style: Styles.soraMakananText5,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: ElevatedButton.icon(
+                      icon: isLoading
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const SizedBox.shrink(),
+                      style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                              const Color(0xff45625d)),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xFF54A5CC)),
+                          shape:
+                              MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ))),
+                      onPressed: () => {
+                            isLoading
+                                ? null
+                                : cekSisaKaloriAkhir(
+                                    totalKalori:
+                                        providerFavoriteFood.totalKalori()),
+                          },
+                      label: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                          isLoading ? '' : "Isi piring saya sudah lengkap!",
+                          style: Styles.bodyQuestion1,
+                          textAlign: TextAlign.center,
+                        ),
+                      )),
+                ),
+                const SizedBox(
+                  height: 50,
+                )
+              ]),
+        ],
       ),
     );
   }

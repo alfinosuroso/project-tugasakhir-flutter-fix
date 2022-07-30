@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
+import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/already_have_an_account.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/dont_have_an_account.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/forget_password.dart';
 import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
@@ -16,7 +17,7 @@ class SignUpPage extends StatefulWidget {
   final double? tinggi;
   final double? umur;
   final num? kaloriHarian;
-  
+
   const SignUpPage({
     Key? key,
     @required this.gender,
@@ -34,78 +35,51 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  bool focusIcon = false;
-
-  void showNotification(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Styles.secondColor,
-        content: Text(message.toString())));
-  }
-
-  Future<void> register() async {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      var responseRegister = await http.post(
-          Uri.parse("https://spoonycal-ta.herokuapp.com/api/register"),
-          body: ({
-            'name': nameController.text,
-            'email': emailController.text,
-            'password': passwordController.text
-          }));
-      if (responseRegister.statusCode == 200) {
-        final dataRegister = jsonDecode(responseRegister.body);
-        final SharedPreferences localStorage =
-            await SharedPreferences.getInstance();
-        localStorage.setInt('id', dataRegister['data']['id']);
-        localStorage.setString('name', dataRegister['data']['name']);
-        localStorage.setString('email', dataRegister['data']['email']);
-        localStorage.setString('token', dataRegister['access_token']);
-
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.green[400],
-            content: Text("Pendaftaran Berhasil!")));
-
-        Navigator.popAndPushNamed(context, '/question1');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Styles.buttonAuthBg,
-            content: Text("Email sudah terdaftar!")));
-      }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Styles.buttonAuthBg,
-          content: Text("Nama/Email/Password Wajib diisi!")));
-    }
-  }
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    bool isLoading = false;
+    
 
     handleSignUp() async {
       setState(() {
         isLoading = true;
       });
 
-      if (await authProvider.register(
-          name: nameController.text,
-          email: emailController.text,
-          password: passwordController.text,
-          gender: widget.gender!,
-          berat: widget.berat!, 
-          tinggi: widget.tinggi!, 
-          umur: widget.umur!, 
-          kaloriHarian: widget.kaloriHarian!, 
-          )) {
+      FocusScope.of(context).requestFocus(FocusNode());
+
+      if (nameController.text == '' ||
+          emailController.text == '' ||
+          passwordController.text == '') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Styles.buttonAuthBg,
+            content: Text(
+              'Nama, Email, dan Password wajib diisi!',
+            ),
+          ),
+        );
+      } else if (await authProvider.register(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+        gender: widget.gender!,
+        berat: widget.berat!,
+        tinggi: widget.tinggi!,
+        umur: widget.umur!,
+        kaloriHarian: widget.kaloriHarian!,
+      )) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.green[400],
+            content: Text("Pendaftaran Berhasil")));
         Navigator.pushNamed(context, '/main_page');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Colors.yellow,
+            backgroundColor: Styles.buttonAuthBg,
             content: Text(
-              'Gagal Register!',
-              textAlign: TextAlign.center,
+              'Email sudah terdaftar/Password minimal 8 karakter',
             ),
           ),
         );
@@ -250,7 +224,11 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             // tag: "login_btn",
             width: MediaQuery.of(context).size.width * 0.78,
-            child: ElevatedButton(
+            child: 
+            ElevatedButton.icon(
+              icon: isLoading ? const CircularProgressIndicator(
+                color: Colors.white,
+              ) : const SizedBox.shrink(),
               style: ElevatedButton.styleFrom(
                 primary: Styles.buttonAuthBg,
                 minimumSize: const Size.fromHeight(50),
@@ -259,10 +237,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               onPressed: () {
-                handleSignUp();
+                isLoading ? null : handleSignUp();
               },
-              child: Text(
-                "Daftar".toUpperCase(),
+              label: Text(
+                isLoading ? '' : "Daftar".toUpperCase(),
                 style: Styles.buttonAuthText,
               ),
             ),
@@ -272,7 +250,7 @@ class _SignUpPageState extends State<SignUpPage> {
           const Spacer(
             flex: 1,
           ),
-          const DontHaveAnAccount(),
+          const AlreadyHaveAnAccount(),
           const SizedBox(height: Styles.defaultPadding),
 
           //   AlreadyHaveAnAccountCheck(

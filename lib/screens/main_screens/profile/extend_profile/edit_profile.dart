@@ -1,11 +1,15 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:tugasakhir_app/screens/main_screens/components_main/fab.dart';
 import 'package:provider/provider.dart';
 import 'package:tugasakhir_app/model/user_model.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/styles.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -15,20 +19,110 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+  TextEditingController controllerUsername = TextEditingController();
+  TextEditingController controllerTinggi = TextEditingController();
+  TextEditingController controllerBerat = TextEditingController();
+  TextEditingController controllerUmur = TextEditingController();
+  TextEditingController controllerKaloriHarian = TextEditingController();
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel? user = authProvider.user;
-    TextEditingController controllerUsername =
-        TextEditingController(text: user?.name);
+    num newKalori = 0;
+
     TextEditingController controllerEmail =
         TextEditingController(text: user?.email);
-    TextEditingController controllerTinggi =
-        TextEditingController(text: user?.tinggi.toString());
-    TextEditingController controllerBerat =
-        TextEditingController(text: user?.berat.toString());
-    TextEditingController controllerUmur =
-        TextEditingController(text: user?.umur.toString());
+
+    num? newKaloriHarian() {
+      if (user?.gender == 'Laki-Laki') {
+        newKalori = 66.5 +
+            (13.8 * user!.berat!) +
+            (5.0 * user.tinggi!) -
+            (6.8 * user.umur!);
+        return newKalori;
+      } else if (user?.gender == 'Perempuan') {
+        newKalori = 655.1 +
+            (9.6 * user!.berat!) +
+            (1.9 * user.tinggi!) -
+            (4.7 * user.umur!);
+        return newKalori;
+      }
+      return null;
+    }
+
+    handleUpdate() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (controllerUsername.text == '' ||
+          controllerBerat.text == '' ||
+          controllerTinggi == '' ||
+          controllerUmur == '' ||
+          controllerKaloriHarian == '') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              'Ada data yang kosong',
+            ),
+          ),
+        );
+      } else if (await authProvider.editData(
+        token: user!.token!,
+        name: controllerUsername.text,
+        berat: num.parse(controllerBerat.text),
+        tinggi: num.parse(controllerTinggi.text),
+        umur: num.parse(controllerUmur.text),
+        kalori_harian: newKaloriHarian(),
+      )) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.green[400],
+            content: Text("Data berhasil disimpan")));
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/main_page', (Route<dynamic> route) => false);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Styles.buttonAuthBg,
+            content: Text(
+              'Ada data yang kosong',
+            ),
+          ),
+        );
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
+
+    Widget showUpdateData() => AlertDialog(
+          title: Text(
+            'Update Data',
+            style: Styles.outfitDialogText3,
+          ),
+          content: Text(
+            'Yakin ingin mengupdate data anda?',
+            style: Styles.outfitDialogText4,
+          ),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'TIDAK',
+                  style: Styles.outfitDialogTidakText5,
+                )),
+            TextButton(
+                onPressed: () {
+                  handleUpdate();
+                },
+                child: const Text('YA', style: Styles.outfitDialogYaText6)),
+          ],
+        );
+
     return Scaffold(
       backgroundColor: Styles.bgMainColor,
       appBar: PreferredSize(
@@ -89,21 +183,26 @@ class _EditProfileState extends State<EditProfile> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         GestureDetector(
-                        onTap: () => AppSettings.openDeviceSettings(asAnotherTask: true,),
-                        child: Image(
-                          image: AssetImage('assets/images/wifi-hotspot.png'),
-                          
-                          // width: 100,
-                          // height: 100,
+                          onTap: () => AppSettings.openDeviceSettings(
+                            asAnotherTask: true,
+                          ),
+                          child: Image(
+                            image: AssetImage('assets/images/wifi-hotspot.png'),
+
+                            // width: 100,
+                            // height: 100,
+                          ),
                         ),
-                      ),
                         SizedBox(
                           width: 10,
                         ),
-                        Image(
-                          image: AssetImage('assets/images/spoonycal-icon.png'),
-                          // width: 100,
-                          // height: 100,
+                        GestureDetector(
+                          onTap: () => Navigator.pushNamed(context, '/pairing_device_screen'),
+                          child: Image(
+                            image: AssetImage('assets/images/spoonycal-icon.png'),
+                            // width: 100,
+                            // height: 100,
+                          ),
                         ),
                       ],
                     ),
@@ -147,7 +246,7 @@ class _EditProfileState extends State<EditProfile> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(40.0),
-                child: Column(
+                child: ListView(
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,23 +257,26 @@ class _EditProfileState extends State<EditProfile> {
                           style: Styles.shareFontProfile11,
                         ),
                         TextField(
+                          onChanged: (value) => {},
                           controller: controllerUsername,
-                          decoration: const InputDecoration(),
                           maxLines: 1,
                           style: Styles.shareFontProfileText12,
+                          decoration: InputDecoration(
+                            hintText: user?.name,
+                          ),
                         ),
 
                         // EMAIL
                         const SizedBox(height: 12),
                         const Text(
-                          "Email Address",
+                          "Email",
                           style: Styles.shareFontProfile11,
                         ),
                         TextField(
+                          enabled: false,
                           controller: controllerEmail,
-                          decoration: const InputDecoration(),
                           maxLines: 1,
-                          style: Styles.shareFontProfileText12,
+                          style: Styles.shareFontProfileText12_2,
                         ),
                         const SizedBox(height: 12),
 
@@ -194,6 +296,7 @@ class _EditProfileState extends State<EditProfile> {
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
                                   ),
+                                  hintText: user?.tinggi.toString(),
                                 ),
                                 maxLines: 1,
                                 style: Styles.shareFontProfileText12,
@@ -230,6 +333,7 @@ class _EditProfileState extends State<EditProfile> {
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
                                   ),
+                                  hintText: user?.berat.toString(),
                                 ),
                                 maxLines: 1,
                                 style: Styles.shareFontProfileText12,
@@ -266,6 +370,7 @@ class _EditProfileState extends State<EditProfile> {
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
                                   ),
+                                  hintText: user?.umur.toString(),
                                 ),
                                 maxLines: 1,
                                 style: Styles.shareFontProfileText12,
@@ -285,8 +390,46 @@ class _EditProfileState extends State<EditProfile> {
                           ],
                         ),
                         const SizedBox(height: 12),
+
+                        // KALORI HARIAN
+                        Text(
+                          "Kalori Harian",
+                          style: Styles.shareFontProfile11,
+                        ),
+                        const SizedBox(height: 4),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 70,
+                              child: TextField(
+                                enabled: false,
+                                controller: controllerKaloriHarian,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  hintText: user?.kaloriHarian.toString(),
+                                ),
+                                maxLines: 1,
+                                style: Styles.shareFontProfileText12_2,
+                                keyboardType: TextInputType.numberWithOptions(
+                                    decimal: true),
+                                inputFormatters: [
+                                  // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d+\.?\d{0,2}')),
+                                ],
+                              ),
+                            ),
+                            Text(
+                              "  kal",
+                              style: Styles.shareFontProfile11,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -296,21 +439,16 @@ class _EditProfileState extends State<EditProfile> {
       ),
 
       // ** FLOATING BUTTON ** //
-      floatingActionButton: const FabProfile(),
+      floatingActionButton: SpeedDial(
+          icon: FontAwesomeIcons.save,
+          animatedIconTheme: IconThemeData(size: 25.0),
+          backgroundColor: Styles.mainBlueColor,
+          overlayOpacity: 0.8,
+          onPress: () => {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => showUpdateData()),
+              }),
     );
   }
 }
-// class ControlEditProfile {
-//   static final TextEditingController controllerUsername =
-//       TextEditingController(text: finalName);
-//   static final TextEditingController controllerEmail =
-//       TextEditingController(text: finalEmail);
-//   static final TextEditingController controllerTinggi =
-//       TextEditingController(text: finalTinggiBadan.toString());
-//   static final TextEditingController controllerBerat =
-//       TextEditingController(text: finalBeratBadan.toString());
-//   static final TextEditingController controllerGender =
-//       TextEditingController(text: finalGender);
-//   static final TextEditingController controllerUmur =
-//       TextEditingController(text: finalUmur.toString());
-// }

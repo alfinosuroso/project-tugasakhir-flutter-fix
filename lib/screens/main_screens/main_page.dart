@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tugasakhir_app/model/catatan_model.dart';
 import 'package:tugasakhir_app/model/user_model.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/screens/main_screens/components_main/fab.dart';
@@ -13,6 +14,7 @@ import 'package:tugasakhir_app/screens/main_screens/profile/profile_appbar.dart'
 import 'package:tugasakhir_app/screens/main_screens/profile/profile_body.dart';
 import 'package:tugasakhir_app/screens/main_screens/report/report_appbar.dart';
 import 'package:tugasakhir_app/screens/main_screens/report/report_body.dart';
+import 'package:tugasakhir_app/services/api_catatan_service.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,6 +26,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final CatatanApiService _catatanModel = CatatanApiService();
+  late Future<List<Datum>>? dataFutureCatatan;
   final isDialOpen = ValueNotifier(false);
 
   int currentIndexBotNavBar = 0;
@@ -44,6 +48,16 @@ class _MainPageState extends State<MainPage> {
     0.0,
   ];
 
+  Future<List<Datum>>? _loadData() async {
+    return await _catatanModel.getCatatanModel();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    dataFutureCatatan = _loadData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -57,22 +71,22 @@ class _MainPageState extends State<MainPage> {
       },
       child: Scaffold(
         backgroundColor: Styles.bgMainColor,
-
+      
         // ** APPBAR - DIFFERENT SCREENAPPBAR */
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(appBarHeight[currentIndexBotNavBar]),
           child: screensAppBar[currentIndexBotNavBar],
         ),
-
+      
         // ** BODY - DIFFERENT SCREENBODY */
         body: IndexedStack(
           index: currentIndexBotNavBar,
           children: screensBody,
         ),
-
+      
         // ** FLOATING BUTTON ** //
         floatingActionButton: const Fab(),
-
+      
         //** BOTTOM NAVIGATION BAR */
         bottomNavigationBar: SizedBox(
           height: 70,

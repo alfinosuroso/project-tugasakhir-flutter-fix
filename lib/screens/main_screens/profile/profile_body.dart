@@ -69,10 +69,12 @@ class _ProfileBodyState extends State<ProfileBody> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: () => AppSettings.openDeviceSettings(asAnotherTask: true,),
+                        onTap: () => AppSettings.openDeviceSettings(
+                          asAnotherTask: true,
+                        ),
                         child: Image(
                           image: AssetImage('assets/images/wifi-hotspot.png'),
-                          
+
                           // width: 100,
                           // height: 100,
                         ),
@@ -80,11 +82,14 @@ class _ProfileBodyState extends State<ProfileBody> {
                       SizedBox(
                         width: 10,
                       ),
-                      Image(
-                        image: AssetImage('assets/images/spoonycal-icon.png'),
-                        // width: 100,
-                        // height: 100,
-                      ),
+                      GestureDetector(
+                          onTap: () => Navigator.pushNamed(context, '/pairing_device_screen'),
+                          child: Image(
+                            image: AssetImage('assets/images/spoonycal-icon.png'),
+                            // width: 100,
+                            // height: 100,
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -165,7 +170,15 @@ class _ProfileBodyState extends State<ProfileBody> {
                           style: Styles.shareFont9,
                         ),
                         onTap: () {
-                          Navigator.pushNamed(context, '/question1');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Styles.buttonAuthBg,
+                              content: Text(
+                                'Pengaturan masih dalam tahap pengembangan',
+                              ),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
                         },
                       ),
                     ),
@@ -216,7 +229,8 @@ class _ProfileBodyState extends State<ProfileBody> {
                         ),
                         onTap: () {
                           UserPreferences().removeUser();
-                          Navigator.popAndPushNamed(context, '/sign_in_page');
+                          Navigator.pushNamedAndRemoveUntil(context, '/sign_in_page',
+                          (Route<dynamic> route) => false);
                         },
                       ),
                     ),
