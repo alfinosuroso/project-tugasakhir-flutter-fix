@@ -1,5 +1,6 @@
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:tugasakhir_app/loading_pages/landing.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
@@ -7,6 +8,7 @@ import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/providers/favorite_food.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_in_page.dart';
 import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
+import 'package:tugasakhir_app/screens/main_screens/profile/extend_bantuan/bantuan.dart';
 import 'package:tugasakhir_app/screens/main_screens/profile/extend_profile/edit_profile.dart';
 import 'package:tugasakhir_app/screens/question/pre_question.dart';
 import 'package:tugasakhir_app/screens/question/question1.dart';
@@ -23,8 +25,7 @@ import 'package:tugasakhir_app/splash_screen.dart';
 
 const String espUrl = 'ws://192.168.207.73:81';
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+
 
   runApp(const MyApp());
 }
@@ -82,6 +83,7 @@ class MyApp extends StatelessWidget {
 
           // Routes Extend Profile
           '/edit_profile': (context) => const EditProfile(),
+          '/bantuan': (context) => BantuanPage(),
 
           // Spoonycal
           '/pairing_device_screen': (context) => const PairingDeviceScreen(),

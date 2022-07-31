@@ -203,7 +203,9 @@ class _ProfileBodyState extends State<ProfileBody> {
                           'Bantuan',
                           style: Styles.shareFont9,
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, '/bantuan');
+                        },
                       ),
                     ),
                   ),

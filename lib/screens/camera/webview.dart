@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-// don't forget this line
-import 'package:flutter_webview_pro/webview_flutter.dart';
-import 'package:webview_pro_android/webview_android.dart';
-import 'dart:io' show Platform;
-
 // class ObjectDetectionWebview extends StatefulWidget {
 //   const ObjectDetectionWebview({Key? key}) : super(key: key);
 

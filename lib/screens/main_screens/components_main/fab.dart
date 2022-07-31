@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tugasakhir_app/screens/camera/webview.dart';
 import 'package:tugasakhir_app/screens/camera_screens/takepicture.dart';
 import 'package:tugasakhir_app/styles.dart';
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-
-// don't forget this line
-import 'package:flutter_webview_pro/webview_flutter.dart';
-import 'package:webview_pro_android/webview_android.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'dart:io' show Platform;
 
 class Fab extends StatefulWidget {
@@ -31,22 +27,34 @@ class _FabState extends State<Fab> {
 
   @override
   Widget build(BuildContext context) {
+    // Future<void> useCamera() async {
+    //   WidgetsFlutterBinding.ensureInitialized();
+
+    //   // Obtain a list of the available cameras on the device.
+    //   final cameras = await availableCameras();
+
+    //   // Get a specific camera from the list of available cameras.
+    //   final firstCamera = cameras.first;
+
+    //   Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => TakePictureScreen(
+    //               // Pass the appropriate camera to the TakePictureScreen widget.
+    //               camera: firstCamera,
+    //             )),
+    //   );
+    // }
     Future<void> useCamera() async {
       WidgetsFlutterBinding.ensureInitialized();
-
-      // Obtain a list of the available cameras on the device.
-      final cameras = await availableCameras();
-
-      // Get a specific camera from the list of available cameras.
-      final firstCamera = cameras.first;
+      // PERMISSION //
+      await Permission.camera.request();
+      await Permission.microphone.request();
 
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => TakePictureScreen(
-                  // Pass the appropriate camera to the TakePictureScreen widget.
-                  camera: firstCamera,
-                )),
+            builder: (context) => ObjectDetectionWebview()),
       );
     }
 
@@ -109,12 +117,12 @@ class _FabState extends State<Fab> {
                               )),
                           TextButton(
                               onPressed: () {
-                                // useCamera();
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ObjectDetectionWebview()));
+                                useCamera();
+                                // Navigator.pushReplacement(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) =>
+                                //             ObjectDetectionWebview()));
                               },
                               child: const Text('DIMENGERTI',
                                   style: Styles.outfitDialogYaText6)),
@@ -145,23 +153,20 @@ class _ObjectDetectionWebviewState extends State<ObjectDetectionWebview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Preview Deteksi Makanan',
-          style: Styles.shareTitleAppbarText13,
+        appBar: AppBar(
+          title: Text(
+            "Deteksi Makanan",
+            style: Styles.shareTitleAppbarText13,
+          ),
+          backgroundColor: Styles.appBarPrimaryColor,
         ),
-        backgroundColor: Styles.appBarPrimaryColor,
-      ),
-      body: const SizedBox(
-          width: double.infinity,
-          // the most important part of this example
-          child: WebView(
-            initialUrl: 'https://hf.space/embed/dblitzz21/food-spoonycal/+',
-
-            // Enable Javascript on WebView
-            javascriptMode: JavascriptMode.unrestricted,
-            gestureNavigationEnabled: true,
-          )),
-    );
+        body: Center(
+          child: InAppWebView(
+            initialUrlRequest: URLRequest(
+                url: Uri.parse(
+                    "https://hf.space/embed/dblitzz21/food-spoonycal/+")),
+          ),
+        ) // This trailing comma makes auto-formatting nicer for build methods.
+        );
   }
 }

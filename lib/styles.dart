@@ -229,10 +229,24 @@ class Styles {
     color: Colors.black54,
   );
 
+  static const TextStyle shareFont7_2 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w400,
+    fontSize: 15.0,
+    color: Colors.black87,
+  );
+
   static const TextStyle shareFont8 = TextStyle(
     fontFamily: 'Share',
     fontWeight: FontWeight.w400,
     fontSize: 20.0,
+    color: Colors.white,
+  );
+
+  static const TextStyle shareFont8_2 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w700,
+    fontSize: 16.0,
     color: Colors.white,
   );
 
@@ -257,9 +271,16 @@ class Styles {
     color: appBarPrimaryColor
   );
 
-  static const TextStyle shareFontProfileText12 = TextStyle(
+  static const TextStyle shareFontProfile11_2 = TextStyle(
     fontFamily: 'Share',
     fontWeight: FontWeight.w400,
+    fontSize: 16.0,
+    color: appBarPrimaryColor
+  );
+
+  static const TextStyle shareFontProfileText12 = TextStyle(
+    fontFamily: 'Share',
+    fontWeight: FontWeight.w700,
     fontSize: 16.0,
     color: Colors.black87
   );
