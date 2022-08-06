@@ -1,6 +1,5 @@
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:tugasakhir_app/loading_pages/landing.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
@@ -18,7 +17,6 @@ import 'package:tugasakhir_app/screens/question/question4.dart';
 import 'package:tugasakhir_app/screens/question/question5.dart';
 import 'package:tugasakhir_app/screens/question/question6.dart';
 import 'package:tugasakhir_app/screens/spoonycal_screens/pairing_device_screen.dart';
-import 'package:tugasakhir_app/screens/spoonycal_screens/reference.countcalorie.dart';
 import 'package:tugasakhir_app/screens/spoonycal_screens/search_screen.dart';
 import 'package:tugasakhir_app/screens/spoonycal_screens/tampildatamakanan.dart';
 import 'package:tugasakhir_app/splash_screen.dart';

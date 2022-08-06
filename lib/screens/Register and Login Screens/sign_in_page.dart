@@ -1,15 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/model/user_model.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/dont_have_an_account.dart';
-import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/forget_password.dart';
-import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_up_page.dart';
 import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 
@@ -194,7 +190,6 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ),
           const SizedBox(height: Styles.defaultPadding),
-          ForgetPassword(),
           const Spacer(
             flex: 1,
           ),

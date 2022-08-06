@@ -4,7 +4,6 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:tugasakhir_app/screens/main_screens/components_main/fab.dart';
 import 'package:provider/provider.dart';
 import 'package:tugasakhir_app/model/user_model.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
@@ -34,6 +33,8 @@ class _EditProfileState extends State<EditProfile> {
 
     TextEditingController controllerEmail =
         TextEditingController(text: user?.email);
+    TextEditingController controllerGender =
+        TextEditingController(text: user?.gender);
 
     num? newKaloriHarian() {
       if (user?.gender == 'Laki-Laki') {
@@ -275,6 +276,20 @@ class _EditProfileState extends State<EditProfile> {
                         TextField(
                           enabled: false,
                           controller: controllerEmail,
+                          maxLines: 1,
+                          style: Styles.shareFontProfileText12_2,
+                        ),
+                        const SizedBox(height: 12),
+
+                        // JENIS KELAMIN
+                        const SizedBox(height: 12),
+                        const Text(
+                          "Jenis Kelamin",
+                          style: Styles.shareFontProfile11,
+                        ),
+                        TextField(
+                          enabled: false,
+                          controller: controllerGender,
                           maxLines: 1,
                           style: Styles.shareFontProfileText12_2,
                         ),

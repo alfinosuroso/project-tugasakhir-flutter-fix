@@ -1,14 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/already_have_an_account.dart';
-import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/dont_have_an_account.dart';
-import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/forget_password.dart';
-import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -246,7 +239,6 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
           const SizedBox(height: Styles.defaultPadding),
-          const ForgetPassword(),
           const Spacer(
             flex: 1,
           ),

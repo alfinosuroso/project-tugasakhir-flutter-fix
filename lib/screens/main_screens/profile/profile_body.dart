@@ -150,40 +150,6 @@ class _ProfileBodyState extends State<ProfileBody> {
                     ),
                   ),
 
-                  //** PENGATURAN */
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                                color: Styles.offGreyBorder, width: 2))),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.settings,
-                          color: Styles.appBarPrimaryColor,
-                          size: 30,
-                        ),
-                        title: Text(
-                          'Pengaturan',
-                          style: Styles.shareFont9,
-                        ),
-                        onTap: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: Styles.buttonAuthBg,
-                              content: Text(
-                                'Pengaturan masih dalam tahap pengembangan',
-                              ),
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-
                   //** BANTUAN */
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
