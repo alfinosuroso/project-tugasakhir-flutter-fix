@@ -244,19 +244,6 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           const AlreadyHaveAnAccount(),
           const SizedBox(height: Styles.defaultPadding),
-
-          //   AlreadyHaveAnAccountCheck(
-          //     press: () {
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder: (context) {
-          //             return SignUpScreen();
-          //           },
-          //         ),
-          //       );
-          //     },
-          //   ),
         ],
       ),
     );
