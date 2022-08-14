@@ -52,11 +52,6 @@ class _QuestionOneState extends State<QuestionOne> {
                 "Kami akan mengajukan beberapa pertanyaan untuk memberikan rekomendasi kalori harian Anda untuk mencapai target yang lebih fit",
                 textAlign: TextAlign.center,
                 style: Styles.bodyQuestion1,
-
-                // TextStyle(
-                //     fontSize: 16,
-                //     fontFamily: "Poppins",
-                //     color: Colors.white),
               ),
             ),
 

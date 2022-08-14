@@ -32,7 +32,7 @@ class _ProfileBodyState extends State<ProfileBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Spacer(
+                const Spacer(
                   flex: 1,
                 ),
                 // 1. Teks User - Welcome User dan Email User
@@ -46,7 +46,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                         "Profil Saya",
                         style: Styles.welcomeUserAppBar1,
                       ),
-                      Spacer(
+                      const Spacer(
                         flex: 1,
                       ),
                       Text(
@@ -72,19 +72,16 @@ class _ProfileBodyState extends State<ProfileBody> {
                         onTap: () => AppSettings.openDeviceSettings(
                           asAnotherTask: true,
                         ),
-                        child: Image(
+                        child: const Image(
                           image: AssetImage('assets/images/wifi-hotspot.png'),
-
-                          // width: 100,
-                          // height: 100,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       GestureDetector(
                           onTap: () => Navigator.pushNamed(context, '/pairing_device_screen'),
-                          child: Image(
+                          child: const Image(
                             image: AssetImage('assets/images/spoonycal-icon.png'),
                             // width: 100,
                             // height: 100,
@@ -104,14 +101,14 @@ class _ProfileBodyState extends State<ProfileBody> {
           child: Container(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30), topRight: Radius.circular(30)),
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black12,
-                  offset: const Offset(
+                  offset: Offset(
                     0.0,
                     -3.0,
                   ),
@@ -127,19 +124,19 @@ class _ProfileBodyState extends State<ProfileBody> {
                   //** EDIT */
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         border: Border(
                             bottom: BorderSide(
                                 color: Styles.offGreyBorder, width: 2))),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
                       child: ListTile(
-                        leading: Icon(
+                        leading: const Icon(
                           Icons.edit,
                           color: Styles.appBarPrimaryColor,
                           size: 30,
                         ),
-                        title: Text(
+                        title: const Text(
                           'Edit Profil',
                           style: Styles.shareFont9,
                         ),

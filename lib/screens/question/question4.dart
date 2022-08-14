@@ -43,7 +43,7 @@ class _QuestionFourState extends State<QuestionFour> {
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: Column(
-                children: [
+                children: const [
                   Text(
                     "Berapakah tinggi badan Anda saat ini?",
                     textAlign: TextAlign.center,
@@ -73,14 +73,10 @@ class _QuestionFourState extends State<QuestionFour> {
                   color: Styles.secondColor,
                   margin: EdgeInsets.all(5),
                   child: TextField(
-                    decoration: new InputDecoration(
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "",
                         contentPadding: EdgeInsets.all(10)),
-                    // inputFormatters: [
-                    //   WhitelistingTextInputFormatter(
-                    //       RegExp(r'^(\d+)?\.?\d{0,2}')),
-                    // ],
                     onChanged: (value) {
                       setState(() {
                         if (DataProfile.controllerTinggiBadan.text != "") {
@@ -91,9 +87,8 @@ class _QuestionFourState extends State<QuestionFour> {
                       });
                     },
                     keyboardType:
-                        TextInputType.numberWithOptions(decimal: true),
+                        const TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: [
-                      // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
                       FilteringTextInputFormatter.allow(
                           RegExp(r'^\d+\.?\d{0,2}')),
                     ],
@@ -106,11 +101,11 @@ class _QuestionFourState extends State<QuestionFour> {
                   alignment: Alignment.center,
                   width: 100,
                   height: 65,
-                  margin: EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     border: Border.all(width: 1, color: Colors.white),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Cm",
                     style: Styles.inputFieldText1,
                     textAlign: TextAlign.center,
@@ -124,7 +119,7 @@ class _QuestionFourState extends State<QuestionFour> {
               flex: 2,
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 0,
             ),
             _notShowButtonRightArrow
@@ -146,7 +141,7 @@ class _QuestionFourState extends State<QuestionFour> {
             const Spacer(
               flex: 1,
             ),
-            AlreadyHaveAnAccount(),
+            const AlreadyHaveAnAccount(),
           ],
         ),
       ),

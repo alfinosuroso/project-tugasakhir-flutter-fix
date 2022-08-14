@@ -1,16 +1,13 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tugasakhir_app/model/catatan_model.dart';
 import 'package:tugasakhir_app/model/user_model.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/providers/favorite_food.dart';
-import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/services/api_catatan_service.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:http/http.dart' as http;
@@ -28,8 +25,6 @@ class _TampilDataMakananState extends State<TampilDataMakanan> {
 
   @override
   Widget build(BuildContext context) {
-    final controllerPage = PageController(initialPage: 0);
-    final CatatanApiService _catatanModel = CatatanApiService();
     ProviderFavoriteFood providerFavoriteFood =
         Provider.of<ProviderFavoriteFood>(context);
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
@@ -57,7 +52,7 @@ class _TampilDataMakananState extends State<TampilDataMakanan> {
 
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.green[400],
-          content: Text("Berhasil mengirim catatan!")));
+          content: const Text("Berhasil mengirim catatan!")));
 
       Navigator.of(context).pushNamedAndRemoveUntil(
           '/main_page', (Route<dynamic> route) => false);
@@ -75,14 +70,14 @@ class _TampilDataMakananState extends State<TampilDataMakanan> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'WARNING!',
                 style: Styles.outfitDialogText3,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 'Isi piring anda melebihi sisa kalori harian anda saat ini!',
                 style: Styles.outfitDialogText4,
               ),
@@ -105,7 +100,7 @@ class _TampilDataMakananState extends State<TampilDataMakanan> {
     Widget showKirimData() => AlertDialog(
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          title: Text(
+          title: const Text(
             'Perhatian!',
             style: Styles.outfitDialogText3,
           ),
@@ -128,7 +123,7 @@ class _TampilDataMakananState extends State<TampilDataMakanan> {
                     ? const CircularProgressIndicator(
                         color: Styles.appBarPrimaryColor,
                       )
-                    : Text('KIRIM SEKARANG!',
+                    : const Text('KIRIM SEKARANG!',
                         style: Styles.outfitDialogYaText6)),
           ],
         );
@@ -139,10 +134,8 @@ class _TampilDataMakananState extends State<TampilDataMakanan> {
         isLoading = true;
       });
 
-      var data = [];
       List<Datum> results = [];
-      String urlList = "https://spoonycal-ta.herokuapp.com/api/catatan";
-      num sisaKalori = 0;
+      String urlList = "https://spoonycal.ik3d.site/api/catatan";
       num? targetKalori;
       num kaloriMasuk = 0;
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -243,7 +236,7 @@ class _TampilDataMakananState extends State<TampilDataMakanan> {
       ),
       body: Stack(
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.67,
             child: Consumer<ProviderFavoriteFood>(
               builder: (context, providerlistState, _) => ListView.builder(
@@ -297,7 +290,7 @@ class _TampilDataMakananState extends State<TampilDataMakanan> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: ListTile(
-                    title: Text(
+                    title: const Text(
                       'Total Kalori',
                       style: Styles.soraMakananText4,
                     ),
@@ -319,7 +312,7 @@ class _TampilDataMakananState extends State<TampilDataMakanan> {
                           foregroundColor: MaterialStateProperty.all<Color>(
                               const Color(0xff45625d)),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xFF54A5CC)),
+                              const Color(0xFF54A5CC)),
                           shape:
                               MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
@@ -332,7 +325,7 @@ class _TampilDataMakananState extends State<TampilDataMakanan> {
                                         providerFavoriteFood.totalKalori()),
                           },
                       label: Padding(
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Text(
                           isLoading ? '' : "Isi piring saya sudah lengkap!",
                           style: Styles.bodyQuestion1,

@@ -1,5 +1,3 @@
-// ignore_for_file: unrelated_type_equality_checks
-
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -64,7 +62,7 @@ class _EditProfileState extends State<EditProfile> {
           controllerUmur == '' ||
           controllerKaloriHarian == '') {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             backgroundColor: Colors.red,
             content: Text(
               'Ada data yang kosong',
@@ -86,7 +84,7 @@ class _EditProfileState extends State<EditProfile> {
             '/main_page', (Route<dynamic> route) => false);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             backgroundColor: Styles.buttonAuthBg,
             content: Text(
               'Ada data yang kosong',
@@ -187,19 +185,19 @@ class _EditProfileState extends State<EditProfile> {
                           onTap: () => AppSettings.openDeviceSettings(
                             asAnotherTask: true,
                           ),
-                          child: Image(
+                          child: const Image(
                             image: AssetImage('assets/images/wifi-hotspot.png'),
 
                             // width: 100,
                             // height: 100,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         GestureDetector(
                           onTap: () => Navigator.pushNamed(context, '/pairing_device_screen'),
-                          child: Image(
+                          child: const Image(
                             image: AssetImage('assets/images/spoonycal-icon.png'),
                             // width: 100,
                             // height: 100,
@@ -296,7 +294,7 @@ class _EditProfileState extends State<EditProfile> {
                         const SizedBox(height: 12),
 
                         // TINGGI BADAN
-                        Text(
+                        const Text(
                           "Tinggi Badan",
                           style: Styles.shareFontProfile11,
                         ),
@@ -315,7 +313,7 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                                 maxLines: 1,
                                 style: Styles.shareFontProfileText12,
-                                keyboardType: TextInputType.numberWithOptions(
+                                keyboardType: const TextInputType.numberWithOptions(
                                     decimal: true),
                                 inputFormatters: [
                                   // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
@@ -324,7 +322,7 @@ class _EditProfileState extends State<EditProfile> {
                                 ],
                               ),
                             ),
-                            Text(
+                            const Text(
                               "  Cm",
                               style: Styles.shareFontProfile11,
                             ),
@@ -333,7 +331,7 @@ class _EditProfileState extends State<EditProfile> {
                         const SizedBox(height: 12),
 
                         // BERAT BADAN
-                        Text(
+                        const Text(
                           "Berat Badan",
                           style: Styles.shareFontProfile11,
                         ),
@@ -352,16 +350,15 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                                 maxLines: 1,
                                 style: Styles.shareFontProfileText12,
-                                keyboardType: TextInputType.numberWithOptions(
+                                keyboardType: const TextInputType.numberWithOptions(
                                     decimal: true),
                                 inputFormatters: [
-                                  // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
                                   FilteringTextInputFormatter.allow(
                                       RegExp(r'^\d+\.?\d{0,2}')),
                                 ],
                               ),
                             ),
-                            Text(
+                            const Text(
                               "  Kg",
                               style: Styles.shareFontProfile11,
                             ),
@@ -370,7 +367,7 @@ class _EditProfileState extends State<EditProfile> {
                         const SizedBox(height: 12),
 
                         // UMUR
-                        Text(
+                        const Text(
                           "Usia",
                           style: Styles.shareFontProfile11,
                         ),
@@ -389,7 +386,7 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                                 maxLines: 1,
                                 style: Styles.shareFontProfileText12,
-                                keyboardType: TextInputType.numberWithOptions(
+                                keyboardType: const TextInputType.numberWithOptions(
                                     decimal: true),
                                 inputFormatters: [
                                   // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
@@ -398,7 +395,7 @@ class _EditProfileState extends State<EditProfile> {
                                 ],
                               ),
                             ),
-                            Text(
+                            const Text(
                               "  Tahun",
                               style: Styles.shareFontProfile11,
                             ),
@@ -407,7 +404,7 @@ class _EditProfileState extends State<EditProfile> {
                         const SizedBox(height: 12),
 
                         // KALORI HARIAN
-                        Text(
+                        const Text(
                           "Kalori Harian",
                           style: Styles.shareFontProfile11,
                         ),
@@ -427,7 +424,7 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                                 maxLines: 1,
                                 style: Styles.shareFontProfileText12_2,
-                                keyboardType: TextInputType.numberWithOptions(
+                                keyboardType: const TextInputType.numberWithOptions(
                                     decimal: true),
                                 inputFormatters: [
                                   // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
@@ -436,7 +433,7 @@ class _EditProfileState extends State<EditProfile> {
                                 ],
                               ),
                             ),
-                            Text(
+                            const Text(
                               "  kal",
                               style: Styles.shareFontProfile11,
                             ),
@@ -456,7 +453,7 @@ class _EditProfileState extends State<EditProfile> {
       // ** FLOATING BUTTON ** //
       floatingActionButton: SpeedDial(
           icon: FontAwesomeIcons.save,
-          animatedIconTheme: IconThemeData(size: 25.0),
+          animatedIconTheme: const IconThemeData(size: 25.0),
           backgroundColor: Styles.mainBlueColor,
           overlayOpacity: 0.8,
           onPress: () => {

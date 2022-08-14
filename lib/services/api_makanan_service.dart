@@ -7,7 +7,7 @@ import 'package:tugasakhir_app/model/makanan_model.dart';
 class FetchDatumMakananList {
   var data = [];
   List<DatumMakananList> results = [];
-  String urlList = "https://spoonycal-ta.herokuapp.com/api/makanan";
+  String urlList = "https://spoonycal.ik3d.site/api/makanan";
 
   Future<List<DatumMakananList>> getDatumMakananList({String? query}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

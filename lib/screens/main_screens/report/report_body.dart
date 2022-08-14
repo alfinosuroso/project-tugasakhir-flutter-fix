@@ -7,7 +7,6 @@ import 'package:tugasakhir_app/services/api_catatan_service.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:collection/collection.dart';
 
 // Variabel Const dari kalori-kalori
 const TWO_PI = 3.14 * 2;
@@ -65,7 +64,7 @@ class _ReportBodyState extends State<ReportBody> {
               print(barChartData?.length);
 
               return PageView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   controller: controllerPage,
                   itemCount: data.length,
                   itemBuilder: (context, index) {
@@ -93,32 +92,32 @@ class _ReportBodyState extends State<ReportBody> {
 
                     return SingleChildScrollView(
                       //** LEBAR KESELURUHAN KONTAINER BODY */
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.8,                        
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             //** LAPORAN KALORI HARIAN KESELURUHAN */
-                            Text(
+                            const Text(
                                   "LAPORAN KALORI MASUK KESELURUHAN",
                                   style: Styles.shareFont3,
                                 ),
 
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             //** CONTAINER KALORI MINGGUAN DAN CHART */
                             Container(
                               height: 500,
-                              padding: EdgeInsets.symmetric(horizontal: 30.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 30.0),
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15.0),
                                   color: Colors.white,
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                       color: Colors.black12,
-                                      offset: const Offset(
+                                      offset: Offset(
                                         0.0,
                                         3.0,
                                       ),
@@ -134,7 +133,7 @@ class _ReportBodyState extends State<ReportBody> {
                                           CrossAxisAlignment.start,
                                           mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Target kalori hari ini",
                                           style: Styles.outfitText1,
                                         ),
@@ -165,7 +164,7 @@ class _ReportBodyState extends State<ReportBody> {
                                                     ColumnSeries<ChartData,
                                                             String>(
                                                         dataLabelSettings:
-                                                            DataLabelSettings(
+                                                            const DataLabelSettings(
                                                                 isVisible: true,
                                                                 labelAlignment:
                                                                     ChartDataLabelAlignment

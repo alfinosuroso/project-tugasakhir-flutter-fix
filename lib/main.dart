@@ -1,9 +1,7 @@
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tugasakhir_app/loading_pages/landing.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
-// import 'package:tugasakhir_app/Register%20and%20Login%20Screens/sign_in_page.dart';
 import 'package:tugasakhir_app/providers/favorite_food.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_in_page.dart';
 import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
@@ -30,7 +28,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-  // Future<UserModel> getUserData() => UserPreferences().getUser();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +48,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         initialRoute: '/splash_screen',
-        // home: ReferenceCountCalorie(),
 
         routes: {
           // Entry App
@@ -60,12 +56,9 @@ class MyApp extends StatelessWidget {
           // Splash Screen
           '/splash_screen': (context) => const SplashScreen(),
 
-          // Loading
-          // '/default_loading': (context) => const Defa(),
 
           // Routes register and login
           '/sign_in_page': (context) => const SignInPage(),
-          // '/sign_up_page': (context) => const SignUpPage(),
 
           // Routes Question
           '/prequestion': (context) => const PreQuestion(),
@@ -87,7 +80,6 @@ class MyApp extends StatelessWidget {
           '/pairing_device_screen': (context) => const PairingDeviceScreen(),
           '/search_screen': (context) => const SearchScreen(),
           '/tampil_data': (context) => const TampilDataMakanan(),
-          // '/search_makanan': (context) => const SearchMakanan(),
         },
       ),
     );

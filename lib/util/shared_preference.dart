@@ -24,7 +24,6 @@ class UserPreferences {
   }
 
   Future<UserModel> getUser(args) async {
-  // void getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt("id");

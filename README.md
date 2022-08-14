@@ -13,12 +13,12 @@ A new Flutter project.
 
 
 ## API Link
-Login : https://spoonycal-ta.herokuapp.com/api/login
+Login : https://spoonycal.ik3d.site/api/login
 
 -- NEED AUTH TOKEN --
-MyUser : https://spoonycal-ta.herokuapp.com/api/myuser
-Register : https://spoonycal-ta.herokuapp.com/api/register
-Makanan : https://spoonycal-ta.herokuapp.com/api/makanan
+MyUser : https://spoonycal.ik3d.site/api/myuser
+Register : https://spoonycal.ik3d.site/api/register
+Makanan : https://spoonycal.ik3d.site/api/makanan
 Catatan : ..
 
 ## Database dan Perhitungan

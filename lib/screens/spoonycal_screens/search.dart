@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tugasakhir_app/screens/spoonycal_screens/count_calorie.dart';
-import 'package:tugasakhir_app/screens/spoonycal_screens/count_caloriesementara.dart';
 import 'package:tugasakhir_app/services/api_makanan_service.dart';
 import 'package:tugasakhir_app/styles.dart';
 
@@ -19,14 +18,14 @@ class SearchMakanan extends SearchDelegate {
             Navigator.pop(context); // pop current page
             showSearch(context: context, delegate: SearchMakanan());
           },
-          icon: Icon(Icons.close))
+          icon: const Icon(Icons.close))
     ];
   }
 
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back_ios),
+      icon: const Icon(Icons.arrow_back_ios),
       onPressed: () {
         Navigator.pop(context);
       },
@@ -43,7 +42,7 @@ class SearchMakanan extends SearchDelegate {
               future: _makananList.getDatumMakananList(query: query),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
                 List<DatumMakananList>? data = snapshot.data;
                 return ListView.builder(
@@ -61,9 +60,6 @@ class SearchMakanan extends SearchDelegate {
                               " kal",
                           style: Styles.soraMakananText2,
                         ),
-                        // When a user taps the ListTile, navigate to the DetailScreen.
-                        // Notice that you're not only creating a DetailScreen, you're
-                        // also passing the current todo through to it.
                         onTap: () {
                           showDialog(
                               context: context,
@@ -119,7 +115,7 @@ class SearchMakanan extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Cari Makanan'),
     );
   }

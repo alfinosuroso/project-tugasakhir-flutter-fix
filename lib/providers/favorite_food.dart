@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tugasakhir_app/model/favorite_food.dart';
+import 'package:tugasakhir_app/model/favorite_model.dart';
 
 class ProviderFavoriteFood extends ChangeNotifier {
   List<FavoriteFoodCalorie> favoriteFood = [];

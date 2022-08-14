@@ -24,24 +24,6 @@ class _FabState extends State<Fab> {
 
   @override
   Widget build(BuildContext context) {
-    // Future<void> useCamera() async {
-    //   WidgetsFlutterBinding.ensureInitialized();
-
-    //   // Obtain a list of the available cameras on the device.
-    //   final cameras = await availableCameras();
-
-    //   // Get a specific camera from the list of available cameras.
-    //   final firstCamera = cameras.first;
-
-    //   Navigator.pushReplacement(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (context) => TakePictureScreen(
-    //               // Pass the appropriate camera to the TakePictureScreen widget.
-    //               camera: firstCamera,
-    //             )),
-    //   );
-    // }
     Future<void> useCamera() async {
       WidgetsFlutterBinding.ensureInitialized();
       // PERMISSION //
@@ -50,15 +32,14 @@ class _FabState extends State<Fab> {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) => ObjectDetectionWebview()),
+        MaterialPageRoute(builder: (context) => const ObjectDetectionWebview()),
       );
     }
 
     return SpeedDial(
       icon: FontAwesomeIcons.add,
       activeIcon: FontAwesomeIcons.minus,
-      animatedIconTheme: IconThemeData(size: 25.0),
+      animatedIconTheme: const IconThemeData(size: 25.0),
       backgroundColor: Styles.mainBlueColor,
       curve: Curves.bounceOut,
       overlayOpacity: 0.8,
@@ -68,7 +49,7 @@ class _FabState extends State<Fab> {
       openCloseDial: isDialOpen,
       children: [
         SpeedDialChild(
-            child: Icon(
+            child: const Icon(
               FontAwesomeIcons.camera,
               color: Styles.mainBlueColor,
             ),
@@ -115,11 +96,6 @@ class _FabState extends State<Fab> {
                           TextButton(
                               onPressed: () {
                                 useCamera();
-                                // Navigator.pushReplacement(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             ObjectDetectionWebview()));
                               },
                               child: const Text('DIMENGERTI',
                                   style: Styles.outfitDialogYaText6)),
@@ -127,7 +103,8 @@ class _FabState extends State<Fab> {
                       ));
             }),
         SpeedDialChild(
-            child: Icon(FontAwesomeIcons.spoon, color: Styles.mainBlueColor),
+            child:
+                const Icon(FontAwesomeIcons.spoon, color: Styles.mainBlueColor),
             label: 'Spoonycal',
             labelStyle: Styles.fabText1,
             onTap: () {
@@ -151,7 +128,7 @@ class _ObjectDetectionWebviewState extends State<ObjectDetectionWebview> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "Deteksi Makanan",
             style: Styles.shareTitleAppbarText13,
           ),

@@ -22,10 +22,6 @@ class _LandingState extends State<Landing> {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       _handleMyUser();
     });
-    // Future.delayed(Duration.zero, () {
-    //   _handleSignIn();
-
-    // });
   }
 
   _handleMyUser() async {
@@ -41,7 +37,6 @@ class _LandingState extends State<Landing> {
         MaterialPageRoute(
             builder: (context) => MainPage()),
       );
-      // Navigator.pushNamed(context, '/main_page');
     } else {
       Navigator.pushNamedAndRemoveUntil(
           context, '/prequestion', ModalRoute.withName('/prequestion'));

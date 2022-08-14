@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tugasakhir_app/model/user_model.dart';
 import 'package:tugasakhir_app/providers/auth_provider.dart';
-import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 
 class ReportAppBar extends StatelessWidget {
@@ -19,14 +18,14 @@ class ReportAppBar extends StatelessWidget {
       elevation: 0,
       automaticallyImplyLeading: false,
 
-      flexibleSpace: Container(
+      flexibleSpace: SizedBox(
         height: 100.0,
         child: Stack(
           children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width,
               height: 100.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(10),
                   bottomRight: Radius.circular(10),
@@ -61,22 +60,17 @@ class ReportAppBar extends StatelessWidget {
                       children: [
                         GestureDetector(
                         onTap: () => AppSettings.openDeviceSettings(asAnotherTask: true,),
-                        child: Image(
+                        child: const Image(
                           image: AssetImage('assets/images/wifi-hotspot.png'),
-                          
-                          // width: 100,
-                          // height: 100,
                         ),
                       ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         GestureDetector(
                           onTap: () => Navigator.pushNamed(context, '/pairing_device_screen'),
-                          child: Image(
+                          child: const Image(
                             image: AssetImage('assets/images/spoonycal-icon.png'),
-                            // width: 100,
-                            // height: 100,
                           ),
                         ),
                       ],

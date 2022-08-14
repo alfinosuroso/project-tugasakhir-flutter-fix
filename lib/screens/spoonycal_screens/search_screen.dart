@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/model/makanan_model.dart';
 import 'package:tugasakhir_app/screens/spoonycal_screens/count_calorie.dart';
-import 'package:tugasakhir_app/screens/spoonycal_screens/count_caloriesementara.dart';
 import 'package:tugasakhir_app/screens/spoonycal_screens/search.dart';
 import 'package:tugasakhir_app/services/api_makanan_service.dart';
 import 'package:tugasakhir_app/styles.dart';
@@ -24,7 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime tempToday = DateTime.now();
-    String finalToday = DateFormat('yyyy-MM-dd' ).format(tempToday);
+    String finalToday = DateFormat('yyyy-MM-dd').format(tempToday);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70.0,
@@ -36,33 +34,33 @@ class _SearchScreenState extends State<SearchScreen> {
         centerTitle: false,
         title: RichText(
           text: TextSpan(
-            text : 'Pilih makanan anda',
-          style: Styles.shareTitleAppbarText13,
-            children: [
-              TextSpan(
-                text : '\n' + '$finalToday',
-          style: Styles.shareDateFont16,
-              )
-          ]),
+              text: 'Pilih makanan anda',
+              style: Styles.shareTitleAppbarText13,
+              children: [
+                TextSpan(
+                  text: '\n' '$finalToday',
+                  style: Styles.shareDateFont16,
+                )
+              ]),
         ),
         actions: [
           IconButton(
             onPressed: () {
               showSearch(context: context, delegate: SearchMakanan());
             },
-            icon: Icon(Icons.search_sharp),
+            icon: const Icon(Icons.search_sharp),
           )
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Stack(
           children: [
             FutureBuilder<List<DatumMakananList>>(
                 future: _makananList.getDatumMakananList(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                   var data = snapshot.data;
                   return ListView.builder(
@@ -80,9 +78,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                 " kal",
                             style: Styles.soraMakananText2,
                           ),
-                          // When a user taps the ListTile, navigate to the DetailScreen.
-                          // Notice that you're not only creating a DetailScreen, you're
-                          // also passing the current todo through to it.
                           onTap: () {
                             showDialog(
                                 context: context,

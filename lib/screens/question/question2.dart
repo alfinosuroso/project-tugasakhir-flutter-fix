@@ -67,7 +67,7 @@ class _QuestionTwoState extends State<QuestionTwo> {
                     });
                   },
                   child: Image(
-                    image: AssetImage('assets/images/maleButton.png'),
+                    image: const AssetImage('assets/images/maleButton.png'),
                     width: _maleGender ? 96 : 60,
                     height: _maleGender ? 96 : 60,
                   ),
@@ -115,7 +115,7 @@ class _QuestionTwoState extends State<QuestionTwo> {
               flex: 3,
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             _notShowButtonRightArrow
@@ -137,7 +137,7 @@ class _QuestionTwoState extends State<QuestionTwo> {
             const Spacer(
               flex: 1,
             ),
-            AlreadyHaveAnAccount(),
+            const AlreadyHaveAnAccount(),
           ],
         ),
       ),

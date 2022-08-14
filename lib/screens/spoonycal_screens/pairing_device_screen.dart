@@ -40,7 +40,7 @@ class PairingDeviceScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15.0),
                       color: Colors.white,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           color: Colors.black12,
                           offset: Offset(
@@ -97,7 +97,7 @@ class PairingDeviceScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15.0),
                       color: Colors.white,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           color: Colors.black12,
                           offset: Offset(
@@ -141,7 +141,7 @@ class PairingDeviceScreen extends StatelessWidget {
                     foregroundColor: MaterialStateProperty.all<Color>(
                         const Color(0xff45625d)),
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Color(0xFF4FCAB4)),
+                        MaterialStateProperty.all<Color>(const Color(0xFF4FCAB4)),
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ))),
@@ -155,7 +155,7 @@ class PairingDeviceScreen extends StatelessWidget {
                   ),
                 )),
 
-                TextButton(onPressed: () => Navigator.pop(context), child: Text(
+                TextButton(onPressed: () => Navigator.pop(context), child: const Text(
                     "Tidak Sekarang",
                     style: Styles.latoPairing4,
                     textAlign: TextAlign.center,

@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/already_have_an_account.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/sign_up_page.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:http/http.dart' as http;
 
 num? finalKaloriHarian;
 int? tesStatus;
@@ -61,14 +59,14 @@ class _QuestionSixState extends State<QuestionSix>
               alignment: Alignment.center,
               // width: 120,
               // height: 65,
-              margin: EdgeInsets.all(5),
+              margin: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                 border: Border.all(width: 1, color: Colors.white),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "${finalKaloriHarian?.toStringAsFixed(2)}" + " kalori/hari",
+                  "${finalKaloriHarian?.toStringAsFixed(2)}" " kalori/hari",
                   style: Styles.inputFieldText1,
                   textAlign: TextAlign.center,
                 ),
@@ -104,7 +102,7 @@ class _QuestionSixState extends State<QuestionSix>
             const Spacer(
               flex: 2,
             ),
-            AlreadyHaveAnAccount(),
+            const AlreadyHaveAnAccount(),
           ],
         ),
       ),

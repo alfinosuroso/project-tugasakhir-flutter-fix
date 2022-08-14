@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tugasakhir_app/model/data_profile.dart';
 import 'package:tugasakhir_app/screens/Register%20and%20Login%20Screens/already_have_an_account.dart';
 import 'package:tugasakhir_app/styles.dart';
-import 'package:after_layout/after_layout.dart';
 
 class QuestionThree extends StatefulWidget {
   const QuestionThree({
@@ -49,7 +46,7 @@ class _QuestionThreeState extends State<QuestionThree> {
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: Column(
-                children: [
+                children: const [
                   Text(
                     "Berapakah berat badan Anda saat ini?",
                     textAlign: TextAlign.center,
@@ -77,16 +74,12 @@ class _QuestionThreeState extends State<QuestionThree> {
                   width: 120,
                   height: 65,
                   color: Styles.secondColor,
-                  margin: EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(5),
                   child: TextField(
-                    decoration: new InputDecoration(
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "",
                         contentPadding: EdgeInsets.all(10)),
-                    // inputFormatters: [
-                    //   WhitelistingTextInputFormatter(
-                    //       RegExp(r'^(\d+)?\.?\d{0,2}')),
-                    // ],
                     onChanged: (value) {
                       setState(() {
                         if (DataProfile.controllerBeratBadan.text != "") {
@@ -97,9 +90,8 @@ class _QuestionThreeState extends State<QuestionThree> {
                       });
                     },
                     keyboardType:
-                        TextInputType.numberWithOptions(decimal: true),
+                        const TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: [
-                      // FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
                       FilteringTextInputFormatter.allow(
                           RegExp(r'^\d+\.?\d{0,2}')),
                     ],
@@ -112,11 +104,11 @@ class _QuestionThreeState extends State<QuestionThree> {
                   alignment: Alignment.center,
                   width: 100,
                   height: 65,
-                  margin: EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     border: Border.all(width: 1, color: Colors.white),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Kg",
                     style: Styles.inputFieldText1,
                     textAlign: TextAlign.center,
@@ -130,7 +122,7 @@ class _QuestionThreeState extends State<QuestionThree> {
               flex: 2,
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 0,
             ),
             _notShowButtonRightArrow
@@ -152,7 +144,7 @@ class _QuestionThreeState extends State<QuestionThree> {
             const Spacer(
               flex: 1,
             ),
-            AlreadyHaveAnAccount(),
+            const AlreadyHaveAnAccount(),
           ],
         ),
       ),

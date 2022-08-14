@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           });
         } else {
           print('Received from MCU: $message');
-          // {'tempC':'30.50','humi':'64.00'}
+          // {'calibration':'30.50','weight':'64.00'}
           Map<String, dynamic> json = jsonDecode(message);
           setState(() {
             dht = CalorieModel.fromJson(json);
@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Text('Kalibrasi: ',
                             style: TextStyle(fontSize: 50, color: Colors.blue)),
                         Text(
-                          '${dht.tempC.toStringAsFixed(1)}',
+                          '${dht.calibration.toStringAsFixed(1)}',
                           style: TextStyle(fontSize: 50, color: Colors.blue),
                         ),
                         Text(
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Text('Berat: ',
                             style: TextStyle(fontSize: 50, color: Colors.blue)),
                         Text(
-                          '${dht.humi.toStringAsFixed(1)}',
+                          '${dht.weight.toStringAsFixed(1)}',
                           style: TextStyle(fontSize: 50, color: Colors.blue),
                         ),
                         Text(

@@ -16,7 +16,7 @@ class BantuanPageState extends State<BantuanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Bantuan",
           style: Styles.shareTitleAppbarText13,
         ),
@@ -70,13 +70,13 @@ class Card1 extends StatelessWidget {
                   headerAlignment: ExpandablePanelHeaderAlignment.center,
                   tapBodyToCollapse: true,
                 ),
-                header: Padding(
+                header: const Padding(
                     padding: EdgeInsets.all(10),
                     child: Text(
                       "TENTANG SPOONYCAL",
                       style: Styles.shareFontProfile11_2,
                     )),
-                collapsed: Text(
+                collapsed: const Text(
                   descSpoonycal,
                   softWrap: true,
                   maxLines: 2,
@@ -86,7 +86,7 @@ class Card1 extends StatelessWidget {
                 ),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: const [
                       Padding(
                           padding: EdgeInsets.only(bottom: 10),
                           child: Text(
@@ -100,7 +100,7 @@ class Card1 extends StatelessWidget {
                 ),
                 builder: (_, collapsed, expanded) {
                   return Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                     child: Expandable(
                       collapsed: collapsed,
                       expanded: expanded,
@@ -142,7 +142,7 @@ class Card2 extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+                children: const [
                   Text(
                     "HUBUNGI KAMI",
                     style: Styles.shareFontProfile11_2,
@@ -169,7 +169,7 @@ class Card2 extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+                children: const [
                   Text(
                     "Developer Team : MOTIVASEE",
                     style: Styles.shareFontProfileText12,
@@ -206,10 +206,10 @@ class Card2 extends StatelessWidget {
 
     buildExpanded3() {
       return Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: const [
             Text(
               loremIpsum,
               softWrap: true,
@@ -242,7 +242,7 @@ class Card2 extends StatelessWidget {
                 collapsed: buildCollapsed3(),
                 expanded: buildExpanded3(),
               ),
-              Divider(
+              const Divider(
                 height: 1,
               ),
               Row(
@@ -354,7 +354,7 @@ class Card3 extends StatelessWidget {
                             hasIcon: false,
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                           child: Text(
                             "INSTRUKSI PENGGUNAAN",
                             style: Styles.shareFont8_2

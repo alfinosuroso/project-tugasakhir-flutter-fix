@@ -10,7 +10,8 @@ import 'package:web_socket_channel/io.dart';
 import 'package:intl/intl.dart';
 
 // const String espUrl = 'ws://192.168.43.56:81';
-const String espUrl = 'ws://192.168.249.73:81';
+// const String espUrl = 'ws://192.168.43.56:81';
+const String espUrl = 'ws://192.168.69.73:81';
 
 class CountCalorie extends StatefulWidget {
   final String? finalMakanan;
@@ -37,6 +38,7 @@ class _CountCalorieState extends State<CountCalorie> {
   CalorieModel dht = CalorieModel(0, 0);
   // double? resultKal;
   final channel = IOWebSocketChannel.connect(espUrl);
+
   @override
   void initState() {
     super.initState();
@@ -52,11 +54,11 @@ class _CountCalorieState extends State<CountCalorie> {
         } else {
           print('Received from MCU: $message');
           print('berhasil mengambil data');
-          // {'tempC':'30.50','humi':'64.00'}
+          // {'calibration':'30.50','weight':'64.00'}
           Map<String, dynamic> json = jsonDecode(message);
           setState(() {
             dht = CalorieModel.fromJson(json);
-            // resultKal = dht.humi * finalKaloriHarian! * 0.01;
+            // resultKal = dht.weight * finalKaloriHarian! * 0.01;
             isLoaded = true;
           });
         }
@@ -65,6 +67,45 @@ class _CountCalorieState extends State<CountCalorie> {
       onDone: () {
         //if WebSocket is disconnected
         print("Web socket is closed");
+        showDialog(
+            context: context, builder: (BuildContext context) => AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          title: const Icon(
+            Icons.warning,
+            size: 70,
+            color: Colors.red,
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'PERANGKAT BELUM TERSAMBUNG!',
+                style: Styles.outfitDialogText3,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Pastikan Hotspot dan Spooyncal sudah menyala!',
+                style: Styles.outfitDialogText4,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        'KEMBALI',
+                        style: Styles.outfitDialogTidakText5,
+                        textAlign: TextAlign.center,
+                      )),
+                ],
+              )
+            ],
+          ),
+        ));
         setState(() {
           msg = 'disconnected';
           isLoaded = false;
@@ -81,15 +122,14 @@ class _CountCalorieState extends State<CountCalorie> {
     ProviderFavoriteFood providerFavoriteFood =
         Provider.of<ProviderFavoriteFood>(context);
 
-
-DateTime tempToday = DateTime.now();
+    DateTime tempToday = DateTime.now();
     String finalToday = DateFormat('yyyy-MM-dd').format(tempToday);
 
     Future<void> realBeratKalori() async {
-      tempBerat = dht.humi;
-      tempKalori = dht.humi * widget.finalKaloriPerGram! * 0.01;
-      totalBerat += dht.humi;
-      totalKalori += dht.humi * widget.finalKaloriPerGram! * 0.01;
+      tempBerat = dht.weight;
+      tempKalori = dht.weight * widget.finalKaloriPerGram! * 0.01;
+      totalBerat += dht.weight;
+      totalKalori += dht.weight * widget.finalKaloriPerGram! * 0.01;
       isEmpty = true;
     }
 
@@ -110,13 +150,13 @@ DateTime tempToday = DateTime.now();
           onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: false,
-title: RichText(
+        title: RichText(
           text: TextSpan(
-              text: 'Pilih makanan anda',
+              text: 'Hitung berat dan kalori',
               style: Styles.shareTitleAppbarText13,
               children: [
                 TextSpan(
-                  text: '\n' + '$finalToday',
+                  text: '\n' '$finalToday',
                   style: Styles.shareDateFont16,
                 )
               ]),
@@ -159,10 +199,10 @@ title: RichText(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20.0),
                               color: Styles.appBarPrimaryColor,
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: Colors.black12,
-                                  offset: const Offset(
+                                  offset: Offset(
                                     0.0,
                                     3.0,
                                   ),
@@ -195,7 +235,7 @@ title: RichText(
                               style: Styles.shareBeratSendokFont14,
                             ),
                             Text(
-                              '${dht.humi.toStringAsFixed(2)} gr',
+                              '${dht.weight.toStringAsFixed(2)} gr',
                               style: Styles.shareBeratSendokFont15,
                             ),
                           ],
@@ -220,11 +260,11 @@ title: RichText(
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width * 0.3,
-                              color: Color(0xFFDCDCDC),
+                              color: const Color(0xFFDCDCDC),
                               child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: !isEmpty
-                                      ? Text(
+                                      ? const Text(
                                           '0',
                                           style: Styles.outfitCalorieText1,
                                           textAlign: TextAlign.center,
@@ -268,7 +308,7 @@ title: RichText(
                                           textAlign: TextAlign.center,
                                         )
                                       : Text(
-                                          '${totalKalori.toStringAsFixed(2)}',
+                                          totalKalori.toStringAsFixed(2),
                                           // '${resultKal}'.toString(),
                                           style: Styles.outfitCalorieText1,
                                           textAlign: TextAlign.center,
@@ -301,7 +341,7 @@ title: RichText(
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(
-                                          Color(0xFF54CC60)),
+                                          const Color(0xFF54CC60)),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
@@ -334,9 +374,9 @@ title: RichText(
                           width: MediaQuery.of(context).size.width * 0.6,
                           child: ElevatedButton(
                               style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Color.fromARGB(255, 80, 196, 169)),
+                                  backgroundColor: MaterialStateProperty.all<
+                                          Color>(
+                                      const Color.fromARGB(255, 80, 196, 169)),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
@@ -345,7 +385,7 @@ title: RichText(
                                     showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(
-                                              title: Text(
+                                              title: const Text(
                                                 'Perhatian!',
                                                 style: Styles.outfitDialogText3,
                                               ),
@@ -400,7 +440,7 @@ title: RichText(
                                     style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
-                                                Color.fromARGB(
+                                                const Color.fromARGB(
                                                     255, 211, 81, 81)),
                                         shape: MaterialStateProperty.all(
                                             RoundedRectangleBorder(
@@ -411,7 +451,7 @@ title: RichText(
                                           clearBeratKalori(),
                                           providerFavoriteFood.clearList(),
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
+                                              .showSnackBar(const SnackBar(
                                                   backgroundColor:
                                                       Color.fromARGB(
                                                           255, 206, 83, 81),
@@ -437,7 +477,7 @@ title: RichText(
                                     style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
-                                                Color.fromARGB(
+                                                const Color.fromARGB(
                                                     255, 210, 186, 67)),
                                         shape: MaterialStateProperty.all(
                                             RoundedRectangleBorder(

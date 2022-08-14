@@ -4,7 +4,7 @@ import 'package:tugasakhir_app/model/user_model.dart';
 import 'package:tugasakhir_app/util/shared_preference.dart';
 
 class AuthService {
-  String baseUrl = 'https://spoonycal-ta.herokuapp.com/api';
+  String baseUrl = 'https://spoonycal.ik3d.site/api';
 
   Future<UserModel> register(
       {required String name,

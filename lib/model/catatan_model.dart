@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final catatanModel = catatanModelFromJson(jsonString);
-
 import 'dart:convert';
 
 CatatanModel catatanModelFromJson(String str) =>
@@ -75,7 +71,7 @@ class DatumCatatanModel {
   num? kaloriMasuk;
   num? sisaKalori;
   num? targetKalori;
-  int? userId;
+  String? userId;
   DateTime? createdAt;
   DateTime? updatedAt;
 

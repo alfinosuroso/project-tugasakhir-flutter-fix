@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tugasakhir_app/model/catatan_model.dart';
-import 'package:tugasakhir_app/screens/main_screens/main_page.dart';
 import 'package:tugasakhir_app/services/api_catatan_service.dart';
 import 'package:tugasakhir_app/styles.dart';
 import 'package:intl/intl.dart';
@@ -34,33 +33,6 @@ class _HomeBodyState extends State<HomeBody> {
       controllerPage.dispose();
     }
 
-    // _remove(List mylist, int index) {
-    //   if (mylist[index] = mylist[mylist.length-1]) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // }
-
-    DateTime today = DateTime.now();
-    List<int> eatenCalorie = [700, 1200, 300];
-    List<String> time = ["08.10", "12.30", "18.23"];
-    // List<int> eatenCalorie = [700, 1200, 300];
-    List<DateTime> dateTime = [
-      today,
-      today.add(const Duration(days: 1)),
-      today.add(const Duration(days: 2))
-    ];
-    List<String> stringDateTime = [
-      DateFormat('yyyy-MM-dd').format(dateTime[0]),
-      DateFormat('yyyy-MM-dd').format(dateTime[1]),
-      DateFormat('yyyy-MM-dd').format(dateTime[2])
-    ];
-
-    DateTime tempToday = DateTime.now();
-    String finalToday = DateFormat('yyyy-MM-dd').format(tempToday);
-
-    // Menghapus visible pada button jika tanggal awal dan akhir
     return Scaffold(
       backgroundColor: Styles.bgMainColor,
       body: FutureBuilder<List<Datum>>(
@@ -80,7 +52,7 @@ class _HomeBodyState extends State<HomeBody> {
             } else if (data!.isNotEmpty &&
                 snapshot.connectionState == ConnectionState.done) {
               return PageView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   controller: controllerPage,
                   itemCount: data.length,
                   itemBuilder: (context, index) {
@@ -88,7 +60,7 @@ class _HomeBodyState extends State<HomeBody> {
                         DateFormat('yyyy-MM-dd').format(data[index].date!);
                     return SingleChildScrollView(
                       //** LEBAR KESELURUHAN KONTAINER BODY */
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.8,
                         child: Column(
                           children: [
@@ -109,7 +81,7 @@ class _HomeBodyState extends State<HomeBody> {
                                               duration: const Duration(
                                                   milliseconds: 700),
                                               curve: Curves.easeInOut),
-                                      icon: Icon(Icons.keyboard_arrow_left),
+                                      icon: const Icon(Icons.keyboard_arrow_left),
                                       iconSize: 50,
                                       color: Styles.mainBlueColor),
                                 ),
@@ -122,7 +94,7 @@ class _HomeBodyState extends State<HomeBody> {
                                         duration:
                                             const Duration(milliseconds: 700),
                                         curve: Curves.easeInOut),
-                                    icon: Icon(Icons.keyboard_arrow_right),
+                                    icon: const Icon(Icons.keyboard_arrow_right),
                                     iconSize: 50,
                                     color: Styles.mainBlueColor),
                               ],
@@ -152,17 +124,17 @@ class _HomeBodyState extends State<HomeBody> {
                                       width:
                                           MediaQuery.of(context).size.width,
                                       height: 220,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 30.0),
                                       child: DecoratedBox(
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(15.0),
                                             color: Colors.white,
-                                            boxShadow: [
+                                            boxShadow: const [
                                               BoxShadow(
                                                 color: Colors.black12,
-                                                offset: const Offset(
+                                                offset: Offset(
                                                   0.0,
                                                   3.0,
                                                 ),
@@ -178,7 +150,7 @@ class _HomeBodyState extends State<HomeBody> {
                                               tween: Tween(
                                                   begin: 0.0,
                                                   end: percentageCircular),
-                                              duration: Duration(
+                                              duration: const Duration(
                                                   milliseconds: 1500),
                                               curve: Curves.easeInOut,
                                               builder: (BuildContext context,
@@ -222,7 +194,7 @@ class _HomeBodyState extends State<HomeBody> {
                                                           height:
                                                               sizeContainer,
                                                           decoration:
-                                                              BoxDecoration(
+                                                              const BoxDecoration(
                                                             shape: BoxShape
                                                                 .circle,
                                                             color:
@@ -241,7 +213,7 @@ class _HomeBodyState extends State<HomeBody> {
                                                               sizeContainer -
                                                                   40,
                                                           decoration:
-                                                              BoxDecoration(
+                                                              const BoxDecoration(
                                                                   color: Colors
                                                                       .white,
                                                                   shape: BoxShape
@@ -253,7 +225,7 @@ class _HomeBodyState extends State<HomeBody> {
                                                                 MainAxisAlignment
                                                                     .center,
                                                             children: [
-                                                              Text(
+                                                              const Text(
                                                                 "TERSISA",
                                                                 style: Styles
                                                                     .shareFont4,
@@ -275,26 +247,26 @@ class _HomeBodyState extends State<HomeBody> {
                                           )),
                                     );
                                   }
-                                  return SizedBox.shrink();
+                                  return const SizedBox.shrink();
                                 }),
 
                             // PEMBATAS
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
 
                             //** KONTAINER LAPORAN KALORI HARIAN DAN LISTVIEW */
                             Container(
                               width: MediaQuery.of(context).size.width,
-                              padding: EdgeInsets.symmetric(horizontal: 30.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 30.0),
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15.0),
                                   color: Colors.white,
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                       color: Colors.black12,
-                                      offset: const Offset(
+                                      offset: Offset(
                                         0.0,
                                         3.0,
                                       ),
@@ -313,17 +285,17 @@ class _HomeBodyState extends State<HomeBody> {
                                           MediaQuery.of(context).size.width *
                                               0.8,
                                       height: 50,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 30.0),
                                       child: DecoratedBox(
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(20.0),
                                           color: Styles.appBarPrimaryColor,
-                                          boxShadow: [
+                                          boxShadow: const [
                                             BoxShadow(
                                               color: Colors.black12,
-                                              offset: const Offset(
+                                              offset: Offset(
                                                 0.0,
                                                 3.0,
                                               ),
@@ -334,7 +306,7 @@ class _HomeBodyState extends State<HomeBody> {
                                         ),
 
                                         //** TEKS LAPORAN KALORI HARIAN */
-                                        child: Center(
+                                        child: const Center(
                                             child: Text(
                                           "LAPORAN KALORI HARIAN",
                                           style: Styles.shareFont8,
@@ -367,7 +339,7 @@ class _HomeBodyState extends State<HomeBody> {
                               ),
                             ),
 
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             )
                           ],

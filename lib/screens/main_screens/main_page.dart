@@ -1,12 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tugasakhir_app/model/catatan_model.dart';
-import 'package:tugasakhir_app/model/user_model.dart';
-import 'package:tugasakhir_app/providers/auth_provider.dart';
 import 'package:tugasakhir_app/screens/main_screens/components_main/fab.dart';
 import 'package:tugasakhir_app/screens/main_screens/home/home_appbar.dart';
 import 'package:tugasakhir_app/screens/main_screens/home/home_body.dart';
@@ -71,22 +65,22 @@ class _MainPageState extends State<MainPage> {
       },
       child: Scaffold(
         backgroundColor: Styles.bgMainColor,
-      
+
         // ** APPBAR - DIFFERENT SCREENAPPBAR */
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(appBarHeight[currentIndexBotNavBar]),
           child: screensAppBar[currentIndexBotNavBar],
         ),
-      
+
         // ** BODY - DIFFERENT SCREENBODY */
         body: IndexedStack(
           index: currentIndexBotNavBar,
           children: screensBody,
         ),
-      
+
         // ** FLOATING BUTTON ** //
         floatingActionButton: const Fab(),
-      
+
         //** BOTTOM NAVIGATION BAR */
         bottomNavigationBar: SizedBox(
           height: 70,
@@ -100,17 +94,17 @@ class _MainPageState extends State<MainPage> {
               selectedItemColor: Styles.appBarPrimaryColor,
               unselectedItemColor: Styles.offGreyColor,
               iconSize: 32,
-              items: [
-                const BottomNavigationBarItem(
-                  icon: const Icon(Icons.home),
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
                   label: "Beranda",
                 ),
-                const BottomNavigationBarItem(
+                BottomNavigationBarItem(
                     icon: Icon(Icons.auto_graph),
                     label: "Laporan",
                     backgroundColor: Colors.orange),
-                const BottomNavigationBarItem(
-                    icon: const Icon(Icons.person),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.person),
                     label: "Profile",
                     backgroundColor: Colors.greenAccent),
               ]),

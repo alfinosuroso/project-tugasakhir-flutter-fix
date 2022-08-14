@@ -18,14 +18,14 @@ class HomeAppBar extends StatelessWidget {
       elevation: 0,
       automaticallyImplyLeading: false,
 
-      flexibleSpace: Container(
+      flexibleSpace: SizedBox(
         height: 140.0,
         child: Stack(
           children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width,
               height: 100.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(10),
                   bottomRight: Radius.circular(10),
@@ -60,19 +60,16 @@ class HomeAppBar extends StatelessWidget {
                       children: [
                         GestureDetector(
                         onTap: () => AppSettings.openDeviceSettings(asAnotherTask: true,),
-                        child: Image(
+                        child: const Image(
                           image: AssetImage('assets/images/wifi-hotspot.png'),
-                          
-                          // width: 100,
-                          // height: 100,
                         ),
                       ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         GestureDetector(
                           onTap: () => Navigator.pushNamed(context, '/pairing_device_screen'),
-                          child: Image(
+                          child: const Image(
                             image: AssetImage('assets/images/spoonycal-icon.png'),
                             // width: 100,
                             // height: 100,
@@ -92,15 +89,15 @@ class HomeAppBar extends StatelessWidget {
               right: 0.0,
               child: Container(
                 height: 60,
-                padding: EdgeInsets.symmetric(horizontal: 30.0),
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     color: Colors.white,
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black12,
-                        offset: const Offset(
+                        offset: Offset(
                           0.0,
                           3.0,
                         ),
@@ -117,7 +114,7 @@ class HomeAppBar extends StatelessWidget {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "BERAT BADAN",
                             style: Styles.shareFont1,
                           ),
@@ -130,7 +127,7 @@ class HomeAppBar extends StatelessWidget {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "KALORI HARIAN",
                             style: Styles.shareFont1,
                           ),

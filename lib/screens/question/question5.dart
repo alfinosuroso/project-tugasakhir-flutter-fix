@@ -43,7 +43,7 @@ class _QuestionFiveState extends State<QuestionFive> {
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: Column(
-                children: [
+                children: const [
                   Text(
                     "Umur berapa Anda saat ini?",
                     textAlign: TextAlign.center,
@@ -73,14 +73,10 @@ class _QuestionFiveState extends State<QuestionFive> {
                   color: Styles.secondColor,
                   margin: EdgeInsets.all(5),
                   child: TextField(
-                    decoration: new InputDecoration(
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "",
                         contentPadding: EdgeInsets.all(10)),
-                    // inputFormatters: [
-                    //   WhitelistingTextInputFormatter(
-                    //       RegExp(r'^(\d+)?\.?\d{0,2}')),
-                    // ],
                     onChanged: (value) {
                       setState(() {
                         if (DataProfile.controllerUmur.text != "") {
@@ -91,7 +87,7 @@ class _QuestionFiveState extends State<QuestionFive> {
                       });
                     },
                     keyboardType:
-                        TextInputType.numberWithOptions(decimal: true),
+                        const TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp('[0-9]+')),
                     ],
@@ -109,11 +105,11 @@ class _QuestionFiveState extends State<QuestionFive> {
                   alignment: Alignment.center,
                   width: 120,
                   height: 65,
-                  margin: EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     border: Border.all(width: 1, color: Colors.white),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Tahun",
                     style: Styles.inputFieldText1,
                     textAlign: TextAlign.center,
@@ -127,7 +123,7 @@ class _QuestionFiveState extends State<QuestionFive> {
               flex: 2,
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 0,
             ),
             _notShowButtonRightArrow
@@ -149,7 +145,7 @@ class _QuestionFiveState extends State<QuestionFive> {
             const Spacer(
               flex: 1,
             ),
-            AlreadyHaveAnAccount(),
+            const AlreadyHaveAnAccount(),
           ],
         ),
       ),
