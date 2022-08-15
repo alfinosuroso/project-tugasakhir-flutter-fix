@@ -47,7 +47,7 @@ class BantuanPageState extends State<BantuanPage> {
 }
 
 const loremIpsum =
-    "Alfino Almero Suroso, Primafadhil Sulistyo, Ahmad Zakaria Fathoni, Riyagung Nuryusufa";
+    "Alfino Almero Suroso dan Primafadhil Sulistyo";
 
 const descSpoonycal =
     "Spoonycal dirancang untuk membantu mengontrol pola makan masyarakat guna mencegah tidak terkontrolnya asupan kalori yang masuk. Didukung dengan alat berbasis Internet of Things dan dukungan deteksi makanan mempermudah pengguna untuk menghitung kalori yang ada pada makanan.";
@@ -192,12 +192,6 @@ class Card2 extends StatelessWidget {
             children: <Widget>[
               Expanded(child: buildImg('assets/images/fino.jpg', 250)),
               Expanded(child: buildImg('assets/images/fadhil.jpg', 250)),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Expanded(child: buildImg('assets/images/thoni.jpeg', 250)),
-              Expanded(child: buildImg('assets/images/ucup.png', 250)),
             ],
           ),
         ],
